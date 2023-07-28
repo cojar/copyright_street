@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Detail</title>
+</head>
+<body>
+<!-- Store 정보 출력 -->
+
+<p>{{ store.content }}</p>
+
+<!-- 이미지 표시 -->
+<img th:src="@{${store.getFile}}" alt="">
+<a th:href="@{|/store/modify/${store.id}|}">수정</a>
+</body>
+</html>

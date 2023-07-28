@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<tr th:each="store : ${storeList}">
+    <div>
+        <td>
+            <img th:src="@{${store.getFile}}" alt="" width="300px" height="200px">
+        </td>
+    </div>
+    <td>
+        <a th:href="@{|/store/detail/${store.id}|}" th:text="${store.title}"></a>
+    </td>
+
+</tr>
+<a href="/store/create">글쓰기</a>
+</body>
+</html>
