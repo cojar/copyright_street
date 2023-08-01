@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.base.security;
 
+
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberRepository;
 import lombok.RequiredArgsConstructor;

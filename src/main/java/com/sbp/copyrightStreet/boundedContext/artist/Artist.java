@@ -1,6 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.artist;
-
 import com.sbp.copyrightStreet.boundedContext.file.File;
+import com.nimbusds.openid.connect.sdk.claims.Address;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -9,9 +9,9 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 
-@Entity
 @Getter
 @Setter
+@Entity
 public class Artist {
 
     @Id
@@ -19,25 +19,25 @@ public class Artist {
     private Long id;
 
     @OneToOne
+
     private Member username;
 
     @OneToOne
     private Member email;
 
-    @OneToOne
-    private Member phoneNumber;
 
-    //파일업로드
-//   @OneToOne
-//   private File portfolio;
+    private String phoneNumber;
+
 
     @Column(columnDefinition = "TEXT")
     private String introDetail;
 
+
+//    @Column
+//    private String portfolio; 파일업로드예정
+
     @CreatedDate
     private LocalDateTime createDate;
-
-    ///adsfasdfasdfasdf
 
     private LocalDateTime modifyDate;
 }

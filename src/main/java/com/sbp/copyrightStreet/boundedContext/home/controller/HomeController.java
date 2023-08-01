@@ -13,7 +13,7 @@ import java.util.Enumeration;
 public class HomeController {
     @GetMapping("/")
     public String showMain() {
-        return "usr/home/main";
+        return "usr1/home/main";
     }
 
     @GetMapping("/debugSession")

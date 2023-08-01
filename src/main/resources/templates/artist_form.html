@@ -1,0 +1,35 @@
+<html layout:decorate="~{usr/layout/layout.html}">
+
+<head>
+    <title>작가등록</title>
+</head>
+
+<body>
+
+<main layout:fragment="main">
+
+    <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
+        <div>
+            <input type="text" name="username" maxlength="30" placeholder="이름" class="input input-bordered">
+        </div>
+        <div>
+            <input type="text" name="loginId" maxlength="30" placeholder="아이디" class="input input-bordered">
+        </div>
+        <div>
+            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
+        </div>
+        <div>
+            <input type="password" name="password2" maxlength="30" placeholder="비밀번호확인" class="input input-bordered">
+        </div>
+        <div>
+            <input type="email" name="email" maxlength="30" placeholder="이메일을 입력해주세요" class="input input-bordered">
+        </div>
+        <div>
+            <input type="submit" value="회원가입" class="btn btn-primary">
+        </div>
+    </form>
+</main>
+
+</body>
+
+</html>

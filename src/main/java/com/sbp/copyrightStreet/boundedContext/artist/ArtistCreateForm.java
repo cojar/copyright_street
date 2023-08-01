@@ -1,0 +1,27 @@
+package com.sbp.copyrightStreet.boundedContext.artist;
+
+import com.sbp.copyrightStreet.boundedContext.member.Member;
+import jakarta.persistence.Column;
+import jakarta.persistence.OneToOne;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
+
+import java.time.LocalDateTime;
+
+@Getter
+@Setter
+public class ArtistCreateForm {
+    @NotEmpty
+    private String username;
+
+    private String introDetail; // 신청내용
+
+    @NotEmpty
+    private String phoneNumber;
+
+//    @Column
+//    private String portfolio; 파일업로드예정
+
+}
