@@ -1,8 +1,8 @@
 package com.sbp.copyrightStreet.base.rq;
 
 import com.sbp.copyrightStreet.base.rsData.RsData;
-import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
-import com.sbp.copyrightStreet.boundedContext.member.service.MemberService;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
+import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 import com.sbp.copyrightStreet.util.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

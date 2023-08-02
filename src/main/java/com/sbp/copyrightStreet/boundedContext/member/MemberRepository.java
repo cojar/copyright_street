@@ -1,6 +1,6 @@
-package com.sbp.copyrightStreet.boundedContext.member.repository;
+package com.sbp.copyrightStreet.boundedContext.member;
 
-import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

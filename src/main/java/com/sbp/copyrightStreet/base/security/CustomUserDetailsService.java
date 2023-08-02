@@ -1,7 +1,7 @@
 package com.sbp.copyrightStreet.base.security;
 
-import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
-import com.sbp.copyrightStreet.boundedContext.member.repository.MemberRepository;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
+import com.sbp.copyrightStreet.boundedContext.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

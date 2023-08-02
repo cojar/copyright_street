@@ -1,8 +1,8 @@
-package com.sbp.copyrightStreet.boundedContext.member.service;
+package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.base.rsData.RsData;
-import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
-import com.sbp.copyrightStreet.boundedContext.member.repository.MemberRepository;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
+import com.sbp.copyrightStreet.boundedContext.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

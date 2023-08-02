@@ -1,9 +1,7 @@
-package com.sbp.copyrightStreet.boundedContext.member.controller;
+package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.base.rq.Rq;
 import com.sbp.copyrightStreet.base.rsData.RsData;
-import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
-import com.sbp.copyrightStreet.boundedContext.member.service.MemberService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

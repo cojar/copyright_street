@@ -1,7 +1,7 @@
 package com.sbp.copyrightStreet.base.security;
 
-import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
-import com.sbp.copyrightStreet.boundedContext.member.service.MemberService;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
+import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
