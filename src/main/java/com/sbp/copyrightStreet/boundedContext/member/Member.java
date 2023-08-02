@@ -37,6 +37,9 @@ public class Member {
 
     @Column
     private String phoneNumber;
+
+    @Column
+    private String email;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
