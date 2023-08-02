@@ -13,5 +13,5 @@ public class Category {
     private Integer id;
 
     @Column(unique = true)
-    private String name;
+    private String name; // 카테고리 이름
 }
