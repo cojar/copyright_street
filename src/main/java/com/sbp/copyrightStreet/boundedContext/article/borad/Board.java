@@ -22,25 +22,25 @@ public class Board {
     private Long id;
 
     @Column(length = 200)
-    private String title;
+    private String title; // 제목
 
     @Column(columnDefinition = "TEXT")
-    private String content;
+    private String content; // 내용
 
     @ManyToOne
-    private Member author;
+    private Member author; //글쓴이
 
     @ManyToOne
-    private Category category;
+    private Category category; //분휴 카테고리
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList;
+    private List<Comment> commentList; //댓글
 
     @ManyToMany
-    private Set<Member> voter;
+    private Set<Member> voter; //추천
 
     @CreatedDate
-    private LocalDateTime createDate;
+    private LocalDateTime createDate; // 생성일
 
-    private LocalDateTime modifyDate;
+    private LocalDateTime modifyDate; // 수정일
 }
