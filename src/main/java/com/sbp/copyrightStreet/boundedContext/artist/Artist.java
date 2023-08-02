@@ -37,6 +37,8 @@ public class Artist {
     @CreatedDate
     private LocalDateTime createDate;
 
+    ///adsfasdfasdfasdf
+
     private LocalDateTime modifyDate;
 }
 
