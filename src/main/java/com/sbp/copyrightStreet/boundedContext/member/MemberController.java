@@ -36,6 +36,7 @@ public class MemberController {
                 System.out.println(bindingResult.getAllErrors().get(i));
             }
             return "usr1/member/join";
+            ///
         }
 
         if (!joinForm.getPassword().equals(joinForm.getPassword2())) {
