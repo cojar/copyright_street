@@ -8,6 +8,9 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -28,8 +31,12 @@ public class Store {
 
     private String filename;
 
+    private int hitCount;
+
+    private String category;
     public String getFile(){
         return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static","");
     }
+
 
 }

@@ -20,6 +20,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     public Optional<Member> findByUsername(String username) {
+
         return memberRepository.findByUsername(username);
     }
 
@@ -38,6 +39,7 @@ public class MemberService {
 
         // 소셜 로그인을 통한 회원가입에서는 비번이 없다.
         if (StringUtils.hasText(password)) password = passwordEncoder.encode(password);
+
 
         Member member = Member
                 .builder()
