@@ -1,7 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.member.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -31,18 +30,9 @@ public class Member {
     @LastModifiedDate // 아래 칼럼에는 값이 자동으로 들어간다.(UPDATE 할 때 마다)
     private LocalDateTime modifyDate;
     private String providerTypeCode; // 일반회원인지, 카카오로 가입한 회원인지, 구글로 가입한 회원인지
-
     @Column(unique = true)
     private String username;
-
     private String password;
-
-    @Column
-    private String email;
-
-    private String birth;
-
-    private String phoneNumber;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
