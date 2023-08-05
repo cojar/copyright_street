@@ -1,4 +1,4 @@
-package com.sbp.copyrightStreet.boundedContext.home.controller;
+package com.sbp.copyrightStreet.boundedContext.store;
 
 import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
 import jakarta.persistence.*;

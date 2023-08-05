@@ -1,4 +1,4 @@
-package com.sbp.copyrightStreet.boundedContext.home.controller;
+package com.sbp.copyrightStreet.boundedContext.store;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

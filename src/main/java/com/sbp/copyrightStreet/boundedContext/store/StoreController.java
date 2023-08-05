@@ -1,6 +1,8 @@
-package com.sbp.copyrightStreet.boundedContext.home.controller;
+package com.sbp.copyrightStreet.boundedContext.store;
 
 
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StoreController {
     private final StoreService storeService;
+    private final CartRepository cartRepository;
 
 
     @GetMapping("/store/create")
@@ -56,8 +59,7 @@ public class StoreController {
 
     @GetMapping("/store/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
-        Store store = this.storeService.getStore(id);
-        this.storeService.delete(store);
+        this.storeService.delete(id);
         return "redirect:/copy/store";
     }
 

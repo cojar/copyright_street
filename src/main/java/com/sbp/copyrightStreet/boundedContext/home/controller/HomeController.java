@@ -1,5 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.home.controller;
 
+import com.sbp.copyrightStreet.boundedContext.store.Store;
+import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

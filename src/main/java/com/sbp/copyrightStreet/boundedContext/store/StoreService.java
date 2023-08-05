@@ -1,10 +1,12 @@
-package com.sbp.copyrightStreet.boundedContext.home.controller;
+package com.sbp.copyrightStreet.boundedContext.store;
 
 
-import com.sbp.copyrightStreet.boundedContext.home.controller.Cart.Cart;
-import com.sbp.copyrightStreet.boundedContext.home.controller.Cart.CartRepository;
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.cart.CartRepository;
+import com.sbp.copyrightStreet.boundedContext.cart.CartService;
+import com.sbp.copyrightStreet.boundedContext.home.controller.DataNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,7 @@ import java.util.UUID;
 public class StoreService {
     private final StoreRepository storeRepository;
     private final CartRepository cartRepository;
+    private final CartService cartService;
 
     public static void increaseHitCount() {
 
@@ -46,7 +49,7 @@ public class StoreService {
 
 
     public Page<Store> getList(int page, String kw) {
-        Pageable pageable = PageRequest.of(page , 3); // page 값 1 감소
+        Pageable pageable = PageRequest.of(page, 3); // page 값 1 감소
         return this.storeRepository.findAll(pageable);
 
     }
@@ -81,11 +84,15 @@ public class StoreService {
         this.storeRepository.save(store);
     }
 
-    public void delete(Store store) {
+    @Transactional
+    public void delete(Integer storeId) {
+        Store store = this.getStore(storeId);
+
+        List<Cart> cartList = this.cartRepository.findByStoreId(storeId);
+        this.cartRepository.deleteAll(cartList);
 
         this.storeRepository.delete(store);
     }
-
 
 
     public void cart(Integer id) {
@@ -99,6 +106,7 @@ public class StoreService {
             cart.setFilepath(store1.getFilepath());
             cart.setFilename(store1.getFilename());
             cart.setCategory(store1.getCategory());
+            cart.setStore(store1);
             this.cartRepository.save(cart);
         }
     }
