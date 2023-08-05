@@ -20,7 +20,7 @@ public class HomeController {
     @ResponseBody
     public String showDebugSession(HttpSession session) {
         StringBuilder sb = new StringBuilder("Session content:\n");
-
+////
         Enumeration<String> attributeNames = session.getAttributeNames();
         while (attributeNames.hasMoreElements()) {
             String attributeName = attributeNames.nextElement();
