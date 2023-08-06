@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.member.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -40,6 +41,8 @@ public class Member {
     private String email;
 
     private String birth;
+
+    private String phoneNumber;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격

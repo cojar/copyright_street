@@ -2,6 +2,7 @@ package com.sbp.copyrightStreet.boundedContext.member.controller;
 
 import com.sbp.copyrightStreet.base.rq.Rq;
 import com.sbp.copyrightStreet.base.rsData.RsData;
+
 import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
 import com.sbp.copyrightStreet.boundedContext.member.service.MemberService;
 import jakarta.validation.Valid;
@@ -11,6 +12,7 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -21,9 +23,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/member") // 액션 URL의 공통 접두어
 @RequiredArgsConstructor
+@Slf4j
 public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
+
+
 
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
@@ -51,6 +56,9 @@ public class MemberController {
         @Email
         private final String email;
 
+        @NotBlank
+        private final String phoneNumber;
+
         @Size(min = 4, max = 30)
         @NotBlank
         private final String birth;
@@ -60,7 +68,7 @@ public class MemberController {
     @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
     public String join(@Valid JoinForm joinForm, BindingResult bindingResult) { // @Valid 가 없으면 @NotBlank 등이 작동하지 않음, 만약에 유효성 문제가 있다면 즉시 정지
-        RsData<Member> joinRs = memberService.join(joinForm.getUsername(), joinForm.getPassword1());
+        RsData<Member> joinRs = memberService.join(joinForm.getUsername(), joinForm.getPassword1(),joinForm.getEmail(),joinForm.getPhoneNumber(),joinForm.getBirth());
         if(bindingResult.hasErrors()){
             return "usr/member/join";
         }
@@ -90,4 +98,6 @@ public class MemberController {
 
         return "usr/member/me";
     }
+
+
 }
