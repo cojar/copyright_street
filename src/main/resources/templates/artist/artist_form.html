@@ -1,4 +1,6 @@
-<html layout:decorate="~{usr/layout/layout.html}">
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>작가등록</title>
@@ -8,28 +10,32 @@
 
 <main layout:fragment="main">
 
-    <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
-        <div>
-            <input type="text" name="username" maxlength="30" placeholder="이름" class="input input-bordered">
-        </div>
-        <div>
-            <input type="text" name="loginId" maxlength="30" placeholder="아이디" class="input input-bordered">
-        </div>
-        <div>
-            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
-        </div>
-        <div>
-            <input type="password" name="password2" maxlength="30" placeholder="비밀번호확인" class="input input-bordered">
-        </div>
-        <div>
-            <input type="email" name="email" maxlength="30" placeholder="이메일을 입력해주세요" class="input input-bordered">
-        </div>
-        <div>
-            <input type="submit" value="회원가입" class="btn btn-primary">
-        </div>
+    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post" class="p-10 flex flex-col gap-4">
+        <ul>
+            <li class="type">이름</li>
+            <li class="content">
+                <input type="text" th:value="${artistCreateForm.username}" disabled placeholder="이름을 입력해주세요.">
+                <input type="hidden" th:field="*{username}" placeholder="이름을 입력해주세요.">
+            </li>
+        </ul>
+        <ul>
+            <li class="type">번호</li>
+            <li class="content">
+                <input type="text" th:field="*{phoneNumber}" placeholder="연락처를 입력해주세요">
+            </li>
+        </ul>
+        <button id="btn-join-1" type="submit" class="btn btn-block btn-primary gap-1">
+            <i class="fa-solid fa-user-plus"></i>
+            <span>등록</span>
+        </button>
     </form>
 </main>
 
 </body>
 
 </html>
+
+
+
+
+
