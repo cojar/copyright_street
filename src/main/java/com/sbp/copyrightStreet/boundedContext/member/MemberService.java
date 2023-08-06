@@ -75,6 +75,7 @@ public class MemberService {
             throw new DataNotFoundException("user not found");
         }
     }
+    //
 
     public Member getUserByEmail(String email) {
         Optional<Member> memberOptional = memberRepository.findByEmail(email);
