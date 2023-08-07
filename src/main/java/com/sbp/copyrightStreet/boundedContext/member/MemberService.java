@@ -25,15 +25,15 @@ public class MemberService {
 
     @Transactional // SELECT 이외의 쿼리에 대한 가능성이 아주 조금이라도 있으면 붙인다.
     // 일반 회원가입(소셜 로그인을 통한 회원가입이 아님)
-    public RsData<Member> join(String username, String password, String loginId, String email, String phoneNumber) {
-        // "GRAMGRAM" 해당 회원이 일반회원가입으로 인해 생성되었다는걸 나타내기 위해서
-        return join("copyrightStreet", username, password, loginId, phoneNumber, email);
+    public RsData<Member> join(String username, String loginId, String password, String email, String phoneNumber) {
+
+        return join("copyrightStreet", username, loginId, password, phoneNumber, email);
     }
 
     // 내부 처리함수, 일반회원가입, 소셜로그인을 통한 회원가입(최초 로그인 시 한번만 발생)에서 이 함수를 사용함
-    private RsData<Member> join(String providerTypeCode, String username, String password, String loginId,String phoneNumber, String email) {
-        if (findByUsername(username).isPresent()) {
-            return RsData.of("F-1", "해당 아이디(%s)는 이미 사용중입니다.".formatted(username));
+    private RsData<Member> join(String providerTypeCode, String username, String loginId, String password, String phoneNumber, String email) {
+        if (findByUsername(loginId).isPresent()) {
+            return RsData.of("F-1", "해당 아이디(%s)는 이미 사용중입니다.".formatted(loginId));
         }
 
         // 소셜 로그인을 통한 회원가입에서는 비번이 없다.
@@ -42,10 +42,10 @@ public class MemberService {
         Member member = Member
                 .builder()
                 .providerTypeCode(providerTypeCode)
-                .loginId(loginId)
                 .username(username)
-                .phoneNumber(phoneNumber)
+                .loginId(loginId)
                 .password(password)
+                .phoneNumber(phoneNumber)
                 .email(email)
                 .createDate(LocalDateTime.now())
                 .build();
@@ -75,6 +75,7 @@ public class MemberService {
             throw new DataNotFoundException("user not found");
         }
     }
+    //
 
     public Member getUserByEmail(String email) {
         Optional<Member> memberOptional = memberRepository.findByEmail(email);

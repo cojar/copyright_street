@@ -22,7 +22,7 @@ public class MemberController {
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
     public String showJoin() {
-        return "usr1/member/join";
+        return "member/join";
     }
 
 
@@ -34,8 +34,8 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             for (int i = 0; i < bindingResult.getErrorCount(); i++) {
                 System.out.println(bindingResult.getAllErrors().get(i));
-            }
-            return "usr1/member/join";
+            }//.
+            return "member/join";
             ///
         }
 
@@ -43,10 +43,10 @@ public class MemberController {
             System.out.println("password confirm error");
             bindingResult.rejectValue("passwordCheck", "passwordInCorrect",
                     "입력한 비밀번호가 일치하지 않습니다.");
-            return "usr1/member/join";
+            return "member/join";
         }
 
-        memberService.join(joinForm.getLoginId(), joinForm.getPassword(), joinForm.getUsername(), joinForm.getEmail(), joinForm.getPhoneNumber());
+        memberService.join(joinForm.getUsername(),joinForm.getLoginId(), joinForm.getPassword(),  joinForm.getEmail(), joinForm.getPhoneNumber());
 
         redirectAttributes.addFlashAttribute("signupSuccess", true);
         return "redirect:/member/login";
@@ -55,12 +55,12 @@ public class MemberController {
     @PreAuthorize("isAnonymous()")
     @GetMapping("/login") // 로그인 폼, 로그인 폼 처리는 스프링 시큐리티가 구현, 폼 처리시에 CustomUserDetailsService 가 사용됨
     public String showLogin() {
-        return "usr1/member/login";
+        return "member/login";
     }
 
     @PreAuthorize("isAuthenticated()") // 로그인 해야만 접속가능
     @GetMapping("/me") // 로그인 한 나의 정보 보여주는 페이지
     public String showMe() {
-        return "usr1/member/me";
+        return "member/me";
     }
 }

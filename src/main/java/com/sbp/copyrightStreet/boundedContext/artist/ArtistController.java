@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.artist;
 
+import com.sbp.copyrightStreet.DataNotFoundException;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 import jakarta.validation.Valid;
@@ -27,14 +28,10 @@ public class ArtistController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
     public String register(Model model, ArtistCreateForm artistCreateForm, Principal principal) {
+        Member member = memberService.getUserByLoginId(principal.getName());
+        artistCreateForm.setUsername(member.getUsername());
 
-        Member memberInfo = this.memberService.getUserByLoginId(principal.getName());
-        artistCreateForm.setUsername(memberInfo.getUsername());
-        String username = principal.getName();
-        Member member = memberService.getUserByLoginId(username);
-        model.addAttribute("username", member.getUsername());
-        model.addAttribute("email", member.getEmail());
-        return "artist_form";
+        return "artist/artist_form";
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -42,16 +39,20 @@ public class ArtistController {
     public String register(Model model,
                            @Valid ArtistCreateForm artistCreateForm,
                            BindingResult bindingResult, Principal principal) throws IOException {
-
         if (bindingResult.hasErrors()) {
             return "registration-page";
         }
 
-        Member memberInfo = this.memberService.getUserByLoginId(principal.getName());
-        Member email = this.memberService.getUserByEmail(memberInfo.getEmail());
+        String username = principal.getName();
+        Member memberInfo = memberService.getUserByLoginId(username);
 
-        // 아티스트 기본 정보 저장
-        Artist artist = this.artistService.create(memberInfo,
+        if (memberInfo == null) {
+            model.addAttribute("error", "유효하지 않은 사용자 정보입니다.");
+            return "error-page";
+        }
+
+        Member email = memberService.getUserByEmail(memberInfo.getEmail());
+        Artist artist = artistService.create(memberInfo,
                 artistCreateForm.getPhoneNumber(),
                 email,
                 artistCreateForm.getIntroDetail());

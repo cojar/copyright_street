@@ -10,22 +10,34 @@
 <table>
     <thead>
     <tr>
+<<<<<<< HEAD
         <th>번호</th>
+=======
+>>>>>>> c4d1271073e0c421c8d1bdf8d13cddb33b2deeca
         <th>제목</th>
         <th>작성일시</th>
     </tr>
     </thead>
     <tbody>
+<<<<<<< HEAD
     <tr th:each="board, loop : ${paging}">
         <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
         <td>
         <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
         </td>
         <td th:text="${board.createDate}"></td>
+=======
+    <tr th:each="board : ${boardList}">
+        <td>
+        <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
+        </td>
+        <td th:text="${board.content}"></td>
+>>>>>>> c4d1271073e0c421c8d1bdf8d13cddb33b2deeca
     </tr>
     </tbody>
 </table>
 
+<<<<<<< HEAD
 <!-- 페이징처리 시작 -->
 <div th:if="${!paging.isEmpty()}">
     <div class="d-flex justify-content-center">
@@ -51,5 +63,7 @@
 </div>
 <!-- 페이징처리 끝 -->
 
+=======
+>>>>>>> c4d1271073e0c421c8d1bdf8d13cddb33b2deeca
 </body>
 </html>
