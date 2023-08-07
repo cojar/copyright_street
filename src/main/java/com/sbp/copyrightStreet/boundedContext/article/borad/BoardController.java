@@ -17,7 +17,7 @@ public class BoardController {
 
     @GetMapping("/list")
     public String boardList(Model model, @RequestParam(value = "page", defaultValue = "0") int page){
-        Page<com.ll.exam.project.borad.Board> paging = this.boardService.getList(page);
+        Page<Board> paging = this.boardService.getList(page);
         model.addAttribute("paging", paging);
 //        List<Board> boardList = this.boardService.getList();
 //        model.addAttribute("boardList", boardList);
@@ -40,7 +40,7 @@ public class BoardController {
 
     @GetMapping("/detail/{id}")
     public String boardDetail(Model model, @PathVariable("id") Integer id) {
-        com.ll.exam.project.borad.Board board = this.boardService.getBoard(id);
+        Board board = this.boardService.getBoard(id);
         model.addAttribute("board", board);
         return "board_detail";
     }
