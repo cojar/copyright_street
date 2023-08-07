@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 디테일</title>
+</head>
+<body>
+
+<h3 th:text="${board.title}"></h3>
+<p th:text="${board.content}"></p>
+
+<h5 th:text="|${#lists.size(board.commentList)}개의 답변이 있습니다.|"></h5>
+<div>
+    <ul>
+        <li th:each="comment : ${board.commentList}" th:text="${comment.content}"></li>
+    </ul>
+</div>
+
+<form th:action="@{|/comment/create/${board.id}|}" method="post">
+    <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
+<a th:href="@{/board/list}">목록</a>
+
+</body>
+</html>

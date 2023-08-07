@@ -1,4 +1,5 @@
-package com.sbp.copyrightStreet.boundedContext.article.borad;
+package com.ll.exam.project.borad;
+
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
