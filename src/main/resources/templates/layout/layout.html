@@ -29,38 +29,40 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- 공통 상단 -->
-
 <!--네비바 -->
-<div class="fixed w-full z-50 bg-white border-b backdrop-blur-lg bg-opacity-80">
-    <div class="mx-auto max-w-7xl px-6 sm:px-6 lg:px-8 ">
-        <div class="relative flex h-16 justify-between">
-            <div class="p-1  justify-start">
-                <a class="p-0 flex-auto" href="/">
-                    <img class="h-12 w-auto" src="/img/logo.png">
+<div class=" w-full z-50 bg-white border-b border-slate-200 backdrop-blur-lg bg-opacity-80">
+    <div class="mx-auto max-w-7xl max-h-40 px-6 sm:px-8 lg:px-8 ">
+        <div class="relative flex h-32 justify-between items-center">
+            <div class="p-1">
+                <a class="p-1 flex-auto" href="/">
+                    <img class="w-40 " src="/img/logo.png">
                 </a>
             </div>
-            <div class="p-2 flex flex-2 items-center md:fleㄷx md:space-x-10  list-none justify-start">
-                <li>
-                    <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                       target="_blank">이미지</a>
-                </li>
-                <li>
-                    <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                       target="_blank">동영상
-                    </a>
-                </li>
-                <li>
-                    <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                       target="_blank">아이콘
-                    </a>
-                </li>
-                <a href="/membership/price" th:href="@{/Membership/Price}"
-                   class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
-                > 라이센스
-                </a>
+            <div class="p-2 flex flex-2 items-center md:space-x-10 justify-start">
+
+                <ul class="grid grid-rows-2" style="row-gap: 3rem;">
+                    <li class="flex justify-between ">
+                        <a href="#" class="text-base font-normal text-teal-500 list-none hover:text-teal-900 mr-8"
+                           target="_blank">작가등록</a>
+                        <a href="/membership/price" th:href="@{/Membership/Price}"
+                           class="text-base font-normal text-teal-500 list-none hover:text-gray-900 mr-8"> 라이센스</a>
+                        <a href="#" class="text-base font-normal text-teal-500 list-none hover:text-gray-900 mr-8"
+                           target="_blank">커뮤니티</a>
+                    </li>
+                    <li class="flex  justify-center">
+                        <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900 mr-8"
+                           target="_blank">이미지</a>
+                        <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900 mr-8"
+                           target="_blank">동영상</a>
+                        <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+                           target="_blank">아이콘</a>
+                    </li>
+                </ul>
             </div>
 
-            <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8">
+            <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
+                <a class="text-gray-700 hover:text-teal-500 text-sm font-medium" href=""> 🛒 </a>
+
                 <a class="text-gray-700 hover:text-teal-500 text-sm font-medium" href="/member/login"
                    th:if="${@rq.logout}">Login</a>
                 <a class="text-gray-700 hover:text-teal-500 text-sm font-medium" href="javascript:;"
@@ -113,6 +115,8 @@
                 localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
             }
         });
+
+
 
 </script>
 
