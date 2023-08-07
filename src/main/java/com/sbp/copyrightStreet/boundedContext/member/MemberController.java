@@ -25,7 +25,7 @@ public class MemberController {
         return "member/join";
     }
 
-
+/////
 
     @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
