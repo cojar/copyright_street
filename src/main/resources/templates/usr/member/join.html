@@ -43,19 +43,23 @@
 
             form.submit(); // 폼 발송
         }
+
     </script>
 
-    <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
-        <div>
-            <input type="text" name="username" maxlength="30" placeholder="아이디" class="input input-bordered">
-        </div>
-        <div>
-            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
-        </div>
-        <div>
-            <input type="submit" value="회원가입" class="btn btn-primary">
-        </div>
-    </form>
+    <div class="flex-wrap p-20">
+        <form th:action method="POST" class="p-10 flex flex-col gap-4 "
+              onsubmit="JoinForm__submit(this); return false;">
+            <div>
+                <input type="text" name="username" maxlength="30" placeholder="아이디" class="input input-bordered">
+            </div>
+            <div>
+                <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
+            </div>
+            <div>
+                <input type="submit" value="회원가입" class="btn btn-primary">
+            </div>
+        </form>
+    </div>
 </main>
 
 </body>
