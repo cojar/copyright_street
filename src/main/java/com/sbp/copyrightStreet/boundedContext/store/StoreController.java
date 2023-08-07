@@ -46,7 +46,7 @@ public class StoreController {
     @GetMapping("/store/modify/{id}")
     public String modify(Store store)
     {
-        return "usr/home/copy_modify";
+        return "store/copy_modify";
     }
 
     @PostMapping("/store/modify/{id}")
