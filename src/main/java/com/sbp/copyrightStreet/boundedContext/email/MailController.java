@@ -1,3 +1,5 @@
+package com.sbp.copyrightStreet.boundedContext.email;
+
 import java.util.Map;
 import java.util.Random;
 
