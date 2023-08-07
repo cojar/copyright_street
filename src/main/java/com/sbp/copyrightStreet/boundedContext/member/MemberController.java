@@ -25,8 +25,6 @@ public class MemberController {
         return "member/join";
     }
 
-
-
     @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
     public String signup(@Valid JoinForm joinForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
