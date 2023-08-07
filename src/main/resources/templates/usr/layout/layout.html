@@ -31,6 +31,7 @@
 <!-- 공통 상단 -->
 <header>
     <a href="/" class="btn btn-link">메인</a>
+    <a href="/membership/price" th:href="@{/Membership/Price}">라이센스 구매</a>
     <a href="/member/login" th:if="${@rq.logout}" class="btn btn-link">로그인</a>
     <a href="/member/join" th:if="${@rq.logout}" class="btn btn-link">회원가입</a>
     <a href="/member/me" th:if="${@rq.login}" class="btn btn-link">내 정보</a>

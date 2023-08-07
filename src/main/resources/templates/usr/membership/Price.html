@@ -3,13 +3,15 @@
 
 <head>
   <script src="https://cdn.tailwindcss.com/3.1.4"></script>
+
+</head>
+
+<body>
   <!-- 토스페이먼츠 결제창 SDK 추가 -->
   <script src="https://js.tosspayments.com/v1/payment"></script>
   <!-- 토스페이먼츠 결제위젯 SDK 추가 -->
   <script src="https://js.tosspayments.com/v1/payment-widget"></script>
-</head>
 
-<body>
 
   <div class="h-screen p-10">
     <div class="p-2 max-w-screen-lg  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -41,7 +43,8 @@
           <p class="text-lg text-gray-600 mb-8">PRO 요금제 설명</p>
           <h2 amount="49,000" class="text-5xl font-bold mb-8 text-yellow-600">49,000원</h2>
           <button id="payment-button" orderName="Pro 요금제"
-            class="bg-yellow-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-yellow-700 transition duration-300 ease-in-out">결제하기
+            class="bg-yellow-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-yellow-700 transition duration-300 ease-in-out">
+            결제하기
           </button>
         </div>
 
@@ -102,46 +105,6 @@
         })
     })
 
-
-
-    // // 2. 결제위젯 SDK 초기화
-    // const paymentWidget = PaymentWidget(clientKey, customerKey) // 회원 결제
-
-    // button.addEventListener("click", function () {
-    //   const paymentAgreement = paymentWidget.renderAgreement('#agreement')
-    //   const agreementStatus = paymentAgreement.getAgreementStatus()
-
-    //   paymentAgreement.on('change', agreementStatus => {
-    //     console.log(!agreementStatus.agreedRequiredTerms) // 고객이 모든 필수 약관에 동의했을 경우 true
-    //   })
-    //   // ------ 결제창 띄우기 ------
-    //   paymentWidget
-    //     .requestPayment('카드', { // 결제수단 파라미터 (카드, 계좌이체, 가상계좌, 휴대폰 등)
-    //       // 결제 정보 파라미터
-    //       // 더 많은 결제 정보 파라미터는 결제창 Javascript SDK에서 확인하세요.
-    //       // https://docs.tosspayments.com/reference/js-sdk
-    //       amount: 100, // 결제 금액
-    //       orderId: 'sDDOU6alK64dAfpc1FjEJ', // 주문 ID(주문 ID는 상점에서 직접 만들어주세요.)
-    //       orderName: '테스트 결제', // 주문명
-    //       customerName: '김토스', // 구매자 이름
-    //       successUrl: 'http://localhost:8020/success', // 결제 성공 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
-    //       failUrl: 'http://localhost:8020/fail', // 결제 실패 시 이동할 페이지(이 주소는 예시입니다. 상점에서 직접 만들어주세요.)
-    //     })
-    //     .then(function (data) {
-    //       // // 성공 처리: 결제 승인 API를 호출
-    //     })
-    //     // ------결제창을 띄울 수 없는 에러 처리 ------
-    //     // 메서드 실행에 실패해서 reject 된 에러를 처리하는 블록입니다.
-    //     // 결제창에서 발생할 수 있는 에러를 확인하세요.
-    //     // https://docs.tosspayments.com/reference/error-codes#결제창공통-sdk-에러
-    //     .catch(function (error) {
-    //       if (error.code === 'USER_CANCEL') {
-    //         // 결제 고객이 결제창을 닫았을 때 에러 처리
-    //       } else if (error.code === 'INVALID_CARD_COMPANY') {
-    //         // 유효하지 않은 카드 코드에 대한 에러 처리
-    //       }
-    //     });
-    // });
 
   </script>
 </body>
