@@ -1,14 +1,16 @@
-<html layout:decorate="~{layout/layout.html}">
+<html layout:decorate="~{usr/layout/layout.html}">
 
 <head>
-    <title>로그인</title>
+    <title>회원가입.</title>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <meta name="_csrf" th:content="${_csrf.token}">
 </head>
 
 <body>
 
 <main layout:fragment="main">
     <script>
-        function LoginForm__submit(form) {
+        function JoinForm__submit(form) {
             // username 이(가) 올바른지 체크
 
             form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
@@ -43,35 +45,140 @@
 
             form.submit(); // 폼 발송
         }
+
+
     </script>
 
-    <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="LoginForm__submit(this); return false;">
+
+    <form th:action="@{/submit}" method="post" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
+        <!-- CSRF 토큰 추가 -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
         <div>
-            <input type="text" name="loginId" maxlength="30" placeholder="아이디" class="input input-bordered">
+            <input type="text" name="username" maxlength="30" placeholder="아이디" class="input input-bordered">
         </div>
         <div>
-            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
+            <input type="password" name="password1" maxlength="30" placeholder="비밀번호" class="input input-bordered">
         </div>
         <div>
-            <input type="submit" value="로그인" class="btn btn-primary">
+            <input type="password" name="password2" maxlength="30" placeholder="비밀번호확인" class="input input-bordered">
+        </div>
+        <div class="count-box">
+            <p>
+                <strong id="resultMailBox">Email</strong>
+            </p>
+            <i class="bi bi-at"></i>
+            <span class="userEmail">
+		<input style="width: 60%; display: inline;" placeholder="이메일을 입력하세요" class="form-control" type="text" id="email"
+               name="email" oninput="fn_emailChk_Ajax()"/>
+		<button type="button" class="btn btn-outline-primary" id="showDiv" onclick="fn_sendEmail_Ajax()">
+			<i class="fa fa-search"></i>이메일 인증
+		</button>
+    <div style="display: none;" id="checkCodeDiv">
+      <input type="text" id="inputCode" style="width: 60%; display: inline;" placeholder="인증코드 입력"
+             class="form-control"/>
+      <button type="button" class="btn btn-outline-primary" onclick="fn_checkCode()">확인</button>
+    </div>
+  	<h6 style="color: green;">※ 이메일을 입력해주세요</h6>
+  	</span>
+        </div>
+        </div>
+        <div>
+            <input type="text" name="phoneNumber" placeholder="연락처" class="input input-bordered">
+        </div>
+        <div>
+            <input type="text" name="birth" placeholder="생년월일" class="input input-bordered">
+        </div>
+        <div>
+
+        </div>
+        <div>
+            <input type="submit" value="회원가입" class="btn btn-primary">
         </div>
     </form>
-
-    <div>
-        <a class="btn btn-link" href="/oauth2/authorization/kakao">
-            카카오로 로그인하기
-        </a>
-
-        <a class="btn btn-link" href="/oauth2/authorization/google">
-            구글 로그인하기(아직 안됨)
-        </a>
-
-        <a class="btn btn-link" href="/oauth2/authorization/naver">
-            네이버 로그인하기(아직 안됨)
-        </a>
-    </div>
 </main>
+
 </body>
 
 </html>
+<script>
+    var flag_dupl_mail = true; // 중복 메일 검사용
+    var flag_dupl_use_mail = true; // 이메일 검사용
+    var resultCode; // 전역 변수로 결과 코드 선언
+
+    var isButtonDisabled = false;
+
+    function disableButton() {
+        isButtonDisabled = true;
+        $("#showDiv").prop("disabled", true);
+        setTimeout(function () {
+            isButtonDisabled = false;
+            $("#showDiv").prop("disabled", false);
+        }, 5000); // 5초 동안 버튼 비활성화
+    }
+
+    function fn_sendEmail_Ajax() {
+        if (isButtonDisabled) return;
+        disableButton();
+
+        var userEmail = $("#email").val().trim();
+
+        var form = {
+            email: userEmail
+        };
+
+        $.ajax({
+            url: "/checkEmailAjax.do",
+            data: JSON.stringify(form),
+            dataType: "json",
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            async: false,
+            success: function (data) {
+                alert("입력하신 이메일 주소에서 발급된 코드를 확인하세요.");
+
+                resultCode = data.joinCode;
+
+                $("#checkCodeDiv").show();
+            },
+            error: function () {
+                alert("네트워크가 불안정합니다. 다시 시도해 주세요.");
+            }
+        });
+    }
+
+        function fn_emailChk_Ajax() {
+            var userEmail = $("#email").val().trim();
+            // ... (fn_emailChk_Ajax 함수 내용)
+        }
+
+        function fn_checkCode() {
+            var inputCode = $("#inputCode").val().trim();
+
+            if (inputCode === "") {
+                alert("인증 코드를 입력해야 합니다.");
+                return;
+            }
+
+            if (inputCode === resultCode) {
+                alert("인증되었습니다.");
+            } else {
+                alert("인증 코드가 다릅니다.");
+            }
+        }
+
+        $(document).ready(function () {
+            $("#showDiv").click(function () {
+                fn_sendEmail_Ajax();
+            });
+
+            $("#email").on("input", function () {
+                fn_emailChk_Ajax();
+            });
+
+            $("#checkCodeDiv button").click(function () {
+                fn_checkCode();
+            });
+        });
+    </script>
 

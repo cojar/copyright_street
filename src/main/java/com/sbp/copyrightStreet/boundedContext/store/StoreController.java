@@ -1,6 +1,8 @@
 package com.sbp.copyrightStreet.boundedContext.store;
 
 
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.cart.CartRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StoreController {
     private final StoreService storeService;
+    private final CartRepository cartRepository;
 
 
     @GetMapping("/store/create")
     public String create(Store store) {
 
-        return "store/copy_form";
+        return "usr/home/copy_form";
     }
 
     @PostMapping("/store/create")
@@ -37,13 +40,13 @@ public class StoreController {
         Store store = this.storeService.getStore(id);
         model.addAttribute("store", store);
         model.addAttribute("id", id); // id 값을 모델에 추가하여 장바구니에 추가할 때 사용
-        return "/store/copy_detail";
+        return "/usr/home/copy_detail";
     }
 
     @GetMapping("/store/modify/{id}")
     public String modify(Store store)
     {
-        return "store/copy_modify";
+        return "usr/home/copy_modify";
     }
 
     @PostMapping("/store/modify/{id}")
@@ -56,8 +59,7 @@ public class StoreController {
 
     @GetMapping("/store/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
-        Store store = this.storeService.getStore(id);
-        this.storeService.delete(store);
+        this.storeService.delete(id);
         return "redirect:/copy/store";
     }
 

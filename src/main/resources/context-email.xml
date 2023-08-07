@@ -1,0 +1,26 @@
+<context-email.xml 파일>
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+
+        <!-- 메일 보내기 -->
+        <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+            <property name="host" value="smtp.gmail.com"/>
+            <property name="port" value="587"/>
+            <property name="username" value="soone4704@gmail.com"/>
+            <property name="password" value="krjpynplmioubwox"/>
+
+
+            <!-- email 요청시는 SMTP -->
+            <property name="javaMailProperties">
+                <props>
+                    <prop key="mail.transport.protocol">smtp</prop>
+                    <prop key="mail.smtp.auth">true</prop>
+                    <prop key="mail.smtp.starttls.enable">true</prop>
+                    <prop key="mail.debug">true</prop>
+                </props>
+            </property>
+        </bean>
+

@@ -1,6 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.store;
 
-import com.sbp.copyrightStreet.boundedContext.member.Member;
+import com.sbp.copyrightStreet.boundedContext.member.entity.Member;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;

@@ -34,9 +34,9 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
-
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' // 타임리프에서 layout.html 사용하려고
+	implementation 'org.springframework.boot:spring-boot-starter-mail' //이메일인증을위해서
 }
 
 tasks.named('test') {

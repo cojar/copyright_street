@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Detail</title>
+</head>
+<body>
+<form th:action="@{/store/cart}" method="post">
+
+    <p th:text="${store.content}"></p>
+    <p>조회수: <span th:text="${store.hitCount}"></span></p>
+    <button type="submit">장바구니에 추가</button>
+    <!-- 이미지 표시 -->
+    <img th:src="@{${store.file}}" alt="">
+    <a th:href="@{|/store/modify/${store.id}|}">수정</a>
+    <a th:href="@{|/store/delete/${store.id}|}">삭제</a>
+    <input type="hidden" name="id" th:value="${id}" /> <!-- id 값을 숨겨진 필드(hidden field)로 전달 -->
+</form>
+</body>
+</html>
