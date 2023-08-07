@@ -1,14 +1,11 @@
 package com.sbp.copyrightStreet.boundedContext.article.borad;
 
-import jakarta.persistence.Id;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -16,12 +13,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 
-    private final BoardRepository boardRepository;
     private final BoardService boardService;
+
     @GetMapping("/list")
-    public String boardList(Model model){
-        List<Board> boardList = this.boardRepository.findAll();
-        model.addAttribute("boardList", boardList);
+    public String boardList(Model model, @RequestParam(value = "page", defaultValue = "0") int page){
+        Page<com.ll.exam.project.borad.Board> paging = this.boardService.getList(page);
+        model.addAttribute("paging", paging);
+//        List<Board> boardList = this.boardService.getList();
+//        model.addAttribute("boardList", boardList);
         return "board_list";
     }
 
@@ -40,17 +39,12 @@ public class BoardController {
     }
 
     @GetMapping("/detail/{id}")
-    public String boardDetail(Model model, @PathVariable("id") Long id) {
-        Board board = this.boardService.getBoard(id);
+    public String boardDetail(Model model, @PathVariable("id") Integer id) {
+        com.ll.exam.project.borad.Board board = this.boardService.getBoard(id);
         model.addAttribute("board", board);
         return "board_detail";
     }
 
-//    @PostMapping("/create")
-//    public String create(@Valid BoardForm boardForm, BindingResult bindingResult, Principal principal) {
-//        SiteUser siteUser = this.userService.getUser(principal.getName());
-//        this.boardService.create(boardForm.getTitle(), boardForm.getContent());
-//        return "redirect:/board/list";
-//    }
+
 
 }
