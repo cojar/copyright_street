@@ -30,7 +30,7 @@ public class RecommentController {
 
         if (bindingResult.hasErrors()) {
             model.addAttribute("comment", comment);
-            return "board_detail";
+            return "board/detail";
         }
         this.commentService.create(comment.getBoard(), recommentForm.getRecomment());
         return String.format("redirect:/board/detail/%s#comment_%s",

@@ -42,12 +42,6 @@ public class Member {
 
     private String phoneNumber;
 
-    @Column
-    private String phoneNumber;
-
-    @Column
-    private String email;
-
     @Column(unique = true)
     private String loginId;
 

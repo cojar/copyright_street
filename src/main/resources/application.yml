@@ -7,11 +7,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/copyright_street?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: root
-<<<<<<< HEAD
-    password:
-=======
     password: 123
->>>>>>> c4d1271073e0c421c8d1bdf8d13cddb33b2deeca
   security:
     oauth2:
       client:
@@ -31,7 +27,7 @@ spring:
             user-name-attribute: id
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true

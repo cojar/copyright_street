@@ -44,11 +44,11 @@ public class HomeController {
         Page<Store> paging = this.storeService.getList(page, kw);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
-        return "usr/home/copy_store";
+        return "store/copy_store";
     }
     @GetMapping("/copy/list")
     public String list(){
 
-        return "usr/home/copy_list";
+        return "store/copy_list";
     }
 }

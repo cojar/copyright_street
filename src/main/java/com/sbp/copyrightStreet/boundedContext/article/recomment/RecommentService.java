@@ -1,13 +1,16 @@
 package com.sbp.copyrightStreet.boundedContext.article.recomment;
 
 import com.sbp.copyrightStreet.boundedContext.article.comment.Comment;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
+@Service
 public class RecommentService {
     private final RecommentRepository recommentRepository;
 
@@ -20,13 +23,19 @@ public class RecommentService {
         return recomment.get();
     }
 
-    public Recomment create(Comment comment, String  recomment) {
-        Recomment r = new Recomment();
-        r.setComment(comment);
-        r.setCreateDate(LocalDateTime.now());
-        r.setRecomment(recomment);
-        this.recommentRepository.save(r);
-        return r;
+    public Recomment create(String content, Member author, Comment comment, Recomment parent) {
+
+        Recomment reComment = new Recomment();
+
+        reComment.setContent(content);
+        reComment.setAuthor(author);
+        reComment.setComment(comment);
+        if (parent != null) reComment.setParent(parent);
+        reComment.setCreateDate(LocalDateTime.now());
+
+        this.recommentRepository.save(reComment);
+
+        return reComment;
     }
 }
 

@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.article.borad;
 
 
+import com.sbp.copyrightStreet.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

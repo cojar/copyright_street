@@ -21,7 +21,7 @@ public class BoardController {
         model.addAttribute("paging", paging);
 //        List<Board> boardList = this.boardService.getList();
 //        model.addAttribute("boardList", boardList);
-        return "board_list";
+        return "board/list";
     }
 
 
@@ -42,7 +42,7 @@ public class BoardController {
     public String boardDetail(Model model, @PathVariable("id") Integer id) {
         Board board = this.boardService.getBoard(id);
         model.addAttribute("board", board);
-        return "board_detail";
+        return "board/detail";
     }
 
 

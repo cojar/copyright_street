@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MembershipController {
     @GetMapping("/Price")
     public String Price(){
-        return "usr/membership/price";
+        return "membership/price";
     }
 
 

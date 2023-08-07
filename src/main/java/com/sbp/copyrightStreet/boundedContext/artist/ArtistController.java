@@ -31,7 +31,7 @@ public class ArtistController {
         Member member = memberService.getUserByLoginId(principal.getName());
         artistCreateForm.setUsername(member.getUsername());
 
-        return "artist/artist_form";
+        return "artist/form";
     }
 
     @PreAuthorize("isAuthenticated()")

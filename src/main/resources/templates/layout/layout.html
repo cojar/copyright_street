@@ -1,5 +1,5 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="ko">
 <head>
 
     <meta charset="UTF-8">
@@ -29,46 +29,97 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- 공통 상단 -->
-<header>
-    <a href="/" class="btn btn-link">메인</a>
-    <a href="/membership/price" th:href="@{/Membership/Price}">라이센스 구매</a>
-    <a href="/member/login" th:if="${@rq.logout}" class="btn btn-link">로그인</a>
-    <a href="/member/join" th:if="${@rq.logout}" class="btn btn-link">회원가입</a>
-    <a href="/member/me" th:if="${@rq.login}" class="btn btn-link">내 정보</a>
-    <a href="javascript:;" th:if="${@rq.login}" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>
-    <a href="/artist/register">작가등록</a>
-    <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
-    <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
-</header>
+<!--네비바 -->
+<div class=" w-full z-50 bg-white border-b border-slate-200 backdrop-blur-lg bg-opacity-80">
+    <div class="mx-auto max-w-7xl max-h-40 px-6 sm:px-8 lg:px-8 ">
+        <div class="relative flex h-32 justify-between items-center">
+            <div class="p-1">
+                <a class="p-1 flex-auto" href="/">
+                    <img class="w-40 " src="/img/logo.png">
+                </a>
+            </div>
+            <div class="p-2 flex flex-2 items-center md:space-x-10 justify-start">
+
+                <ul class="grid grid-rows-2" style="row-gap: 3rem;">
+                    <li class="flex justify-between ">
+                        <a href="#" class="text-base font-normal text-teal-500 list-none hover:text-teal-900 mr-8"
+                           target="_blank">작가등록</a>
+                        <a href="/membership/price" th:href="@{/Membership/Price}"
+                           class="text-base font-normal text-teal-500 list-none hover:text-gray-900 mr-8"> 라이센스</a>
+                        <a href="#" class="text-base font-normal text-teal-500 list-none hover:text-gray-900 mr-8"
+                           target="_blank">커뮤니티</a>
+                    </li>
+                    <li class="flex  justify-center">
+                        <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900 mr-8"
+                           target="_blank">이미지</a>
+                        <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900 mr-8"
+                           target="_blank">동영상</a>
+                        <a href="#" class="text-base font-normal text-gray-500 list-none hover:text-gray-900"
+                           target="_blank">아이콘</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
+                <a class="text-gray-700 hover:text-teal-500 text-sm font-medium" href=""> 🛒 </a>
+
+                <a class="text-gray-700 hover:text-teal-500 text-sm font-medium" href="/member/login"
+                   th:if="${@rq.logout}">Login</a>
+                <a class="text-gray-700 hover:text-teal-500 text-sm font-medium" href="javascript:;"
+                   th:if="${@rq.login}" onclick="$(this).next().submit();">Logout</a>
+                <a class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm "
+                   href="/member/join" th:if="${@rq.logout}">Sign up
+                </a>
+                <a class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm "
+                   href="/member/me" th:if="${@rq.login}">MY
+                </a>
+                <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
+                <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<header>-->
+<!--    <a href="/" class="btn btn-link">메인</a>-->
+<!--    <a href="/membership/price" th:href="@{/Membership/Price}">라이센스 구매</a>-->
+<!--    <a href="/member/login" th:if="${@rq.logout}" class="btn btn-link">로그인</a>-->
+<!--    <a href="/member/join" th:if="${@rq.logout}" class="btn btn-link">회원가입</a>-->
+<!--    <a href="/member/me" th:if="${@rq.login}" class="btn btn-link">내 정보</a>-->
+<!--    <a href="javascript:;" th:if="${@rq.login}" onclick="$(this).next().submit();" class="btn btn-link">로그아웃</a>-->
+<!--    <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>-->
+<!--    <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>-->
+<!--</header>-->
 
 <main layout:fragment="main"></main>
 
 <script th:inline="javascript">
-    // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
-    const params = /*[[ ${param} ]]*/ null;
+        // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
+        const params = /*[[ ${param} ]]*/ null;
 
-    if (params.msg) {
-        toastNotice(params.msg[0]);
-    }
-
-    if (params.errorMsg) {
-        toastWarning(params.errorMsg[0]);
-    }
-
-    // history.back 에 의해서 돌아온 경우에 실행됨
-    // 평소에도 실행됨
-    $(window).bind("pageshow", function (event) {
-        const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
-
-        if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
-            toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
-            localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+        if (params.msg) {
+            toastNotice(params.msg[0]);
         }
-    });
+
+        if (params.errorMsg) {
+            toastWarning(params.errorMsg[0]);
+        }
+
+        // history.back 에 의해서 돌아온 경우에 실행됨
+        // 평소에도 실행됨
+        $(window).bind("pageshow", function (event) {
+            const localStorageKeyAboutHistoryBackErrorMsg = "historyBackErrorMsg___" + location.href;
+
+            if (localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg)) {
+                toastWarning(localStorage.getItem(localStorageKeyAboutHistoryBackErrorMsg));
+                localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
+            }
+        });
+
+
+
 </script>
 
 </body>
 
 </html>
-
-

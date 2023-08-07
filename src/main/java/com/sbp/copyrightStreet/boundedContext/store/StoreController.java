@@ -21,7 +21,7 @@ public class StoreController {
     @GetMapping("/store/create")
     public String create(Store store) {
 
-        return "usr/home/copy_form";
+        return "store/copy_form";
     }
 
     @PostMapping("/store/create")
@@ -40,7 +40,7 @@ public class StoreController {
         Store store = this.storeService.getStore(id);
         model.addAttribute("store", store);
         model.addAttribute("id", id); // id 값을 모델에 추가하여 장바구니에 추가할 때 사용
-        return "/usr/home/copy_detail";
+        return "store/copy_detail";
     }
 
     @GetMapping("/store/modify/{id}")
