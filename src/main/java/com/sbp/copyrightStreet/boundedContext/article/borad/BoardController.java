@@ -37,7 +37,7 @@ public class BoardController {
 
         return "redirect:/board/list";
     }
-
+//
     @GetMapping("/detail/{id}")
     public String boardDetail(Model model, @PathVariable("id") Integer id) {
         Board board = this.boardService.getBoard(id);
