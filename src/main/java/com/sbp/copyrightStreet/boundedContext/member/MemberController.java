@@ -34,7 +34,7 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             for (int i = 0; i < bindingResult.getErrorCount(); i++) {
                 System.out.println(bindingResult.getAllErrors().get(i));
-            }
+            }//.
             return "member/join";
             ///
         }
