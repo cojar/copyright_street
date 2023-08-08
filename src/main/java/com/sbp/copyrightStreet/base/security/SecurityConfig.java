@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .formLogin()
                 .loginPage("/member/login")
                 .defaultSuccessUrl("/")
+                .usernameParameter("loginId")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
