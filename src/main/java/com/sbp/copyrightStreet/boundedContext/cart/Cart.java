@@ -1,38 +1,40 @@
-package com.sbp.copyrightStreet.boundedContext.cart;
+    package com.sbp.copyrightStreet.boundedContext.cart;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+    import jakarta.persistence.*;
+    import lombok.Getter;
+    import lombok.Setter;
+    import com.sbp.copyrightStreet.boundedContext.store.Store;
 
-import java.time.LocalDateTime;
+    import java.time.LocalDateTime;
 
-@Getter
-@Setter
-@Entity
-public class Cart {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Getter
+    @Setter
+    @Entity
+    public class Cart {
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Integer id;
 
-    private String title;
+        private String title;
 
-    private String content;
+        private String content;
 
-    private LocalDateTime create_Date;
+        private LocalDateTime create_Date;
 
-    private String filepath;
+        private String filepath;
 
-    private String filename;
+        private String filename;
 
-    private int hitCount;
+        private int hitCount;
 
-    private String category;
+        private String category;
 
-    public String getFile() {
-        return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static", "");
+        @ManyToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "store_id")
+        private Store store;
+
+        public String getFile() {
+            return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static", "");
+        }
     }
-}

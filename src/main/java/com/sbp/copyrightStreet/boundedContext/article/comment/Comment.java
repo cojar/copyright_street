@@ -21,22 +21,24 @@ public class Comment {
     private Long id;
 
     @Column(columnDefinition = "TEXT")
-    private String content; // 댓글 내용
+    private String content;
 
     @ManyToOne
-    private Member author; // 댓글쓴이
+    private Member author;
 
     @ManyToOne
-    private Board board; // 해당 댓글이 있는 게시글
+    private Board board;
 
     @OneToMany(mappedBy = "comment", cascade = CascadeType.REMOVE)
-    private List<Recomment> reCommentList; // 대댓글
+    private List<Recomment> reCommentList;
 
     @ManyToMany
-    private Set<Member> voter; //추천 좋아요
+    private Set<Member> voter;
 
     @CreatedDate
-    private LocalDateTime createDate; // 댓글 생성일
+    private LocalDateTime createDate;
 
-    private LocalDateTime modifyDate;  // 수정
+    private LocalDateTime modifyDate;
 }
+
+

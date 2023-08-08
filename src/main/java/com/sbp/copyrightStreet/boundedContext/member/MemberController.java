@@ -25,8 +25,6 @@ public class MemberController {
         return "member/join";
     }
 
-/////
-
     @PreAuthorize("isAnonymous()")
     @PostMapping("/join")
     public String signup(@Valid JoinForm joinForm, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
@@ -34,7 +32,7 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             for (int i = 0; i < bindingResult.getErrorCount(); i++) {
                 System.out.println(bindingResult.getAllErrors().get(i));
-            }
+            }//.
             return "member/join";
             ///
         }
