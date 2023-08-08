@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
 
     <!-- 공통 JS 불러오기 -->
-    <script src="/resource/common/common.js"></script>
+    <script src="/resource/static/common.js"></script>
     <!-- 공통 CSS 불러오기 -->
-    <link rel="stylesheet" href="/resource/common/common.css">
+    <link rel="stylesheet" href="/resource/static/common.css">
 
 </head>
 
@@ -53,7 +53,7 @@
                 <a href="/member/login"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium"
                    th:if="${@rq.logout}">Login</a>
-                <a href="javascript:;"
+                <a href="javascript:;" id="logout-link"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium"
                    th:if="${@rq.login}" onclick="$(this).next().submit();">Logout</a>
                 <a href="/member/join"
@@ -93,6 +93,25 @@
                 localStorage.removeItem(localStorageKeyAboutHistoryBackErrorMsg);
             }
         });
+            $(document).ready(function() {
+        const logoutLink = document.getElementById('logout-link');
+        logoutLink.addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent the link from navigating
+            $.ajax({
+                url: '/member/logout',
+                method: 'POST',
+                success: function(response) {
+                    window.location.href = '/member/login';
+                },
+                error: function(error) {
+                    // Handle error if logout fails
+                    console.error('Logout error:', error);
+                    toastr.error('Logout failed. Please try again.');
+                }
+            });
+        });
+    });
+
 </script>
 
 </body>

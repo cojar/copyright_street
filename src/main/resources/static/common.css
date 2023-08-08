@@ -1,0 +1,553 @@
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'LotteMartDream';
+  font-style: normal;
+  font-weight: 300;
+  src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
+}
+
+html > body {
+  font-family: 'LotteMartDream', sans-serif;
+}
+/* 폰트적용 - 끝 */
+
+/* 유틸 - 시작 */
+.touch-imposible .invisible-scrollbar-box::-webkit-scrollbar
+{
+  width: 0;
+  height: 0;
+}
+
+.grid-item-float {
+  grid-template-columns:repeat(auto-fit, minmax(0, max-content));
+}
+
+.item-bt-1-not-last-child > *:not(:last-child) {
+  border-bottom:1px solid #afafaf;
+}
+
+.title-bar {
+  font-size:1.1rem;
+  padding-top:5px;
+  paddinb-bottom:5px;
+  margin-top:20px;
+  margin-bottom:15px;
+  border:solid black;
+  border-width:2px 0;
+}
+
+.title-bar:first-child {
+  margin-top:0;
+}
+
+.form-control .plain-text {
+  padding: 0 .25rem;
+  color:rgba(0,0,0,0.7);
+}
+
+.plain-link-wrap.gap-2 > *:not(:last-child) {
+  margin-right:0.5rem;
+}
+
+.plain-link-wrap.gap-3 > *:not(:last-child) {
+  margin-right:0.75rem;
+}
+
+.form-type-1 {
+  gap:10px;
+}
+
+.btn-wrap {
+  display:flex;
+  flex-wrap:wrap;
+}
+
+.btn-wrap.gap-1 > *:not(:last-child) {
+  margin-right:0.25rem;
+}
+
+.btn-wrap.gap-2 > *:not(:last-child) {
+  margin-right:0.5rem;
+}
+
+.btn-wrap.gap-3 > *:not(:last-child) {
+  margin-right:0.75rem;
+}
+
+:root {
+  --card-title_height:40px;
+  --card-title_left-btn-cell-width:50px;
+}
+
+.card-title {
+  background-color:rgb(87, 13, 248);
+  color:white;
+  text-align:center;
+  height:var(--card-title_height);
+  position:absolute;
+  width:100%;
+  display:grid;
+  align-items:center;
+  grid-template-columns: var(--card-title_left-btn-cell-width) auto var(--card-title_left-btn-cell-width);
+}
+
+.card-title + * {
+  margin-top:var(--card-title_height);
+}
+
+html > body .plain-link {
+  color:rgb(59, 130, 246);
+}
+
+html > body .plain-link:hover {
+  text-decoration:underline;
+}
+/* 유틸 - 끝 */
+
+/* 기타 - 시작 */
+.component-title-bar {
+  border:solid black;
+  border-width:2px 0;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+/* 기타 - 끝 */@font-face {
+              font-family: 'GmarketSansMedium';
+              src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+              font-weight: normal;
+              font-style: normal;
+            }
+
+            html>body {
+              font-family: 'GmarketSansMedium';
+            }
+
+            :root {
+              --mobile-site-width: 1100px;
+            }
+
+            /* lib */
+            .con {
+              max-width: 1200px;
+            }
+
+            .mobile-con {
+              max-width: var(--mobile-site-width);
+            }
+
+            .mobile-section-con {
+              max-width: 760px;
+            }
+
+            .mobile-section-con-2 {
+              max-width: var(--mobile-site-width);
+            }
+
+            .footer-con {
+              max-width: 1890px;
+            }
+
+            /* custom */
+
+            /* top-bar 구현 시작  */
+            .pc-top-bar__section-01 .logo>img {
+              width: 71px;
+              height: 94px;
+            }
+
+            .pc-top-bar__widget-data>ul>li>a {
+              display: flex;
+              padding: 0 8px;
+              color: rgba(136, 136, 136, 1);
+              transition: color .4s;
+              font-size: 12px;
+            }
+
+            .pc-top-bar__widget-data>ul>li:hover>a {
+              color: rgba(136, 136, 136, 0.5);
+            }
+
+            .pc-top-bar__widget-btn-group .widget-btn-01 a,
+            .pc-top-bar__widget-btn-group .widget-btn-02 a {
+              border-radius: 30px;
+              padding: 7px 20px 5px 20px;
+              font-size: 14px;
+              transition: all .4s;
+            }
+
+            .pc-top-bar__widget-btn-group .widget-btn-01 a {
+              background-color: #ff7e6b;
+              color: #fff;
+              border-color: #ff7e6b;
+              border-width: 1px;
+            }
+
+            .pc-top-bar__widget-btn-group .widget-btn-01:hover a {
+              background-color: #fff;
+              color: #ff7e6b;
+              border-color: #ff7e6b;
+              border-width: 1px;
+            }
+
+            .pc-top-bar__widget-btn-group .widget-btn-02 a {
+              background-color: #1ecad3;
+              color: #fff;
+              border-color: #1ecad3;
+              border-width: 1px;
+            }
+
+            .pc-top-bar__widget-btn-group .widget-btn-02:hover a {
+              background-color: #10adb5;
+              color: #fff;
+              border-color: #10adb5;
+            }
+
+            .pc-top-bar__menu-box-1 {
+              display: flex;
+              justify-content: center;
+            }
+
+            .pc-top-bar__menu-box-1>ul>li>a {
+              display: flex;
+              height: 100%;
+              align-items: center;
+              padding: 0 35px;
+              color: #212121;
+              transition: color .3s;
+            }
+
+            .pc-top-bar__menu-box-1>ul>li:hover>a {
+              color: rgba(33, 33, 33, 0.5);
+            }
+
+            .mobile-top-bar__logo>img {
+              width: 104px;
+            }
+
+            .mobile-top-bar__btn-side-bar>i {
+              font-size: 21px;
+              color: #1ecad3;
+            }
+
+            /* top-bar 구현 끝 */
+
+            /* pc 섹션 배너 구현 시작 */
+            .pc-section-wrap .section-banner {
+              height: 593px;
+              background-position: 50% 50%;
+              background-size: cover;
+              background-repeat: no-repeat;
+              left: 0;
+              top: 0;
+              right: 0;
+              bottom: 0;
+            }
+
+            .pc-section-wrap .section-banner-1 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/375dc88d2890e.png);
+            }
+
+            /* section-banner__img-box 공통속성 */
+            .section-banner__img-box>img {
+              width: 200px;
+            }
+
+            /* section-banner__txt-box 공통속성 */
+            .section-banner__txt-box span {
+              display: block;
+              font-size: 18px;
+              color: white;
+              line-height: 2;
+            }
+
+            .section-banner-1__logo>img {
+              height: 173px;
+            }
+
+            .pc-section-wrap .section-banner-2 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/86ac866da3a0d.png);
+            }
+
+            .section-banner-2__logo>img {
+              height: 91px;
+            }
+
+            .pc-section-wrap .section-banner-3 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/90b93bf672e6a.png);
+            }
+
+            .section-banner-3__logo>img {
+              height: 86px;
+            }
+
+            .pc-section-wrap .section-banner-4 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/0d89208feb8c5.png);
+            }
+
+            .section-banner-4__logo>img {
+              height: 84px;
+            }
+
+            /* pc 섹션 배너 구현 끝 */
+
+            /* mobile 섹션 배너 구현 시작 */
+
+            /* mobile 섹션 배너 공통 속성 */
+            .mobile-section-wrap .section-banner {
+              height: 694px;
+              width: 100%;
+              background-position: 50% 50%;
+              background-size: cover;
+              background-repeat: no-repeat;
+            }
+
+            /* mobile 섹션 section-banner__img-box 공통 속성 */
+            .mobile-section-wrap .section-banner__img-box>img {
+              height: 272px;
+            }
+
+            /* mobile 섹션 section-banner__txt-box 공통 속성 */
+            .mobile-section-wrap .section-banner__txt-box>div {
+              text-align: center;
+            }
+
+            .mobile-section-wrap .section-banner__txt-box span {
+              display: block;
+              color: white;
+              font-size: 20px;
+              letter-spacing: -0.7px;
+            }
+
+            /* mobile 섹션 section-banner__txt-box 공통 속성 end */
+
+            .mobile-section-wrap .section-banner-1 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/8dfcd51abd898.png);
+            }
+
+            .mobile-section-wrap .section-banner-1__logo>img {
+              height: 142px;
+            }
+
+            .mobile-section-wrap .section-banner-2 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/80e0b09b92e18.png);
+            }
+
+            .mobile-section-wrap .section-banner-2__logo>img {
+              height: 98px;
+            }
+
+            .mobile-section-wrap .section-banner-3 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/4bf817b4eb447.png);
+            }
+
+            .mobile-section-wrap .section-banner-3__logo>img {
+              height: 98px;
+            }
+
+            .mobile-section-wrap .section-banner-4 {
+              background-image: url(https://cdn.imweb.me/thumbnail/20220517/e03e67c0d71c9.png);
+            }
+
+            .mobile-section-wrap .section-banner-4__logo>img {
+              height: 98px;
+            }
+
+            /* mobile 섹션 배너 구현 끝 */
+
+            /* pc-section-interactive-banner 구현 시작 */
+            .pc-section-interactive-banner .carousel-item {
+              background-size: cover;
+              background-position: center center;
+              background-repeat: no-repeat;
+              min-height: 59px;
+              width: 155px;
+            }
+
+            .pc-section-interactive-banner .carousel-item:nth-child(1) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/6cff932165c24.jpg);
+              width: 180px;
+            }
+
+            .pc-section-interactive-banner .carousel-item:nth-child(2) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/7434b6388c3f7.jpg);
+              width: 200px;
+            }
+
+            .pc-section-interactive-banner .carousel-item:nth-child(3) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/b20f4b0daca42.jpg);
+            }
+
+            .pc-section-interactive-banner .carousel-item:nth-child(4) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/636fefe3f41d8.jpg);
+            }
+
+            .pc-section-interactive-banner .carousel-item:nth-child(5) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/a0c6a623cf42e.jpg);
+              width: 180px;
+            }
+
+            .pc-section-interactive-banner .carousel-item:nth-child(6) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/187f0b5636736.jpg);
+            }
+
+            /* pc-section-interactive-banner 구현 끝 */
+
+            /* mob-section-interactive-banner 구현 시작 */
+            .mob-section-interactive-banner .carousel-item {
+              background-size: contain;
+              background-position: center center;
+              background-repeat: no-repeat;
+              min-height: 136px;
+              width: 300px;
+            }
+
+            .mob-section-interactive-banner .carousel-item:nth-child(1) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/636fefe3f41d8.jpg);
+            }
+
+            .mob-section-interactive-banner .carousel-item:nth-child(2) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/a0c6a623cf42e.jpg);
+            }
+
+            .mob-section-interactive-banner .carousel-item:nth-child(3) {
+              background-image: url(https://cdn.imweb.me/thumbnail/20210802/187f0b5636736.jpg);
+            }
+
+            /* mob-section-interactive-banner 구현 끝 */
+
+            /* footer 구현 시작 */
+            .footer-info__servie-link>ul>li>a {
+              display: flex;
+              height: 100%;
+              align-items: center;
+              padding: 0 10px;
+              color: #999;
+            }
+
+            .footer-info__servie-link>ul>li:nth-last-child(2)>a {
+              color: black;
+            }
+
+            .footer-info__btn-wrap>ul>li>a {
+              display: flex;
+              font-size: 14px;
+              height: 100%;
+              align-items: center;
+              padding: 0 5px;
+            }
+
+            .footer-info__btn-wrap>ul>li>a>img {
+              height: 40px;
+            }
+
+            .info-busi>p {
+              font-size: 14px;
+              color: #999;
+            }
+
+            .copy-right {
+              font-size: 14px;
+              color: #999;
+              font-weight: bold;
+            }
+
+            /* footer 구현 끝 */
+
+
+            /* 화면 너비가 992px 이상일 때 */
+            @media (min-width: 992px) {
+              .mobile-top-bar {
+                display: none;
+              }
+
+              .mobile-section-video-wrap {
+                display: none;
+              }
+
+              .mobile-section-wrap {
+                display: none;
+              }
+
+              .mob-section-interactive-banner {
+                display: none;
+              }
+
+              .mobile-footer-bar {
+                display: none;
+              }
+            }
+
+            /* 화면 너비가 992px, 767px 사이 */
+            @media (max-width: 992px) and (min-width : 767px) {
+              .pc-top-bar {
+                display: none;
+              }
+
+              .mobile-section-video-wrap {
+                display: none;
+              }
+
+              .pc-section-wrap {
+                display: none;
+              }
+
+              .pc-section-interactive-banner {
+                display: none;
+              }
+
+              .pc-footer-bar {
+                display: none;
+              }
+            }
+
+            /* 화면 너비가 767px 이하일 때 */
+            @media (max-width: 767px) {
+              .pc-top-bar {
+                display: none;
+              }
+
+              .pc-section-video-wrap {
+                display: none;
+              }
+
+              .pc-section-wrap {
+                display: none;
+              }
+
+              .mobile-section-wrap .section-banner__txt-box span {
+                letter-spacing: -1.9px;
+              }
+
+              .pc-section-interactive-banner {
+                display: none;
+              }
+
+              .section-interactive-banner__main-txt>p {
+                font-size: 15px !important;
+              }
+
+              .pc-footer-bar {
+                display: none;
+              }
+            }

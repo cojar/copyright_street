@@ -1,36 +1,136 @@
-<!DOCTYPE html>
-<html layout:decorate="~{layout/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout/layout.html}">
 
 <head>
     <title>작가등록</title>
 </head>
 
 <body>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+<!-- daisyui 불러오기 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@0.14.4/dist/full.css">
+
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<div class="component-title-bar container mx-auto">
 <main layout:fragment="main">
 
-    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post" class="p-10 flex flex-col gap-4">
-        <ul>
-            <li class="type">이름</li>
-            <li class="content">
-                <input type="text" th:value="${artistCreateForm.username}" disabled placeholder="이름을 입력해주세요.">
-                <input type="hidden" th:field="*{username}" placeholder="이름을 입력해주세요.">
-            </li>
-        </ul>
-        <ul>
-            <li class="type">번호</li>
-            <li class="content">
-                <input type="text" th:field="*{phoneNumber}" placeholder="연락처를 입력해주세요">
-            </li>
-        </ul>
-        <button id="btn-join-1" type="submit" class="btn btn-block btn-primary gap-1">
-            <i class="fa-solid fa-user-plus"></i>
-            <span>등록</span>
-        </button>
-    </form>
-</main>
+    <div class="section-article-write">
+        <div class="container mx-auto">
+            <div class="card bordered shadow-lg item-bt-1-not-last-child">
+                <div class="card-title">
+                    <a href="javascript:history.back();" class="cursor-pointer">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <span>정보 입력</span>
+                </div>
+                <div class="px-4 py-8">
+                    <form class="grid form-type-1">
+                        <div class="form-control">
+                            <label class="cursor-pointer label inline">
+                                신청자
+                            </label>
+                            <span class="plain-text inline">최기범 taecoo1</span>
+                            <label class="cursor-pointer label inline">
+                                계약형태
+                            </label>
+                            <span class="plain-text inline">비독점(40%)</span>
+                            <label class="cursor-pointer label inline">
+                                연락처
+                            </label>
+                            <span class="plain-text inline">01098002794</span>
+                            <label class="cursor-pointer label inline">
+                                이메일
+                            </label>
+                            <span class="plain-text inline">taecoo3@naver.com</span>
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">포트폴리오</span>
+                            </label>
+                            <input type="text" placeholder="원본5장 이상" class="input input-bordered">
+                        </div>
 
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">신청내용</span>
+                            </label>
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text"></span>
+                            </label>
+                            <textarea placeholder="간단한 자기소개와 함께 주 이용장비를 알려주세요" class="h-80 textarea textarea-bordered" ></textarea>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">본문 이미지 1</span>
+                            </label>
+                        </div>
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">본문 이미지 2</span>
+                            </label>
+                        </div>
+
+                        <div class="mt-4 btn-wrap gap-1">
+                            <a href="#" class="btn btn-primary btn-sm mb-1">
+                                <span><i class="fas fa-save"></i></span>
+                                &nbsp;
+                                <span>작성</span>
+                            </a>
+
+                            <a onclick="if ( !confirm('삭제하시겠습니까?') ) return false;" href="#"  class="btn btn-error btn-sm mb-1">
+                                <span><i class="fas fa-trash"></i></span>
+                                &nbsp;
+                                <span>삭제</span>
+                            </a>
+                            <a href="#" class="btn btn-sm mb-1" title="자세히 보기">
+                                <span><i class="fas fa-list"></i></span>
+                                &nbsp;
+                                <span>리스트</span>
+                            </a>
+                            <a href="#" class="btn btn-sm mb-1" title="자세히 보기">
+                                <span><i class="fas fa-list"></i></span>
+                                &nbsp;
+                                <span>상세페이지</span>
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+$('input[type="file"].thumb-available').each(function(index, node) {
+const $node = $(node);
+
+$node.on('change', function () {
+const thumbSelector = $node.attr('data-thumb-selector');
+
+if (typeof (FileReader) != "undefined") {
+const evalStr = '$node.' + thumbSelector;
+var $imageHolder = eval(evalStr);
+$imageHolder.empty();
+
+var reader = new FileReader();
+reader.onload = function (e) {
+$("<img />", {
+"src": e.target.result,
+"class": "max-w-sm block rounded border-2 border-gray-500"
+}).appendTo($imageHolder);
+}
+reader.readAsDataURL($(this)[0].files[0]);
+} else {
+alert("This browser does not support FileReader.");
+}
+});
+});
 </body>
 
 </html>
