@@ -21,14 +21,14 @@ public class HomeController {
     private final StoreService storeService;
     @GetMapping("/")
     public String showMain() {
-        return "usr/home/main";
+        return "main";
     }
 
     @GetMapping("/debugSession")
     @ResponseBody
     public String showDebugSession(HttpSession session) {
         StringBuilder sb = new StringBuilder("Session content:\n");
-
+////
         Enumeration<String> attributeNames = session.getAttributeNames();
         while (attributeNames.hasMoreElements()) {
             String attributeName = attributeNames.nextElement();
@@ -44,11 +44,11 @@ public class HomeController {
         Page<Store> paging = this.storeService.getList(page, kw);
         model.addAttribute("paging", paging);
         model.addAttribute("kw", kw);
-        return "usr/home/copy_store";
+        return "store/copy_store";
     }
     @GetMapping("/copy/list")
     public String list(){
 
-        return "usr/home/copy_list";
+        return "store/copy_list";
     }
 }

@@ -21,7 +21,7 @@ public class CartController {
     public String cart(Model model) {
         List<Cart> cartItems = cartService.getCartItems();
         model.addAttribute("cartItems", cartItems);
-        return "usr/home/copy_cart";
+        return "store/copy_cart";
     }
 
     @PostMapping("/store/cart")

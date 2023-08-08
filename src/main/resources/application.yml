@@ -7,7 +7,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/copyright_street?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: root
-    password:
+    password: 1234
   security:
     oauth2:
       client:
@@ -26,28 +26,17 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDBDialect
-        format_sql: 'false'
-        show_sql: 'false'
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
 logging:
   level:
     root: INFO
     com.sbp.copyrightStreet: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
-  mail:
-    # Google smtp server 사용
-    host: smtp.gmail.com
-    port: 587
-    username: soone4704@gmail.com #앱 비밀번호 발급받은 google 계정
-    password: krjpynplmioubwox #발급받은 앱 비밀번호
-    properties:
-      mail:
-        smtp:
-          starttls:
-            enable: true
-          auth: true
+
