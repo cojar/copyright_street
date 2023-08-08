@@ -28,7 +28,7 @@ public class BoardController {
 
     @GetMapping("/create")
     public String boardCreate(){
-        return "board_form";
+        return "board/form";
     }
 
     @PostMapping("/create")
