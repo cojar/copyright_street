@@ -19,8 +19,8 @@ public class BoardController {
     public String boardList(Model model, @RequestParam(value = "page", defaultValue = "0") int page){
         Page<Board> paging = this.boardService.getList(page);
         model.addAttribute("paging", paging);
-//        List<Board> boardList = this.boardService.getList();
-//        model.addAttribute("boardList", boardList);
+        List<Board> boardList = this.boardService.getList();
+        model.addAttribute("boardList", boardList);
         return "board/list";
     }
 
