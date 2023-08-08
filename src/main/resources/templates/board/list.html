@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html layout:decorate="~{layout/layout.html}">
+
 <head>
     <meta charset="UTF-8">
     <title>작가게시판 목록</title>
 </head>
+<body>
+
+<main layout:fragment="main">
+</main>
 <body>
 <a th:href="@{/board/create}">게시물 등록</a>
 
@@ -19,7 +24,7 @@
     <tr th:each="board, loop : ${paging}">
         <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
         <td>
-        <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
+            <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
         </td>
         <td th:text="${board.createDate}"></td>
     </tr>
@@ -48,6 +53,7 @@
         </ul>
     </div>
 </div>
-<!-- 페이징처리 끝 -->
+
 </body>
+
 </html>

@@ -1,40 +1,105 @@
-<!DOCTYPE html>
-<html layout:decorate="~{layout/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout/layout.html}">
 
-<head>
-    <title>작가등록</title>
-</head>
+<!-- daisyui 불러오기 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@0.14.4/dist/full.css">
 
-<body>
+<!-- 폰트어썸 불러오기 -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
-<main layout:fragment="main">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post" class="p-10 flex flex-col gap-4">
-        <ul>
-            <li class="type">이름</li>
-            <li class="content">
-                <input type="text" th:value="${artistCreateForm.username}" disabled placeholder="이름을 입력해주세요.">
-                <input type="hidden" th:field="*{username}" placeholder="이름을 입력해주세요.">
-            </li>
-        </ul>
-        <ul>
-            <li class="type">번호</li>
-            <li class="content">
-                <input type="text" th:field="*{phoneNumber}" placeholder="연락처를 입력해주세요">
-            </li>
-        </ul>
-        <button id="btn-join-1" type="submit" class="btn btn-block btn-primary gap-1">
-            <i class="fa-solid fa-user-plus"></i>
-            <span>등록</span>
-        </button>
-    </form>
-</main>
+<d5iv class="component-title-bar container mx-auto">
+    게시물 작성
+</d5iv>
 
-</body>
+<div class="section-article-write">
+    <div class="container mx-auto">
+        <div class="card bordered shadow-lg item-bt-1-not-last-child">
+            <div class="card-title">
+                <a href="javascript:history.back();" class="cursor-pointer">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+                <span>게시물 작성</span>
+            </div>
+            <div class="px-4 py-8">
+                <form class="grid form-type-1">
+                    <div class="form-control">
+                        <label class="cursor-pointer label">
+                            작성자
+                        </label>
+                        <div class="plain-text">
+                            홍길동
+                        </div>
+                    </div>
 
-</html>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">제목</span>
+                        </label>
+                        <input type="text" placeholder="제목" class="input input-bordered">
+                    </div>
 
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">본문</span>
+                        </label>
+                        <textarea placeholder="본문" class="h-80 textarea textarea-bordered"></textarea>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">본문 이미지 1</span>
+                        </label>
+                        <div>
+                            <input class="thumb-available" data-thumb-selector="next().next()" type="file" name="file" placeholder="본문 이미지 1" accept="image/png, image/jpeg, image/png">
+                            <div class="mt-2">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">본문 이미지 2</span>
+                        </label>
+                        <div>
+                            <input class="thumb-available" data-thumb-selector="next()" data-thumb-selector="" class="" type="file" name="file" placeholder="본문 이미지 2" accept="image/png, image/jpeg, image/png">
+                            <div class="mt-2">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 btn-wrap gap-1">
+                        <a href="#" class="btn btn-primary btn-sm mb-1">
+                            <span><i class="fas fa-save"></i></span>
+                            &nbsp;
+                            <span>작성</span>
+                        </a>
+
+                        <a onclick="if ( !confirm('삭제하시겠습니까?') ) return false;" href="#"  class="btn btn-error btn-sm mb-1">
+                            <span><i class="fas fa-trash"></i></span>
+                            &nbsp;
+                            <span>삭제</span>
+                        </a>
+                        <a href="#" class="btn btn-sm mb-1" title="자세히 보기">
+                            <span><i class="fas fa-list"></i></span>
+                            &nbsp;
+                            <span>리스트</span>
+                        </a>
+                        <a href="#" class="btn btn-sm mb-1" title="자세히 보기">
+                            <span><i class="fas fa-list"></i></span>
+                            &nbsp;
+                            <span>상세페이지</span>
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</html>>
 
 
 

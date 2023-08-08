@@ -1,7 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
+import com.sbp.copyrightStreet.DataNotFoundException;
 import com.sbp.copyrightStreet.base.rsData.RsData;
-import com.sbp.copyrightStreet.boundedContext.DataNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
