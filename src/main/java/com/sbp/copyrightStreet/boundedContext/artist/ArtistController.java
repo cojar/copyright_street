@@ -30,7 +30,6 @@ public class ArtistController {
     public String register(Model model, ArtistCreateForm artistCreateForm, Principal principal) {
         Member member = memberService.getUserByLoginId(principal.getName());
         artistCreateForm.setUsername(member.getUsername());
-
         return "artist/form";
     }
 
@@ -40,17 +39,11 @@ public class ArtistController {
                            @Valid ArtistCreateForm artistCreateForm,
                            BindingResult bindingResult, Principal principal) throws IOException {
         if (bindingResult.hasErrors()) {
-            return "registration-page";
+            return "artist/form";
         }
 
         String username = principal.getName();
         Member memberInfo = memberService.getUserByLoginId(username);
-
-        if (memberInfo == null) {
-            model.addAttribute("error", "유효하지 않은 사용자 정보입니다.");
-            return "error-page";
-        }
-
         Member email = memberService.getUserByEmail(memberInfo.getEmail());
         Artist artist = artistService.create(memberInfo,
                 artistCreateForm.getPhoneNumber(),

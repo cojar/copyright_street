@@ -33,8 +33,8 @@ public class Artist {
     private String introDetail;
 
 
-//    @Column
-//    private String portfolio; 파일업로드예정
+    @Column
+    private String portfolio;
 
     @CreatedDate
     private LocalDateTime createDate;
