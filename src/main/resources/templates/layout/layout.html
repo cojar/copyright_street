@@ -40,12 +40,13 @@
                 </a>
             </div>
             <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
-                <a href="/store/list" th:href="@{/store/list}"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">스토어</a>
-                <a href="/artist/register"
+
+                <a th:if="${@rq.login}" th:unless="${successArtistRegistration}" href="/artist/register"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
+                <a th:if="${@rq.login} and ${successArtistRegistration}" href="/store/create"
+                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">상품등록</a>
                 <a href="/membership/price"
-                   c class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>
+                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>
                 <a href="/board/list"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium">커뮤니티</a>
                 <a href="/store/cart"

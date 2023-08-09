@@ -37,6 +37,8 @@ dependencies {
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect' // 타임리프에서 layout.html 사용하려고
 	implementation 'org.springframework.boot:spring-boot-starter-mail' //이메일인증을위해서
+	implementation 'org.apache.logging.log4j:log4j-api:2.17.1'
+	implementation 'org.apache.logging.log4j:log4j-core:2.17.1'
 }
 
 tasks.named('test') {
