@@ -33,10 +33,12 @@ public class MailHandler {
         messageHelper.setTo(email);
     }
 
+
     // 제목
     public void setSubject(String subject) throws MessagingException {
         messageHelper.setSubject(subject);
     }
+
 
     // 메일 내용
     public void setText(String text, boolean useHtml) throws MessagingException {

@@ -58,18 +58,6 @@ public class HomeController {
         return "usr/home/copy_list";
     }
 
-//    @PostMapping("/copy/author")
-//    public String author1(){
-//        log.info("emial:");
-//        return "usr/member/author";
-//
-//    }
-
-    @PostMapping("/copy/author")
-    public void author1(HttpServletRequest req, HttpServletResponse resp){
-        log.info("emial:");
-        log.info(req.getParameter("subject"));
-    }
 
 
 

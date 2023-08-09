@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class EmailService {
     private JavaMailSender mailSender;
     private static final String FROM_ADDRESS = "soone4704@gmail.com";
+    private static final String TO_ADDRESS = "vv4704@gmail.com";
 
     public void mailSend(MailDto mailDto) {
         try {
@@ -21,8 +22,13 @@ public class EmailService {
             // 제목
             mailHandler.setSubject(mailDto.getTitle());
             // HTML Layout
-            String htmlContent = "<p>" + mailDto.getMessage() +"<p> <img src='cid:sample-img'>";
+            String htmlContent = "<p>" + mailDto.getMessage() + "<p> <img src='cid:sample-img'>";
             mailHandler.setText(htmlContent, true);
+
+            // 받는 사람 (이메일을 받는 사람의 주소 설정)
+            mailHandler.setTo(mailDto.getRecipientEmail());
+            //받는사람
+            mailHandler.setTo(EmailService.TO_ADDRESS);
 
             // 절대 파일 경로 설정
             String absoluteFilePath = "/Users/munchangbin/originTest.txt";
@@ -33,8 +39,7 @@ public class EmailService {
             mailHandler.setInline("sample-img", imageFilePath);
 
             mailHandler.send();
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

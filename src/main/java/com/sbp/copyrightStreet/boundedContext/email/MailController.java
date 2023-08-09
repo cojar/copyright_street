@@ -54,12 +54,12 @@ public class MailController {
 
         return map;
     }
-    @GetMapping("/mail")
+    @GetMapping("/copy/author")
     public String dispMail() {
         return "mail";
     }
 
-    @PostMapping("/mail")
+    @PostMapping("/copy/author")
     public void execMail(MailDto mailDto) {
         emailService.mailSend(mailDto);
     }

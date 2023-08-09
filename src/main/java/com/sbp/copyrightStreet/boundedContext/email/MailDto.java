@@ -16,4 +16,5 @@ public class MailDto {
     private String title;
     private String message;
     private List<MultipartFile> attachedFiles;
+    private String recipientEmail;
 }
