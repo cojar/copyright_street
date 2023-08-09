@@ -28,78 +28,24 @@
                     <span>정보 입력</span>
                 </div>
                 <div class="px-4 py-8">
-                    <form class="grid form-type-1">
-                        <div class="form-control">
-                            <label class="cursor-pointer label inline">
-                                신청자
-                            </label>
-                            <span class="plain-text inline">최기범 taecoo1</span>
-                            <label class="cursor-pointer label inline">
-                                계약형태
-                            </label>
-                            <span class="plain-text inline">비독점(40%)</span>
-                            <label class="cursor-pointer label inline">
-                                연락처
-                            </label>
-                            <span class="plain-text inline">01098002794</span>
-                            <label class="cursor-pointer label inline">
-                                이메일
-                            </label>
-                            <span class="plain-text inline">taecoo3@naver.com</span>
+                    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">이름</label>
+                            <input type="text" th:field="*{username}" class="form-control">
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">포트폴리오</span>
-                            </label>
-                            <input type="text" placeholder="원본5장 이상" class="input input-bordered">
+                        <div class="mb-3">
+                            <label for="phoneNumber" class="form-label">연락처</label>
+                            <input type="text" th:field="*{phoneNumber}" class="form-control">
                         </div>
-
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">신청내용</span>
-                            </label>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">이메일</label>
+                            <input type="text" th:field="*{email}" class="form-control">
                         </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text"></span>
-                            </label>
-                            <textarea placeholder="간단한 자기소개와 함께 주 이용장비를 알려주세요" class="h-80 textarea textarea-bordered" ></textarea>
+                        <div class="mb-3">
+                            <label for="introDetail" class="form-label">간단한소개</label>
+                            <textarea name="introDetail" id="" cols="30" rows="10" type="text" th:field="*{introDetail}"></textarea>
                         </div>
-
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">본문 이미지 1</span>
-                            </label>
-                        </div>
-                        <div class="form-control">
-                            <label class="label">
-                                <span class="label-text">본문 이미지 2</span>
-                            </label>
-                        </div>
-
-                        <div class="mt-4 btn-wrap gap-1">
-                            <a href="#" class="btn btn-primary btn-sm mb-1">
-                                <span><i class="fas fa-save"></i></span>
-                                &nbsp;
-                                <span>작성</span>
-                            </a>
-
-                            <a onclick="if ( !confirm('삭제하시겠습니까?') ) return false;" href="#"  class="btn btn-error btn-sm mb-1">
-                                <span><i class="fas fa-trash"></i></span>
-                                &nbsp;
-                                <span>삭제</span>
-                            </a>
-                            <a href="#" class="btn btn-sm mb-1" title="자세히 보기">
-                                <span><i class="fas fa-list"></i></span>
-                                &nbsp;
-                                <span>리스트</span>
-                            </a>
-                            <a href="#" class="btn btn-sm mb-1" title="자세히 보기">
-                                <span><i class="fas fa-list"></i></span>
-                                &nbsp;
-                                <span>상세페이지</span>
-                            </a>
-                        </div>
+                        <button type="submit" class="btn btn-primary">회원가입</button>
                     </form>
                 </div>
             </div>
