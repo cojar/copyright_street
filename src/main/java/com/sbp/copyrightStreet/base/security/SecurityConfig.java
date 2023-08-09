@@ -19,9 +19,11 @@ public class SecurityConfig {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(
                         authorizeRequests -> authorizeRequests
-                                .requestMatchers("/admin/**").
-                                hasAnyRole("ADMIN", "SUPER_ADMIN")
-                                .requestMatchers("/**")
+                                .requestMatchers(new AntPathRequestMatcher("/copy/WebSendMail", "POST"))
+                                .permitAll()
+                                .requestMatchers(new AntPathRequestMatcher("/admin/**"))
+                                .hasAnyRole("ADMIN", "SUPER_ADMIN")
+                                .requestMatchers(new AntPathRequestMatcher("/**"))
                                 .permitAll()
                 )
                 .csrf().ignoringRequestMatchers(
@@ -39,6 +41,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
