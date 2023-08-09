@@ -586,3 +586,175 @@ html > body .plain-link:hover {
                 display: none;
               }
             }
+
+            /* 폰트적용 - 시작 */
+            @font-face {
+              font-family: 'LotteMartDream';
+              font-style: normal;
+              font-weight: 400;
+              src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamMedium.woff') format('woff');
+            }
+
+            @font-face {
+              font-family: 'LotteMartDream';
+              font-style: normal;
+              font-weight: 700;
+              src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamBold.woff') format('woff');
+            }
+
+            @font-face {
+              font-family: 'LotteMartDream';
+              font-style: normal;
+              font-weight: 300;
+              src: url('https://cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/lottemart/LotteMartDream/LotteMartDreamLight.woff') format('woff');
+            }
+
+            html > body {
+              font-family: 'LotteMartDream', sans-serif;
+            }
+            /* 폰트적용 - 끝 */
+
+            /* 유틸 - 시작 */
+            .row-span-7 {
+              grid-row: span 7/span 7;
+            }
+
+            .row-span-8 {
+              grid-row: span 8/span 8;
+            }
+
+            .touch-imposible .invisible-scrollbar-box::-webkit-scrollbar
+            {
+              width: 0;
+              height: 0;
+            }
+
+            .grid-item-float {
+              grid-template-columns:repeat(auto-fit, minmax(0, max-content));
+            }
+
+            .item-bt-1-not-last-child > *:not(:last-child) {
+              border-bottom:1px solid #afafaf;
+            }
+
+            .title-bar {
+              font-size:1.1rem;
+              padding-top:5px;
+              paddinb-bottom:5px;
+              margin-top:20px;
+              margin-bottom:15px;
+              border:solid black;
+              border-width:2px 0;
+            }
+
+            .title-bar:first-child {
+              margin-top:0;
+            }
+
+            .form-control .plain-text {
+              padding: 0 .25rem;
+              color:rgba(0,0,0,0.7);
+            }
+
+            .plain-link-wrap.gap-2 > *:not(:last-child) {
+              margin-right:0.5rem;
+            }
+
+            .plain-link-wrap.gap-3 > *:not(:last-child) {
+              margin-right:0.75rem;
+            }
+
+            .form-type-1 {
+              gap:10px;
+            }
+
+            .btn-wrap {
+              display:flex;
+              flex-wrap:wrap;
+            }
+
+            .btn-wrap.gap-1 > *:not(:last-child) {
+              margin-right:0.25rem;
+            }
+
+            .btn-wrap.gap-2 > *:not(:last-child) {
+              margin-right:0.5rem;
+            }
+
+            .btn-wrap.gap-3 > *:not(:last-child) {
+              margin-right:0.75rem;
+            }
+
+            :root {
+              --card-title_height:40px;
+              --card-title_left-btn-cell-width:50px;
+            }
+
+            .card-title {
+              background-color:rgb(87, 13, 248);
+              color:white;
+              text-align:center;
+              height:var(--card-title_height);
+              position:absolute;
+              width:100%;
+              display:grid;
+              align-items:center;
+              grid-template-columns: var(--card-title_left-btn-cell-width) auto var(--card-title_left-btn-cell-width);
+            }
+
+            .card-title + * {
+              margin-top:var(--card-title_height);
+            }
+
+            html > body .plain-link {
+              color:rgb(59, 130, 246);
+            }
+
+            html > body .plain-link:hover {
+              text-decoration:underline;
+            }
+
+            .max-h-18 {
+              max-height:calc(0.25rem * 18);
+            }
+
+            .line-clamp-3 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 3;
+            }
+
+            .line-clamp-2 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 2;
+            }
+
+            .line-clamp-4 {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-box-orient: vertical;
+              -webkit-line-clamp: 4;
+            }
+
+            /* 유틸 - 끝 */
+
+            /* 기타 - 시작 */
+            .component-title-bar {
+              border:solid black;
+              border-width:2px 0;
+              margin-top:20px;
+              margin-bottom:10px;
+            }
+            /* 기타 - 끝 */
+
+            @media ( max-width: 640px ) {
+              .sm\:col-span-3 {
+                grid-column: span 3 / span 3;
+              }
+            }
