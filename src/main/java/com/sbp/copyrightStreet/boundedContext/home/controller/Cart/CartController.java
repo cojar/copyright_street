@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.home.controller.Cart;
 
-import com.sbp.copyrightStreet.boundedContext.home.controller.StoreService;
+
+import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
