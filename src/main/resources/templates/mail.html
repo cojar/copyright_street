@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>메일 발송</title>
+</head>
+<body>
+<h1>메일 발송</h1>
+
+<form action="/mail" method="post" enctype="multipart/form-data">
+  <label for="address">이메일 주소</label>
+  <input type="email" id="address" name="address" placeholder="이메일 주소"> <br>
+
+  <label for="title">제목</label>
+  <input type="text" id="title" name="title" placeholder="제목"> <br>
+
+  <label for="message">메일 내용</label>
+  <textarea id="message" name="message" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"></textarea> <br>
+
+  <label for="attachment">첨부 파일</label>
+  <input type="file" id="attachment" name="attachment"> <br>
+
+  <button type="submit">발송</button>
+</form>
+</body>
+</html>
