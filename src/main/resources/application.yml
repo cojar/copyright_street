@@ -26,19 +26,20 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
   jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MariaDBDialect
-        format_sql: 'false'
-        show_sql: 'false'
     hibernate:
       ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
 logging:
   level:
     root: INFO
     com.sbp.copyrightStreet: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
+
   mail:
     # Google smtp server 사용
     host: smtp.gmail.com
@@ -59,3 +60,6 @@ logging:
     prefix: classpath:/templates/
     suffix: .html
     cache: false #
+
+
+

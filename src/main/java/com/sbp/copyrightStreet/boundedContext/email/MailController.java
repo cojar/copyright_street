@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.email;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Random;
 
@@ -54,14 +55,16 @@ public class MailController {
 
         return map;
     }
+
     @GetMapping("/copy/author")
     public String dispMail() {
         return "mail";
     }
 
     @PostMapping("/copy/author")
-    public void execMail(MailDto mailDto) {
+    public String execMail(MailDto mailDto) {
+        mailDto.setAttachedFiles(new ArrayList<>()); // Initialize attachedFiles list
         emailService.mailSend(mailDto);
+        return "redirect:/copy/author";
     }
-
 }
