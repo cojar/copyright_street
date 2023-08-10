@@ -69,14 +69,9 @@ public class MemberService {
 
     public Member getUserByLoginId(String loginId) {
         Optional<Member> memberInfo = this.memberRepository.findByLoginId(loginId);
-        if (memberInfo.isPresent()) {
-            return memberInfo.get();
-        } else {
-            throw new DataNotFoundException("user not found");
-        }
+        return memberInfo.orElseThrow(() -> new DataNotFoundException("user not found"));
     }
     //
-
     public Member getUserByEmail(String email) {
         Optional<Member> memberOptional = memberRepository.findByEmail(email);
         return memberOptional.orElse(null); // Return the found member or null if not found
