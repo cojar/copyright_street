@@ -18,12 +18,12 @@ public class Artist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @Column
 
-    private Member username;
+    private String username;
 
-    @OneToOne
-    private Member email;
+    @Column
+    private String email;
 
 
     private String phoneNumber;
