@@ -45,10 +45,7 @@ public class ArtistController {
                 artistCreateForm.getPhoneNumber(),
                 artistCreateForm.getEmail(),
                 artistCreateForm.getIntroDetail());
-        if (artist!=null) {
             model.addAttribute("successArtistRegistration", true);
-        }
-
         LOGGER.info("Artist registration successful: " + model.getAttribute("successArtistRegistration"));
         return "redirect:/";
     }
