@@ -39,7 +39,7 @@
                     <img class="w-40 " src="/img/logo.png">
                 </a>
             </div>
-            <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">ㅎ
+            <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
                 <a th:unless="${@rq.successArtistRegistration}" href="/artist/register"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
                 <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/store/create"
