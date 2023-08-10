@@ -24,4 +24,8 @@ public class ArtistService {
         this.artistRepository.save(artist);
         return artist;
     }
+
+    public boolean isRegistered(String username) {
+        return this.artistRepository.findByUsername(username).isPresent();
+    }
 }

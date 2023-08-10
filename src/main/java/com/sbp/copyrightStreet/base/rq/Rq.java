@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.base.rq;
 
 import com.sbp.copyrightStreet.base.rsData.RsData;
+import com.sbp.copyrightStreet.boundedContext.artist.ArtistService;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 
@@ -20,14 +21,17 @@ import java.util.Date;
 @RequestScope
 public class Rq {
     private final MemberService memberService;
+
+    private final ArtistService artistService;
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
     private final HttpSession session;
     private final User user;
     private Member member = null; // 레이지 로딩, 처음부터 넣지 않고, 요청이 들어올 때 넣는다.
 
-    public Rq(MemberService memberService, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+    public Rq(MemberService memberService, ArtistService artistService, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
         this.memberService = memberService;
+        this.artistService = artistService;
         this.req = req;
         this.resp = resp;
         this.session = session;
@@ -51,6 +55,11 @@ public class Rq {
     public boolean isLogout() {
         return !isLogin();
     }
+
+    public boolean isSuccessArtistRegistration() {
+        return this.artistService.isRegistered(this.getMember().getUsername());
+    }
+
 
     // 로그인 된 회원의 객체
     public Member getMember() {
