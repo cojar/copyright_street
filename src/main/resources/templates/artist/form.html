@@ -18,6 +18,10 @@
 <div class="component-title-bar container mx-auto">
 <main layout:fragment="main">
 
+    <div class="component-title-bar container mx-auto">
+        게시물 작성
+    </div>
+
     <div class="section-article-write">
         <div class="container mx-auto">
             <div class="card bordered shadow-lg item-bt-1-not-last-child">
@@ -28,22 +32,22 @@
                     <span>정보 입력</span>
                 </div>
                 <div class="px-4 py-8">
-                    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">이름</label>
-                            <input type="text" th:field="*{username}" class="form-control">
+                    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post" class="grid form-type-1">
+                        <div class="form-control">
+                            <label class="form-label" for="username">이름</label>
+                            <input type="text" th:field="*{username}" class="input input-bordered">
                         </div>
-                        <div class="mb-3">
-                            <label for="phoneNumber" class="form-label">연락처</label>
-                            <input type="text" th:field="*{phoneNumber}" class="form-control">
+                        <div class="form-control">
+                            <label class="form-label" for="phoneNumber">연락처</label>
+                            <input type="text" th:field="*{phoneNumber}" class="input input-bordered">
                         </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">이메일</label>
-                            <input type="text" th:field="*{email}" class="form-control">
+                        <div class="form-control">
+                            <label class="form-label" for="email">이메일</label>
+                            <input type="text" th:field="*{email}" class="input input-bordered">
                         </div>
-                        <div class="mb-3">
-                            <label for="introDetail" class="form-label">간단한소개</label>
-                            <textarea name="introDetail" id="" cols="30" rows="10" type="text" th:field="*{introDetail}"></textarea>
+                        <div class="form-control">
+                            <label class="form-label" for="introDetail">간단한소개</label>
+                            <textarea name="introDetail" id="" cols="30" rows="10" type="text" th:field="*{introDetail}" class="textarea textarea-bordered"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">회원가입</button>
                     </form>
@@ -51,6 +55,7 @@
             </div>
         </div>
     </div>
+
 </main>
 </div>
 $('input[type="file"].thumb-available').each(function(index, node) {

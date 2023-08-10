@@ -27,8 +27,8 @@ public class ArtistController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
     public String register(Model model, ArtistCreateForm artistCreateForm, Principal principal) {
-        String loggedInUsername = principal.getName();
-        artistCreateForm.setUsername(loggedInUsername);
+        String logInUsername = principal.getName();
+        artistCreateForm.setUsername(logInUsername);
         return "artist/form";
     }
 
