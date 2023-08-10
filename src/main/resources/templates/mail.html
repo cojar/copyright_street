@@ -1,12 +1,3 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <title>작가 등록</title>
-</head>
-<body>
-<h1>포트폴리오 보내기</h1>
-
 <form th:action="@{/copy/author}" method="post" enctype="multipart/form-data">
   <input type="hidden" name="recipientEmail" value="vv4704@gmail.com">
 
@@ -16,10 +7,8 @@
   <label for="message">메일 내용</label>
   <textarea id="message" name="message" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"></textarea> <br>
 
-  <label for="attachment">첨부 파일.</label>
-  <input type="file" id="attachment" name="attachment"> <br>
+  <label for="attachedFiles">첨부 파일</label>
+  <input type="file" id="attachedFiles" name="attachedFiles" multiple> <br> <!-- multiple 속성은 여러 파일 업로드를 지원하기 위함 -->
 
   <button type="submit">발송</button>
 </form>
-</body>
-</html>

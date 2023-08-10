@@ -55,6 +55,7 @@ public class MailHandler {
             ByteArrayResource resource = new ByteArrayResource(fileBytes);
             messageHelper.addAttachment(displayFileName, resource);
         }
+
     }
 
     // 이미지 삽입

@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.email;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -11,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @AllArgsConstructor
@@ -62,8 +64,8 @@ public class MailController {
     }
 
     @PostMapping("/copy/author")
-    public String execMail(MailDto mailDto) {
-        mailDto.setAttachedFiles(new ArrayList<>()); // Initialize attachedFiles list
+    public String execMail(MailDto mailDto, @RequestParam("attachedFiles") List<MultipartFile> attachedFiles) {
+        mailDto.setAttachedFiles(attachedFiles);
         emailService.mailSend(mailDto);
         return "redirect:/copy/author";
     }
