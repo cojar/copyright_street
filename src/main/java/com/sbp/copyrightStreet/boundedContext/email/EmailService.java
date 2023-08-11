@@ -52,13 +52,7 @@ public class EmailService {
 
 
             String imageFilePath = "/Users/munchangbin/Documents/static/sample1.jpg";
-            /* 첨부파일 변경
-            String imageFilePath = "/Users/munchangbin/Documents/static/sample1.jpg";
-            byte[] imageBytes = Files.readAllBytes(Paths.get(imageFilePath)); // 이미지 파일 읽어옴
-            setInline("sample-img", imageBytes, messageHelper);
 
-            mailDto.setAttachedFiles(new ArrayList<>());
-            */
             // 파일 추가
             FileDataSource fds = new FileDataSource(imageFilePath);
             messageHelper.addAttachment(MimeUtility.encodeText("sample1.jpg", "UTF-8", "B"), fds);
