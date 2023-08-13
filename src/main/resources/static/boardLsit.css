@@ -1,0 +1,90 @@
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tbody tr:hover {
+  background-color: #f5f5f5;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a.th-btn {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+.d-flex.justify-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+
+
+
+
+ul.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+ul.pagination li {
+  margin: 0 5px;
+}
+
+ul.pagination li a {
+  display: block;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+ul.pagination li a:hover {
+  background-color: #ddd;
+}
+
+ul.pagination li.active a {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+ul.pagination li.disabled a {
+  pointer-events: none;
+  background-color: #f5f5f5;
+  color: #ccc;
+  border-color: #ddd;
+}
+
+.d-flex.justify-content-center {
+  display: flex;
+  justify-content: center;
+}

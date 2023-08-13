@@ -1,6 +1,6 @@
-package com.ll.exam.project.borad;
+package com.sbp.copyrightStreet.boundedContext.article.borad;
 
-
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -15,4 +15,7 @@ public class BoardForm {
 
     @NotEmpty(message = "내용은 필수항목입니다.")
     private String content;
+
+    @NotBlank(message = "카테고리선택은 필수항목입니다.")
+    private String category;
 }

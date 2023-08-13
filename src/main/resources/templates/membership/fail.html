@@ -1,23 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="~{layout/layout.html}">
 
 <head>
-    <title>결제실패 </title>
-    <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <title>주문 결제실패</title>
 </head>
 
 <body>
-<section>
-    <h1>결제 실패</h1>
-</section>
+<main layout:fragment="main">
+    <section class="section section-payment-fail container mx-auto">
+        <div>
+            주문 결제실패
+        </div>
+
+        <div>
+            주문번호 : [[${orderId}]]
+        </div>
+
+        <div>[[${message}]]</div>
+        <div>[[${code}]]</div>
+    </section>
+</main>
 </body>
-<script>
-  const queryParams = new URLSearchParams(window.location.search);
-
-  console.log('error code:', queryParams.get('code'));
-  console.log('error message:', queryParams.get('message'));
-
-</script>
-
 </html>
