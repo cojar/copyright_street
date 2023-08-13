@@ -1,9 +1,7 @@
 <html layout:decorate="~{layout/layout.html}">
 
 <head>
-    <title>회원가입.</title>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <meta name="_csrf" th:content="${_csrf.token}">
+    <title>회원가입</title>
 </head>
 
 <body>
@@ -45,9 +43,9 @@
 
             form.submit(); // 폼 발송
         }
-
-
     </script>
+
+
 
 
     <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
@@ -55,6 +53,9 @@
             <input type="text" name="username" maxlength="30" placeholder="이름" class="input input-bordered">
         </div>
         <div>
+
+            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
+
             <input type="text" name="loginId" maxlength="30" placeholder="아이디" class="input input-bordered">
         </div>
 
@@ -87,6 +88,7 @@
   	</span>
         </div>
         <div>
+
         </div>
         <div>
             <input type="submit" value="회원가입" class="btn btn-primary">
@@ -97,6 +99,7 @@
 </body>
 
 </html>
+
 <script>
     var flag_dupl_mail = true; // 중복 메일 검사용
     var flag_dupl_use_mail = true; // 이메일 검사용
@@ -177,3 +180,4 @@
             });
         });
     </script>
+

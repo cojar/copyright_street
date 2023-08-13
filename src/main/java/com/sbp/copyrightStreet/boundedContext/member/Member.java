@@ -1,7 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -34,6 +33,7 @@ public class Member {
     @Column(unique = true)
     private String username;
     private String password;
+
 
     @Column
     private String email;

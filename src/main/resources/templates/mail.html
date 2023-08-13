@@ -1,0 +1,14 @@
+<form th:action="@{/copy/author}" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="recipientEmail" value="vv4704@gmail.com">
+
+  <label for="title">제목</label>
+  <input type="text" id="title" name="title" placeholder="제목"> <br>
+
+  <label for="message">메일 내용</label>
+  <textarea id="message" name="message" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"></textarea> <br>
+
+  <label for="attachedFiles">첨부 파일</label>
+  <input type="file" id="attachedFiles" name="attachedFiles" multiple> <br> <!-- multiple 속성은 여러 파일 업로드를 지원하기 위함 -->
+
+  <button type="submit">발송</button>
+</form>
