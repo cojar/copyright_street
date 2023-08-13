@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +33,8 @@ public class Artist {
     @Column(columnDefinition = "TEXT")
     private String introDetail;
 
+    @OneToMany(mappedBy = "artist")
+    private List<File> files;
 
     @Column
     private String portfolio;
