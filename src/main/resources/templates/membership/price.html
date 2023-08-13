@@ -7,132 +7,121 @@
 
 <body>
 
-    <main layout:fragment="main">
+<main layout:fragment="main">
 
-        <!-- 토스페이먼츠 결제창 SDK 추가 -->
-        <script src="https://js.tosspayments.com/v1/payment"></script>
+    <!-- 토스페이먼츠 결제창 SDK 추가 -->
+    <script src="https://js.tosspayments.com/v1/payment"></script>
 
-        <script>
-            const clientKey = 'test_ck_qLlDJaYngroEyp7RMDx3ezGdRpXx'
-            const customerKey = '1a2CxHVSbsPSwHq3L97gc'
-            // ------  결제위젯 초기화 ------ 
-            // 비회원 결제에는 customerKey 대신 ANONYMOUS를 사용하세요.
-            const tossPayments = TossPayments(clientKey, customerKey) // 회원 결제
-            // const paymentWidget = PaymentWidget(clientKey, PaymentWidget.ANONYMOUS) // 비회원 결제
+    <script th:inline="javascript">
+        const orderId = /*[[ ${payment.orderId} ]]*/ null;
+        const customerName = /*[[ ${payment.customerName} ]]*/ null;
+        const customerEmail = /*[[ ${payment.customerEmail} ]]*/ null;
+        const orderName = /*[[ ${payment.orderName} ]]*/ null;
+        const createDate = /*[[ ${payment.createDate} ]]*/ null;
+        const paySuccessYn = null;
+
+    </script>
+
+    <script>
+            const clientKey = 'test_ck_qLlDJaYngroEyp7RMDx3ezGdRpXx';
+
+            // ------  결제위젯 초기화 ------
+            const tossPayments = TossPayments(clientKey); // 회원 결제
             function paymentBasic() {
                 tossPayments
                     .requestPayment("카드", {
                         amount: 15000,
-                        orderId: "PllHebE0Kctauecp_JaJZ",            // 주문 ID(직접 만들어주세요)
-                        orderName: "Basic 요금제",                 // 주문명
-                        successUrl: "http://localhost:8020/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
-                        failUrl: "http://localhost:8020/fail",        // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
-                        customerEmail: "customer123@gmail.com",
-                        customerName: "혀나"
+                        orderId: "order__" + orderId,
+                        orderName: "Basic 요금제",
+                        successUrl: "http://localhost:8020/success",
+                        failUrl: "http://localhost:8020/fail",
+                        customerEmail: customerEmail,
+                        customerName: customerName,
+                        createDate: createDate,
+                        paySuccessYn: paySuccessYn
                     })
-                    //     // ------결제창을 띄울 수 없는 에러 처리 ------
-                    //     // 메서드 실행에 실패해서 reject 된 에러를 처리하는 블록입니다.
-                    //     // 결제창에서 발생할 수 있는 에러를 확인하세요.
-                    //     // https://docs.tosspayments.com/reference
-                    .catch(function (error) {
-                        if (error.code === 'USER_CANCEL') {
-                            // 결제 고객이 결제창을 닫았을 때 에러 처리
-                        } else if (error.code === 'INVALID_CARD_COMPANY') {
-                            // 유효하지 않은 카드 코드에 대한 에러 처리
-                        }
-                    })
+                    .catch(handlePaymentError);
             }
             function paymentPremium() {
                 tossPayments
                     .requestPayment("카드", {
                         amount: 29000,
-                        orderId: "PllHebE0Kctauecp_JaJZ",            // 주문 ID(직접 만들어주세요)
-                        orderName: "Premium 요금제",                 // 주문명
-                        successUrl: "http://localhost:8020/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
-                        failUrl: "http://localhost:8020/fail",        // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
-                        customerEmail: "customer123@gmail.com",
-                        customerName: "혀나"
+                        orderId: "order__" + orderId,
+                        orderName: "Premium 요금제",
+                        successUrl: "http://localhost:8020/success",
+                        failUrl: "http://localhost:8020/fail",
+                        customerEmail: customerEmail,
+                        customerName: customerName
                     })
-                    //     // ------결제창을 띄울 수 없는 에러 처리 ------
-                    //     // 메서드 실행에 실패해서 reject 된 에러를 처리하는 블록입니다.
-                    //     // 결제창에서 발생할 수 있는 에러를 확인하세요.
-                    //     // https://docs.tosspayments.com/reference
-                    .catch(function (error) {
-                        if (error.code === 'USER_CANCEL') {
-                            // 결제 고객이 결제창을 닫았을 때 에러 처리
-                        } else if (error.code === 'INVALID_CARD_COMPANY') {
-                            // 유효하지 않은 카드 코드에 대한 에러 처리
-                        }
-                    })
+                    .catch(handlePaymentError);
             }
             function paymentPro() {
                 tossPayments
                     .requestPayment("카드", {
                         amount: 49000,
-                        orderId: "PllHebE0Kctauecp_JaJZ",            // 주문 ID(직접 만들어주세요)
-                        orderName: "Pro 요금제",                 // 주문명
-                        successUrl: "http://localhost:8020/success",  // 결제에 성공하면 이동하는 페이지(직접 만들어주세요)
-                        failUrl: "http://localhost:8020/fail",        // 결제에 실패하면 이동하는 페이지(직접 만들어주세요)
-                        customerEmail: "customer123@gmail.com",
-                        customerName: "혀나"
+                        orderId: "order__" + orderId,
+                        orderName: "Pro 요금제",
+                        successUrl: "http://localhost:8020/success",
+                        failUrl: "http://localhost:8020/fail",
+                        customerEmail: customerEmail,
+                        customerName: customerName,
                     })
-                    //     // ------결제창을 띄울 수 없는 에러 처리 ------
-                    //     // 메서드 실행에 실패해서 reject 된 에러를 처리하는 블록입니다.
-                    //     // 결제창에서 발생할 수 있는 에러를 확인하세요.
-                    //     // https://docs.tosspayments.com/reference
-                    .catch(function (error) {
-                        if (error.code === 'USER_CANCEL') {
-                            // 결제 고객이 결제창을 닫았을 때 에러 처리
-                        } else if (error.code === 'INVALID_CARD_COMPANY') {
-                            // 유효하지 않은 카드 코드에 대한 에러 처리
-                        }
-                    })
+                    .catch(handlePaymentError);
             }
-        </script>
 
-        <div class="h-screen p-10">
-            <div class="p-2 max-w-screen-lg  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
-                    <div class="px-6 py-8">
-                        <h3 class="text-3xl font-bold mb-4 text-purple-600">Basic</h3>
-                        <p class="text-lg text-gray-600 mb-8">BASIC 요금제 설명</p>
-                        <h2 amount="15,000" class="text-5xl font-bold mb-8 text-purple-600">15,000원</h2>
-                        <button onclick="paymentBasic();" id="payment-button-basic" orderName="Basic 요금제"
+            function handlePaymentError(error) {
+                if (error.code === 'USER_CANCEL') {
+                    // 결제 고객이 결제창을 닫았을 때 에러 처리
+                } else if (error.code === 'INVALID_CARD_COMPANY') {
+                    // 유효하지 않은 카드 코드에 대한 에러 처리
+                }
+            }
+
+    </script>
+
+    <div class="h-screen p-10">
+        <div class="p-2 max-w-screen-lg  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="px-6 py-8">
+                    <h3 class="text-3xl font-bold mb-4 text-purple-600">Basic</h3>
+                    <p class="text-lg text-gray-600 mb-8">BASIC 요금제 설명</p>
+                    <h2 amount="15,000" class="text-5xl font-bold mb-8 text-purple-600">15,000원</h2>
+                    <button onclick="paymentBasic();" id="payment-button-basic" orderName="Basic 요금제"
                             class="bg-purple-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-purple-700 transition duration-300 ease-in-out">
-                            결제하기
-                        </button>
-                    </div>
+                        결제하기
+                    </button>
                 </div>
-                <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
-                    <div class="px-6 py-8">
-                        <h3 class="text-3xl font-bold mb-4 text-green-600">Premium</h3>
-                        <p class="text-lg text-gray-600 mb-8"> PRIMIUM 요금제 설명</p>
-                        <h2 amount="29,000" class="text-5xl font-bold mb-8 text-green-600">29,000원</h2>
+            </div>
+            <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="px-6 py-8">
+                    <h3 class="text-3xl font-bold mb-4 text-green-600">Premium</h3>
+                    <p class="text-lg text-gray-600 mb-8"> PRIMIUM 요금제 설명</p>
+                    <h2 amount="29,000" class="text-5xl font-bold mb-8 text-green-600">29,000원</h2>
 
-                        <button onclick="paymentPremium();" id="payment-button-premium" orderName="Premium 요금제"
+                    <button onclick="paymentPremium();" id="payment-button-premium" orderName="Premium 요금제"
                             class="bg-green-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-green-700 transition duration-300 ease-in-out">
-                            결제하기
-                        </button>
-                    </div>
+                        결제하기
+                    </button>
                 </div>
-                <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
-                    <div class="px-6 py-8">
-                        <h3 class="text-3xl font-bold mb-4 text-yellow-600">Pro</h3>
-                        <p class="text-lg text-gray-600 mb-8">PRO 요금제 설명</p>
-                        <h2 amount="49,000" class="text-5xl font-bold mb-8 text-yellow-600">49,000원</h2>
-                        <button onclick="paymentPro();" id="payment-button-pro" orderName="Pro 요금제"
+            </div>
+            <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
+                <div class="px-6 py-8">
+                    <h3 class="text-3xl font-bold mb-4 text-yellow-600">Pro</h3>
+                    <p class="text-lg text-gray-600 mb-8">PRO 요금제 설명</p>
+                    <h2 amount="49,000" class="text-5xl font-bold mb-8 text-yellow-600">49,000원</h2>
+                    <button onclick="paymentPro();" id="payment-button-pro" orderName="Pro 요금제"
                             class="bg-yellow-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-yellow-700 transition duration-300 ease-in-out">
-                            결제하기
-                        </button>
-                    </div>
-
+                        결제하기
+                    </button>
                 </div>
 
             </div>
 
         </div>
 
-    </main>
+    </div>
+
+</main>
 </body>
 
 </html>
