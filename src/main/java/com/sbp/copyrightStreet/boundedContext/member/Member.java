@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
+import com.sbp.copyrightStreet.boundedContext.article.recomment.Recomment;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -33,13 +34,8 @@ public class Member {
     @Column(unique = true)
     private String username;
     private String password;
-
-
     @Column
     private String email;
-
-    private String birth;
-
     private String phoneNumber;
 
     @Column(unique = true)
