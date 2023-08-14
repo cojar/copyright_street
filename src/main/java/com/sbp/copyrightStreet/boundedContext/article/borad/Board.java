@@ -1,6 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.article.borad;
 
-import com.sbp.copyrightStreet.boundedContext.article.category.Category;
+
 import com.sbp.copyrightStreet.boundedContext.article.comment.Comment;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
@@ -10,7 +10,6 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -18,30 +17,29 @@ import java.util.Set;
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @Column(length = 200)
-    private String title;
+    private String title; // 제목
 
-    @Column(columnDefinition = "TEXT")
-    private String content;
-
-    @ManyToOne
-    private Member author;
+    private String content; // 내용
 
     @ManyToOne
-    private Category category;
+    private Member author; //글쓴이
 
+    private String category; //분류 카테고리
+    //
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList;
+    private List<Comment> commentList; //댓글
 
-    @ManyToMany
-    private Set<Member> voter;
+    //    @ManyToMany
+//    private Set<Member> voter; //추천
+    @Column(columnDefinition = "integer default 0", nullable = false)
+    private int view;
 
-    private Integer hit;
 
     @CreatedDate
-    private LocalDateTime createDate;
+    private LocalDateTime createDate; // 생성일
 
-    private LocalDateTime modifyDate;
+    private LocalDateTime modifyDate; // 수정일
 }

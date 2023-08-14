@@ -13,14 +13,18 @@ public class ArtistService {
     private final ArtistRepository artistRepository;
 
     //포트폴리오 추가예정
-    public Artist create(Member username, String phoneNumber, Member email, String introDetail) {
+    public Artist create(String username, String phoneNumber, String email, String introDetail) {
 
         Artist artist = new Artist();
         artist.setUsername(username);
         artist.setEmail(email);
         artist.setPhoneNumber(phoneNumber);
         artist.setIntroDetail(introDetail);
+        artist.setCreateDate(LocalDateTime.now());
         this.artistRepository.save(artist);
         return artist;
+    }
+    public boolean isRegistered(String username) {
+        return this.artistRepository.findByUsername(username).isPresent();
     }
 }
