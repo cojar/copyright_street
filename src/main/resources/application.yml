@@ -33,10 +33,34 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+
 logging:
   level:
     root: INFO
     com.sbp.copyrightStreet: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
+
+  mail:
+    # Google smtp server 사용
+    host: smtp.gmail.com
+    port: 587
+    username: soone4704@gmail.com #앱 비밀번호 발급받은 google 계정
+    password: krjpynplmioubwox #발급받은 앱 비밀번호
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false #
+
+
 

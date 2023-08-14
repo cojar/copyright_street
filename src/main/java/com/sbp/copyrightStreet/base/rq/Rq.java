@@ -21,20 +21,19 @@ import java.util.Date;
 @RequestScope
 public class Rq {
     private final MemberService memberService;
-
-    private final ArtistService artistService;
     private final HttpServletRequest req;
     private final HttpServletResponse resp;
     private final HttpSession session;
     private final User user;
     private Member member = null; // 레이지 로딩, 처음부터 넣지 않고, 요청이 들어올 때 넣는다.
+    private final ArtistService artistService;
 
-    public Rq(MemberService memberService, ArtistService artistService, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+    public Rq(MemberService memberService, HttpServletRequest req, HttpServletResponse resp, HttpSession session, ArtistService artistService) {
         this.memberService = memberService;
-        this.artistService = artistService;
         this.req = req;
         this.resp = resp;
         this.session = session;
+        this.artistService = artistService;
 
         // 현재 로그인한 회원의 인증정보를 가져옴
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -43,6 +42,13 @@ public class Rq {
             this.user = (User) authentication.getPrincipal();
         } else {
             this.user = null;
+        }
+    }
+    public boolean isSuccessArtistRegistration() {
+        if(this.getMember() != null){
+        return this.artistService.isRegistered(this.getMember().getUsername());
+        }else{
+            return false;
         }
     }
 
@@ -55,11 +61,6 @@ public class Rq {
     public boolean isLogout() {
         return !isLogin();
     }
-
-    public boolean isSuccessArtistRegistration() {
-        return this.artistService.isRegistered(this.getMember().getUsername());
-    }
-
 
     // 로그인 된 회원의 객체
     public Member getMember() {

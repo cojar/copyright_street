@@ -723,3 +723,15 @@ html > body .plain-link:hover {
                 grid-column: span 3 / span 3;
               }
             }
+
+                /* 입력 필드의 너비를 조절 */
+                .input {
+                    width: 200px; /* 원하는 너비로 조정 */
+                }
+
+                /* 텍스트 영역의 너비 및 높이 조절 */
+                .textarea {
+                    width: 70%; /* 전체 너비 활용 */
+                    max-width: 400px; /* 최대 너비 설정 */
+                    height: 500px; /* 원하는 높이로 조정 */
+                }

@@ -21,16 +21,16 @@
     <!-- 공통 CSS 불러오기 -->
     <link rel="stylesheet" href="/resource/static/common.css">
 
+
+
 </head>
 
 <body>
 
-<!-- 데이지 UI 불러오기 -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
-<!-- 테일윈드 불러오기 -->
-<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- 공통 상단 -->
+<div class="mx-auto max-w-7xl max-h-30 px-6 sm:px-8 lg:px-8" style="background-color: rgba(255, 255, 255, 0.8); background-image: url('your-background-image-url'); background-size: cover; background-position: center;">
+
 <div class=" w-full z-50 bg-white border-b border-slate-200 backdrop-blur-lg bg-opacity-80">
     <div class="mx-auto max-w-7xl max-h-30 px-6 sm:px-8 lg:px-8 ">
         <div class="relative flex h-32 justify-between items-center">
@@ -43,7 +43,7 @@
 
                 <a th:unless="${@rq.successArtistRegistration}" href="/artist/register"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
-                <a th:if="${@rq.login} and ${@rq.successArtistRegistration}" href="/store/create"
+                <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/store/create"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium">상품등록</a>
                 <a href="/membership/price"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>

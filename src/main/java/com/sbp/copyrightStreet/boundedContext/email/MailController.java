@@ -1,25 +1,27 @@
 package com.sbp.copyrightStreet.boundedContext.email;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 
 import com.sbp.copyrightStreet.boundedContext.email.MailService;
 import jakarta.servlet.http.HttpSession;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 
-
+@AllArgsConstructor
 @Controller
 public class MailController {
-
+    private final EmailService emailService;
     @Autowired
     private MailService mailService;
+
 
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
@@ -41,7 +43,7 @@ public class MailController {
 
         session.setAttribute("joinCode", joinCode);
 
-        String subject = "회원가입 인증 코드 입니다.";
+        String subject = "저작거리 홈페이지 회원가입 인증 코드 입니다.";
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("안녕하세요. '저작거리'입니다.\r귀하의 인증 코드는  <" + joinCode + "> 입니다.");
         System.out.println(stringBuilder.toString());
@@ -56,4 +58,15 @@ public class MailController {
         return map;
     }
 
+    @GetMapping("/copy/author")
+    public String dispMail() {
+        return "mail";
+    }
+
+    @PostMapping("/copy/author")
+    public String execMail(MailDto mailDto, @RequestParam("attachedFiles") List<MultipartFile> attachedFiles) {
+        mailDto.setAttachedFiles(attachedFiles);
+        emailService.mailSend(mailDto);
+        return "redirect:/copy/author";
+    }
 }
