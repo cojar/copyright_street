@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
+import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
 import com.sbp.copyrightStreet.boundedContext.article.recomment.Recomment;
 import jakarta.persistence.*;
 import lombok.*;
@@ -41,7 +42,8 @@ public class Member {
     @Column(unique = true)
     private String loginId;
 
-
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Board> boardList;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
