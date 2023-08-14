@@ -79,6 +79,6 @@ public class MemberService {
 
     public Member getUserByEmail(String email) {
         Optional<Member> memberOptional = memberRepository.findByEmail(email);
-        return memberOptional.orElse(null); // Return the found member or null if not found
+        return memberOptional.orElse(null);
     }
 }
