@@ -2,23 +2,19 @@ package com.sbp.copyrightStreet.boundedContext.home.controller;
 
 import com.sbp.copyrightStreet.boundedContext.store.Store;
 import com.sbp.copyrightStreet.boundedContext.store.StoreService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.List;
 
-@Slf4j
 @Controller
 @RequiredArgsConstructor
 
@@ -57,8 +53,4 @@ public class HomeController {
 
         return "store/copy_list";
     }
-
-
-
-
 }

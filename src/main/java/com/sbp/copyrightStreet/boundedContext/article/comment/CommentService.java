@@ -21,9 +21,20 @@ public class CommentService {
         this.commentRepository.save(comment);
     }
 
-    public Comment getComment(Integer id) {
+    public Comment getComment(Integer id) {// Integer 로 타입이 들어오면 null 값도 허용해줄 수 있음
         Optional<Comment> answer = this.commentRepository.findById(id);
         return answer.get();
 
+    }
+    public Comment getAnswer(Integer id) {
+        Optional<Comment> answer = this.commentRepository.findById(id);
+        return answer.get();
+
+    }
+
+    public void modify(Comment comment, String content) {
+        comment.setContent(content);
+        comment.setModifyDate(LocalDateTime.now());
+        this.commentRepository.save(comment);
     }
 }

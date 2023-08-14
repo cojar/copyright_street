@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,14 +7,21 @@
 
 <body>
 <h5>질문등록</h5>
+<form th:object="${questionForm}" method="post">
+    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
 
-<!--<form th:object="${articleForm}" method="post">-->
-<form th:action="@{/board/create}" th:object="${boardForm}"  method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    <!--<form action="/board/create" th:object="${boardForm}"  method="post">-->
+    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+    <select name="category">
+        <option value="">카테고리를선택해주세요</option>
+        <option value="자유">자유</option>
+        <option value="작가">작가</option>
+        <option value="스토어">스토어</option>
+    </select>
     <div class="mb-3">
-    <label for="subject" class="form-label">제목</label>
-    <input type="text" name="title" id="subject">
-</div>
+        <label for="subject" class="form-label">제목</label>
+        <input type="text" name="title" id="subject">
+    </div>
     <div class="mb-3">
         <label for="content" class="form-label">내용</label>
         <textarea name="content" id="content" rows="10"></textarea>
@@ -22,24 +29,4 @@
     <button type="submit">저장하기</button>
 </form>
 </body>
-
-<!--<body>-->
-<!--<h5>질문등록</h5>-->
-
-<!--<form action="/board/create" th:object="${boardForm}"  method="post">-->
-
-<!--&lt;!&ndash;    <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">&ndash;&gt;-->
-<!--&lt;!&ndash;        <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--    <label for="title" >제목</label>-->
-<!--    <input type="text" name="title" id="title">-->
-
-<!--    <label for="content">내용</label>-->
-<!--    <textarea name="content" id="content"></textarea>-->
-
-<!--  <input type="submit" value="저장하기">-->
-<!--</form>-->
-
-<!--</body>-->
 </html>

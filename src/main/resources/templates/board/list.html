@@ -1,154 +1,65 @@
 <html layout:decorate="~{layout/layout.html}">
+
 <head>
     <title>메인</title>
-    <link rel="stylesheet" href="static/common.css">
 </head>
 <body>
 <main layout:fragment="main">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daisyui@0.14.4/dist/full.css">
-    <!-- 폰트어썸 불러오기 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <div class="component-title-bar container mx-auto">
-        게시물 리스트
-    </div>
+    <link rel="stylesheet" type="text/css" th:href="@{/boardList.css}">
 
-    <a th:href="@{/board/create}">게시물 등록</a>
+    <a th:href="@{/board/create}" class="registration">게시물 등록</a>
 
-    <div class="section-article-list">
-        <div class="container mx-auto">
-            <div class="card bordered shadow-lg item-bt-1-not-last-child">
-                <div class="card-title">
-                    <a href="javascript:history.back();" class="cursor-pointer">
-                        <i class="fas fa-chevron-left"></i>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>카테고리</th>
+            <th style="width:50%">제목</th>
+            <th>글쓴이</th>
+            <th>조회수</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="board, loop : ${paging}">
+            <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
+            <td><span th:text="${board.category}"></span></td>
+            <td>
+                <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
+            </td>
+            <!--        <td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>-->
+
+            <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td>
+
+            <td th:text="${board.view}"></td>
+
+            <td th:text="${board.createDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이징처리 시작 -->
+    <div th:if="${!paging.isEmpty()}">
+        <div class="d-flex justify-content-center">
+            <ul class="pagination justify-content-center">
+                <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number}">
+                        <span>이전</span>
                     </a>
-                    <span>게시물 리스트</span>
-                </div>
-                <div class="item-bt-1-not-last-child">
-                    <!-- 게시물 아이템, first -->
-                    <div class="px-4 py-8">
-                        <a class="hover:underline cursor-pointer">
-                            <span class="badge badge-outline">제목</span>
-                            <div class="line-clamp-3">
-                                      d
-                            </div>
-                        </a>
-                        <div class="mt-3 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                            <a href="#" class="row-span-7">
-                                <img class="rounded" src="https://www.utoimage.com/data/banner/2023/07/20230721163612_185110299664ba356c354ea.jpg" alt="">
-                            </a>
-
-                            <a href="#" class="hover:underline">
-                                <span class="badge badge-primary" >번호</span>
-                                <span>1232</span>
-                            </a>
-
-                            <a href="#" class="cursor-pointer hover:underline">
-                                <span class="badge badge-accent">작성자</span>
-                                <span>홍길동</span>
-                            </a>
-
-                            <a href="#" class="hover:underline">
-                                <span class="badge">등록날짜</span>
-                                <span class="text-gray-600 text-light">2020-12-12 12:12:12</span>
-                            </a>
-
-                            <a href="#" class="hover:underline">
-                                <span class="badge">수정날짜</span>
-                                <span class="text-gray-600 text-light">2020-12-12 12:12:12</span>
-                            </a>
-
-                            <a class="mt-3 hover:underline cursor-pointer col-span-1 sm:col-span-2 xl:col-span-3">
-                                <span class="badge badge-outline">본문</span>
-                                <div class="line-clamp-3">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum sapiente fuga libero maxime! Quisquam delectus necessitatibus, laboriosam inventore commodi, odio voluptates tenetur excepturi quo consequatur obcaecati, incidunt quam nulla! Porro?
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="plain-link-wrap gap-3 mt-4">
-                            <a href="#" class="plain-link" title="자세히 보기">
-                                <span><i class="fas fa-info"></i></span>
-                                <span>자세히 보기</span>
-                            </a>
-                            <a href="#" class="plain-link">
-                                <span><i class="fas fa-edit"></i></span>
-                                <span>수정</span>
-                            </a>
-                            <a onclick="if ( !confirm('삭제하시겠습니까?') ) return false;" href="#" class="plain-link">
-              <span>
-                <i class="fas fa-trash"></i>
-                <span>삭제</span>
-              </span>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- 게시물 아이템, second -->
-                    <div class="px-4 py-8">
-                        <a class="hover:underline cursor-pointer">
-                            <span class="badge badge-outline">제목</span>
-                            <div class="line-clamp-3">
-                                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum sapiente fuga libero maxime! Quisquam delectus necessitatibus, laboriosam inventore commodi, odio voluptates tenetur excepturi quo consequatur obcaecati, incidunt quam nulla! Porro?
-                            </div>
-                        </a>
-                        <div class="mt-3 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                            <a href="#" class="row-span-7">
-                                <img class="rounded" src="https://i.pravatar.cc/250?img=14" alt="">
-                            </a>
-
-                            <a href="#" class="hover:underline">
-                                <span class="badge badge-primary">번호</span>
-                                <span>1232</span>
-                            </a>
-
-                            <a href="#" class="cursor-pointer hover:underline">
-                                <span class="badge badge-accent">작성자</span>
-                                <span>홍길동</span>
-                            </a>
-
-                            <a href="#" class="hover:underline">
-                                <span class="badge">등록날짜</span>
-                                <span class="text-gray-600 text-light">2020-12-12 12:12:12</span>
-                            </a>
-
-                            <a href="#" class="hover:underline">
-                                <span class="badge">수정날짜</span>
-                                <span class="text-gray-600 text-light">2020-12-12 12:12:12</span>
-                            </a>
-
-                            <a class="mt-3 hover:underline cursor-pointer col-span-1 sm:col-span-2 xl:col-span-3">
-                                <span class="badge badge-outline">본문</span>
-                                <div class="line-clamp-3">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum sapiente fuga libero maxime! Quisquam delectus necessitatibus, laboriosam inventore commodi, odio voluptates tenetur excepturi quo consequatur obcaecati, incidunt quam nulla! Porro?
-                                </div>
-                            </a>
-                        </div>
-
-                        <div class="plain-link-wrap gap-3 mt-4">
-                            <a href="#" class="plain-link" title="자세히 보기">
-                                <span><i class="fas fa-info"></i></span>
-                                <span>자세히 보기</span>
-                            </a>
-                            <a href="#" class="plain-link">
-                                <span><i class="fas fa-edit"></i></span>
-                                <span>수정</span>
-                            </a>
-                            <a onclick="if ( !confirm('삭제하시겠습니까?') ) return false;" href="#" class="plain-link">
-              <span>
-                <i class="fas fa-trash"></i>
-                <span>삭제</span>
-              </span>
-
-                                <a th:href="@{/board/create}">게시물 등록</a>
-
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                </li>
+                <li class="page-item"
+                    th:classappend="${page == paging.number+1} ? 'active'"
+                    th:each="page: ${#numbers.sequence(1, paging.totalPages)}"
+                    th:if="${page >= paging.number-5 and page <= paging.number+5}">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${page}" th:text="${page}"></a>
+                </li>
+                <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+                    <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+2}">
+                        <span>다음</span>
+                    </a>
+                </li>
+            </ul>
         </div>
-    </div>
     </div>
 </main>
 
@@ -156,3 +67,4 @@
 </body>
 
 </html>
+

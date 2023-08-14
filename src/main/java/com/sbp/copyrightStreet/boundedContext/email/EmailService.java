@@ -1,45 +1,100 @@
 package com.sbp.copyrightStreet.boundedContext.email;
 
-import lombok.AllArgsConstructor;
+import jakarta.activation.DataSource;
+import jakarta.activation.FileDataSource;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeUtility;
+import jakarta.mail.util.ByteArrayDataSource;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.InputStreamResource;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
-@AllArgsConstructor
+@Slf4j
 public class EmailService {
     private JavaMailSender mailSender;
     private static final String FROM_ADDRESS = "soone4704@gmail.com";
-    private static final String TO_ADDRESS = "vv4704@gmail.com";
+    private static final String TO_ADDRESS = "vx4704@naver.com";
+
+    public EmailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
 
     public void mailSend(MailDto mailDto) {
         try {
-            MailHandler mailHandler = new MailHandler(mailSender);
+            MimeMessage mimeMessage = mailSender.createMimeMessage();
+            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage, true, "UTF-8");
 
-            // 받는 사람
-            mailHandler.setTo(mailDto.getAddress());
-            // 보내는 사람
-            mailHandler.setFrom(EmailService.FROM_ADDRESS);
-            // 제목
-            mailHandler.setSubject(mailDto.getTitle());
-            // HTML Layout
+            messageHelper.setFrom(FROM_ADDRESS);
+            mailDto.setAddress("soone4704@gmail.com");
+
+            messageHelper.setSubject(mailDto.getTitle());
+
             String htmlContent = "<p>" + mailDto.getMessage() + "<p> <img src='cid:sample-img'>";
-            mailHandler.setText(htmlContent, true);
+            messageHelper.setText(htmlContent, true);
 
-            // 받는 사람 (이메일을 받는 사람의 주소 설정)
-            mailHandler.setTo(mailDto.getRecipientEmail());
-            //받는사람
-            mailHandler.setTo(EmailService.TO_ADDRESS);
+           // messageHelper.setTo(TO_ADDRESS);
+            messageHelper.setTo("vx4704@naver.com");
+           // mailDto.setRecipientEmail("vx4704@naver.com");
+            mailDto.setRecipientEmail("vx4704@naver.com");
 
-            // 절대 파일 경로 설정
-            String absoluteFilePath = "/Users/munchangbin/originTest.txt";
-            mailHandler.setAttach("newTest.txt", absoluteFilePath);
 
-            // 이미지 삽입
             String imageFilePath = "/Users/munchangbin/Documents/static/sample1.jpg";
-            mailHandler.setInline("sample-img", imageFilePath);
 
-            mailHandler.send();
+            // 파일 추가
+            FileDataSource fds = new FileDataSource(imageFilePath);
+            messageHelper.addAttachment(MimeUtility.encodeText("sample1.jpg", "UTF-8", "B"), fds);
+           // setAttach("sample1.jpg", mailDto.getAttachedFiles(), messageHelper);
+
+            mailSender.send(mimeMessage);
         } catch (Exception e) {
+            e.printStackTrace();
+            log.info("eoor");
+            log.info(e.toString());
+        }
+
+    }
+
+    public void setAttach(String displayFileName, List<MultipartFile> attachedFiles, MimeMessageHelper messageHelper) {
+        try {
+            if (attachedFiles != null && !attachedFiles.isEmpty()) {
+                for (MultipartFile file : attachedFiles) {
+                    if (file != null) { // null인 MultipartFile을 건너뜁니다.
+                        byte[] fileBytes = file.getBytes();
+                        ByteArrayResource resource = new ByteArrayResource(fileBytes);
+
+                        String originalFileName = file.getOriginalFilename();
+                        String actualFileName = (originalFileName != null && !originalFileName.isEmpty()) ? originalFileName : "unknown-file";
+
+                        messageHelper.addAttachment(actualFileName, resource);
+                    }
+                }
+            }
+        } catch (MessagingException | IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setInline(String contentId, byte[] imageBytes, MimeMessageHelper messageHelper) {
+        try {
+            //ByteArrayResource resource = new ByteArrayResource(imageBytes);
+            DataSource imageDataSource = new ByteArrayDataSource(imageBytes, "image/jpg");
+            //messageHelper.addInline(contentId, new InputStreamResource(new ByteArrayInputStream(imageBytes)),  "image/png");
+
+            messageHelper.addInline(contentId, new InputStreamResource(new ByteArrayInputStream(imageBytes)),  "image/png");
+            // messageHelper.addInline(contentId, resource);
+        } catch (MessagingException e) {
             e.printStackTrace();
         }
     }

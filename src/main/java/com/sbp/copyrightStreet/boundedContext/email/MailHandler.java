@@ -2,13 +2,16 @@ package com.sbp.copyrightStreet.boundedContext.email;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class MailHandler {
     private JavaMailSender sender;
@@ -29,8 +32,8 @@ public class MailHandler {
     }
 
     // 받는 사람 이메일
-    public void setTo(String email) throws MessagingException {
-        messageHelper.setTo(email);
+    public void setTo(String toAddress) throws MessagingException {
+        messageHelper.setTo(toAddress);
     }
 
 
@@ -46,19 +49,19 @@ public class MailHandler {
     }
 
     // 첨부 파일
-    public void setAttach(String displayFileName, String pathToAttachment) throws MessagingException, IOException {
-        File file = new ClassPathResource(pathToAttachment).getFile();
-        FileSystemResource fsr = new FileSystemResource(file);
+    public void setAttach(String displayFileName, List<MultipartFile> attachedFiles) throws MessagingException, IOException {
+        for (MultipartFile file : attachedFiles) {
+            byte[] fileBytes = file.getBytes();
+            ByteArrayResource resource = new ByteArrayResource(fileBytes);
+            messageHelper.addAttachment(displayFileName, resource);
+        }
 
-        messageHelper.addAttachment(displayFileName, fsr);
     }
 
     // 이미지 삽입
-    public void setInline(String contentId, String pathToInline) throws MessagingException, IOException {
-        File file = new ClassPathResource(pathToInline).getFile();
-        FileSystemResource fsr = new FileSystemResource(file);
-
-        messageHelper.addInline(contentId, fsr);
+    public void setInline(String contentId, byte[] imageBytes) throws MessagingException {
+        ByteArrayResource resource = new ByteArrayResource(imageBytes);
+        messageHelper.addInline(contentId, resource);
     }
 
     // 발송
