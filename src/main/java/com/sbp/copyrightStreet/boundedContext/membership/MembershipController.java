@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/Membership")
+@RequestMapping("/membership")
 public class MembershipController {
-    @GetMapping("/Price")
+    @GetMapping("/price")
     public String Price(Model model) {
         Payment payment = new Payment();
 

@@ -2,26 +2,37 @@ package com.sbp.copyrightStreet.boundedContext.payment;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
+import com.sbp.copyrightStreet.boundedContext.member.MemberService;
+import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.ResponseErrorHandler;
 import org.springframework.web.client.RestTemplate;
+
+import java.security.Principal;
 
 import javax.annotation.PostConstruct;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@RequiredArgsConstructor
 @Controller
 @RequestMapping("/payment")
 public class PaymentController {
+
+    private final MemberService memberService;
     private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper objectMapper= new ObjectMapper();
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @PostConstruct
     private void init() {
@@ -37,12 +48,17 @@ public class PaymentController {
         });
     }
 
-    private final String SECRET_KEY = "test_sk_oeqRGgYO1r50Ak6dYX5VQnN2Eyaz";
+    @Value("${secret.key}")
+    private final String SECRET_KEY;
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping("{id}/success")
     public String confirmPayment(
+            @PathVariable("id") Integer id, Principal principal,
             @RequestParam String paymentKey, @RequestParam String orderId, @RequestParam Long amount,
             Model model) throws Exception {
+
+        Member member = this.memberService.getUserByLoginId(orderId);
 
         HttpHeaders headers = new HttpHeaders();
         // headers.setBasicAuth(SECRET_KEY, ""); // spring framework 5.2 이상 버전에서 지원
@@ -71,8 +87,12 @@ public class PaymentController {
         }
     }
 
+    @PreAuthorize("isAuthenticated()")
     @RequestMapping("{id}/fail")
-    public String failPayment(@RequestParam String message, @RequestParam String code, Model model) {
+    public String failPayment(@RequestParam String message,
+                              @RequestParam String code,
+                              Model model, Principal principal) {
+
         model.addAttribute("message", message);
         model.addAttribute("code", code);
         return "membership/fail";
