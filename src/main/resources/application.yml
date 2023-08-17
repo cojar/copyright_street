@@ -27,7 +27,7 @@ spring:
             user-name-attribute: id
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
@@ -61,6 +61,8 @@ logging:
     prefix: classpath:/templates/
     suffix: .html
     cache: false #
+  custom:
+    genFileDirPath: C:\Users\choos\genFile
 
 
 

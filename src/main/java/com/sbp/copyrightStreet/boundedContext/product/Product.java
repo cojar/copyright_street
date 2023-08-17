@@ -46,6 +46,8 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Hash> hashList;
 
+    private String thumbnailImg;
+
     @CreatedDate
     private LocalDateTime createDate;
 

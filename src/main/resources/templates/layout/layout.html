@@ -48,9 +48,9 @@
                 <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
                     <a href="/product/list"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">스토어</a>
-                    <a href="/artist/register"
+                    <a th:unless="${@rq.successArtistRegistration}" href="/artist/register"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
-                    <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/store/create"
+                    <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/product/create"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">상품등록</a>
                     <a href="/membership/price"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>
@@ -58,12 +58,12 @@
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">커뮤니티</a>
                     <a href="/store/cart"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"> 🛒 </a>
-                    <a href="/member/login"
+                    <a th:href="@{/member/login}"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"
-                       th:if="${@rq.logout}">Login</a>
+                       th:if="${@rq.logout}">로그인</a>
                     <a href="javascript:;" id="logout-link"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"
-                       th:if="${@rq.login}" onclick="$(this).next().submit();">Logout</a>
+                       th:if="${@rq.login}" onclick="$(this).next().submit();">로그아웃</a>
                     <a href="/member/join"
                        class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
                        th:if="${@rq.logout}">Sign up

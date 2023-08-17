@@ -1,0 +1,20 @@
+<html layout:decorate="~{layout/layout.html}">
+
+<head>
+  <title>상품등록</title>
+</head>
+<body>
+<main layout:fragment="main">
+  <form th:action="@{/product/create}" method="post" enctype="multipart/form-data">
+  제목 : <input type="text" name="name"><br>
+  내용 : <input type="text" name="description"><br>
+    가격 : <input type="number" name="price"><br>
+    썸네일: <input type="file" name="thumbnail" accept="img/png, image/gif, image/jpeg"><br>
+<button type="submit">등록</button>
+  </form>
+
+</main>
+</body>
+
+</html>
+
