@@ -5,16 +5,31 @@
 </head>
 <body>
 <main layout:fragment="main">
-  <form th:action="@{/product/create}" method="post" enctype="multipart/form-data">
-  제목 : <input type="text" name="name"><br>
-  내용 : <input type="text" name="description"><br>
-    가격 : <input type="number" name="price"><br>
-    썸네일: <input type="file" name="thumbnail" accept="img/png, image/gif, image/jpeg"><br>
-<button type="submit">등록</button>
+  <h1>컨텐츠 생성 페이지</h1>
+
+  <form th:action="@{/product/create}" method="post"  enctype="multipart/form-data">
+    제목 : <input type="text" name="name"> <br>
+    내용 : <input type="text" name="description"> <br>
+    가격 : <input type="number" name="price"> <br>
+    썸네일: <input type="file" name="thumbnail" accept="img/png, image/gif, image/jpeg"> <br>
+    <button type="submit">전송</button>
   </form>
+
+
+  <ul th:each="product : ${productList}">
+    <li th:text="${product.name}"></li>
+    <li th:text="${product.description}"></li>
+    <li><img th:src="@{|/gen/${product.thumbnailImg}|}" alt="test이미지"></li>
+  </ul>
 
 </main>
 </body>
-
+<script>
+  document.getElementById("productForm").addEventListener("submit", function(event) {
+    var redirectUrl = "/product/detail";
+    window.location.href = redirectUrl;
+    event.preventDefault();
+  });
+</script>
 </html>
 

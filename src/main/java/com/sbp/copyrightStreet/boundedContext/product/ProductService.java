@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -25,10 +26,14 @@ public class ProductService {
     @Value("${custom.genFileDirPath}")
     private String genFileDirPath;
 
-    public void create(String name, String description, int price, MultipartFile thumbnail) {
-        String thumbnailRelPath = genFileDirPath;
+    public Long create(String name, String description, int price, MultipartFile thumbnail) {
+        String thumbnailRelPath = "product/" + UUID.randomUUID().toString() + ".jpg";
+        File thumbnailFile = new File(genFileDirPath +"/" + thumbnailRelPath);
+
+        thumbnailFile.mkdir();
+
         try {
-            thumbnail.transferTo(new File(genFileDirPath +"/1.jpg"));
+            thumbnail.transferTo(thumbnailFile);
         } catch(IOException e){
             throw new RuntimeException(e);
         }
@@ -39,6 +44,8 @@ public class ProductService {
         p.setThumbnailImg(thumbnailRelPath);
         p.setCreateDate(LocalDateTime.now());
         this.productRepository.save(p);
+        Product createdProduct = this.productRepository.save(p);
+        return createdProduct.getId();
     }
 
     public Page<Product> getList(int page, String kw) {
@@ -48,6 +55,9 @@ public class ProductService {
         return this.productRepository.findAllByKeyword(kw, pageable);
     }
 
+    public List<Product> getList() {
+        return this.productRepository.findAll();
+    }
     public Product getProduct(Long id) {
         Optional<Product> product = this.productRepository.findById(id);
         if (product.isPresent()) {

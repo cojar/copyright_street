@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/product")
@@ -36,15 +38,17 @@ public class ProductController {
     }
 
     @GetMapping("/create")
-    public String create(){
+    public String create(Model model){
+        List<Product> productList = this.productService.getList();
+        model.addAttribute("productList",productList);
         return "product/create";
     }
 
     @PostMapping("/create")
     public String createContent(@RequestParam String name, @RequestParam String description,@RequestParam int price,
                                 MultipartFile thumbnail){
-        this.productService.create(name,description,price,thumbnail);
-        return "product/create";
+        Long createdProductId = this.productService.create(name, description, price, thumbnail);
+        return "redirect:/product/detail/" + createdProductId;
     }
 
 }
