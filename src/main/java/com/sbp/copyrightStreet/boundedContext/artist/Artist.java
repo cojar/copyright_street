@@ -20,7 +20,6 @@ public class Artist {
     private Long id;
 
     @Column
-
     private String username;
 
     @Column
