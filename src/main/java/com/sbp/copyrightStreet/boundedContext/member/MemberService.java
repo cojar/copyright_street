@@ -1,7 +1,8 @@
     package com.sbp.copyrightStreet.boundedContext.member;
 
-    import com.sbp.copyrightStreet.DataNotFoundException;
+
     import com.sbp.copyrightStreet.base.rsData.RsData;
+    import com.sbp.copyrightStreet.boundedContext.home.controller.DataNotFoundException;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,7 +11,6 @@
     import org.springframework.util.StringUtils;
 
     import java.time.LocalDateTime;
-    import java.util.List;
     import java.util.Optional;
 
     @Slf4j
@@ -105,8 +105,6 @@
             }
             return passwordEncoder.matches(password, member.getPassword());
         }
-
-
 
         }
 

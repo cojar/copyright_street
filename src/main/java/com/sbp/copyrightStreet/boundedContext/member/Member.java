@@ -4,7 +4,6 @@ package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
 
-import com.sbp.copyrightStreet.boundedContext.article.recomment.Recomment;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,6 +11,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,6 +26,8 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @ToString // 디버그를 위한
 @Entity // 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
 @Getter // 아래 필드에 대해서 전부다 게터를 만든다. private Long id; => public Long getId() { ... }
+@Setter
+@Component
 public class Member {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -41,6 +43,7 @@ public class Member {
     @Column
     private String email;
     private String phoneNumber;
+    private String nickname;
 
     @Column(unique = true)
     private String loginId;
@@ -63,4 +66,6 @@ public class Member {
 
         return grantedAuthorities;
     }
+
+
 }
