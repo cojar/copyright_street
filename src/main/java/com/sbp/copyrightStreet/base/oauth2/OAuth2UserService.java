@@ -64,6 +64,8 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
                     memberRepository.save(member);
                 }
             }
+
+
         } else {
             member = memberRepository.findByUsername("%s_%s".formatted(oauthType, oauthId))
                     .orElseThrow(MemberNotFoundException::new);
