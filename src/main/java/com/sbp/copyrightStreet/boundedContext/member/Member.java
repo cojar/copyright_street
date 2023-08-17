@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
+import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
 import com.sbp.copyrightStreet.boundedContext.article.recomment.Recomment;
 import jakarta.persistence.*;
 import lombok.*;
@@ -8,7 +9,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -16,7 +16,6 @@ import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@Component
 @Builder // Member.builder().providerTypeCode(providerTypeCode) .. 이런식으로 쓸 수 있게 해주는
 @NoArgsConstructor // @Builder 붙이면 이거 필수
 @AllArgsConstructor // @Builder 붙이면 이거 필수
@@ -24,7 +23,6 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @ToString // 디버그를 위한
 @Entity // 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
 @Getter // 아래 필드에 대해서 전부다 게터를 만든다. private Long id; => public Long getId() { ... }
-@Setter
 public class Member {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -39,16 +37,13 @@ public class Member {
     private String password;
     @Column
     private String email;
-    @Column
-    private String nickname;
     private String phoneNumber;
 
     @Column(unique = true)
     private String loginId;
 
-    private LocalDateTime lastLoginDate;
-
-
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Board> boardList;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
