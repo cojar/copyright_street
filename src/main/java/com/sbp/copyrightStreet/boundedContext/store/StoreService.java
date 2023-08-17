@@ -48,10 +48,9 @@ public class StoreService {
     }
 
 
-    public Page<Store> getList(int page, String kw) {
+    public Page<Store> getList(int page,String kw) {
         Pageable pageable = PageRequest.of(page, 3); // page 값 1 감소
         return this.storeRepository.findAll(pageable);
-
     }
 
     public Store getStore(Integer id) {
@@ -95,19 +94,5 @@ public class StoreService {
     }
 
 
-    public void cart(Integer id) {
-        Optional<Store> store = this.storeRepository.findById(id);
-        if (store.isPresent()) {
-            Store store1 = store.get();
-            Cart cart = new Cart();
-            cart.setTitle(store1.getTitle());
-            cart.setContent(store1.getContent());
-            cart.setCreate_Date(LocalDateTime.now());
-            cart.setFilepath(store1.getFilepath());
-            cart.setFilename(store1.getFilename());
-            cart.setCategory(store1.getCategory());
-            cart.setStore(store1);
-            this.cartRepository.save(cart);
-        }
-    }
+
 }

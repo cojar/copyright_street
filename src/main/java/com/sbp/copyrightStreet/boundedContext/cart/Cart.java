@@ -1,6 +1,7 @@
     package com.sbp.copyrightStreet.boundedContext.cart;
 
 
+    import com.sbp.copyrightStreet.boundedContext.member.Member;
     import jakarta.persistence.*;
     import lombok.Getter;
     import lombok.Setter;
@@ -33,6 +34,10 @@
         @ManyToOne(cascade = CascadeType.ALL)
         @JoinColumn(name = "store_id")
         private Store store;
+
+        @ManyToOne
+        private Member member;
+
 
         public String getFile() {
             return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static", "");

@@ -11,27 +11,40 @@
         <th>ID</th>
         <th>Title</th>
         <th>Content</th>
-
     </tr>
     </thead>
     <tbody>
-
-        <!-- Add more columns as needed -->
-    </tr>
-    </thead>
-    <tbody>
-    <!-- Loop through the cart items and display them -->
-
     <tr th:each="item : ${cartItems}">
         <td th:text="${item.id}"></td>
         <td th:text="${item.title}"></td>
         <td th:text="${item.content}"></td>
-
-
-        <!-- Add more columns as needed -->
-
     </tr>
     </tbody>
 </table>
+
+<p>사용자 ID: <span th:text="${memberId}"></span></p>
+
+<!-- Display the cart items when the user ID matches the member ID -->
+<div th:if="${memberId == memberIdFromCart}">
+    <h3>장바구니 아이템</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Content</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cartItems}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.title}"></td>
+            <td th:text="${item.content}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<a href="/store/list">리스트로 가기</a>
 </body>
 </html>

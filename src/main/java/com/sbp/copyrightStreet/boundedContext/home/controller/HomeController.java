@@ -40,17 +40,5 @@ public class HomeController {
 
         return sb.toString().replaceAll("\n", "<br>");
     }
-    @GetMapping("/copy/store")
-    public String store(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
-                        @RequestParam(value = "kw", defaultValue = "") String kw) {
-        Page<Store> paging = this.storeService.getList(page, kw);
-        model.addAttribute("paging", paging);
-        model.addAttribute("kw", kw);
-        return "store/copy_store";
-    }
-    @GetMapping("/copy/list")
-    public String list(){
 
-        return "store/copy_list";
-    }
 }
