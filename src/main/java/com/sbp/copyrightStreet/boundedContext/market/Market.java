@@ -19,8 +19,11 @@ public class Market {
     private Long id;
 
     private String email;
+
     private String name;
+
     private String info;
+
     @OneToOne
     private Member member;
 

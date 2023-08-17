@@ -7,6 +7,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,8 +17,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "item")
-@ToString
 public class Product {
 
     @Id
@@ -32,6 +32,7 @@ public class Product {
 
     private int hitCount;
 
+    @Column
     private String isActive;
 
     private String description;//설명
@@ -45,7 +46,9 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Hash> hashList;
 
-    private LocalDateTime regTime; //상품 등록시간
+    @CreatedDate
+    private LocalDateTime createDate;
 
-    private LocalDateTime modifyTime; //상품 수정시간
+    @LastModifiedDate
+    private LocalDateTime modifyDate;
 }

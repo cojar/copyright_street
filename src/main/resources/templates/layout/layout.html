@@ -17,62 +17,119 @@
     <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
 
     <!-- 공통 JS 불러오기 -->
-    <script src="/resource/static/common.js"></script>
+    <script src="/common.js"></script>
     <!-- 공통 CSS 불러오기 -->
-    <link rel="stylesheet" href="/resource/static/common.css">
+    <link rel="stylesheet" href="/common.css">
+    <link rel="stylesheet" href="/boardLsit.css">
+
+    <!-- 데이지 UI 불러오기 -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
+    <!-- 테일윈드 불러오기 -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 <body>
 
-<!-- 데이지 UI 불러오기 -->
-<link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet" type="text/css"/>
-<!-- 테일윈드 불러오기 -->
-<script src="https://cdn.tailwindcss.com"></script>
 
 <!-- 공통 상단 -->
-<div class=" w-full z-50 bg-white border-b border-slate-200 backdrop-blur-lg bg-opacity-80">
-    <div class="mx-auto max-w-7xl max-h-30 px-6 sm:px-8 lg:px-8 ">
-        <div class="relative flex h-32 justify-between items-center">
-            <div class="p-1">
-                <a class="p-1 flex-auto" href="/">
-                    <img class="w-40 " src="/img/logo.png">
-                </a>
-            </div>
-            <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
-                <a th:unless="${@rq.successArtistRegistration}" href="/artist/register"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
-                <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/store/create"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">상품등록</a>
-                <a href="/membership/price"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>
-                <a href="/board/list"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">커뮤니티</a>
-                <a href="/store/cart"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium"> 🛒 </a>
-                <sec:authorize access="isAuthenticated()">
-                <a href="/mypage/myProfile"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">마이페이지 </a>
-                <a href="/member/login"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium"
-                   th:if="${@rq.logout}">Login</a>
-                <a href="javascript:;" id="logout-link"
-                   class="text-gray-700 hover:text-teal-500 text-lg font-medium"
-                   th:if="${@rq.login}" onclick="$(this).next().submit();">Logout</a>
-                <a href="/member/join"
-                   class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
-                   th:if="${@rq.logout}">Sign up
-                </a>
-                <a class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
-                   href="/member/me" th:if="${@rq.login}">MY
-                </a>
-                <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
-                <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
+<div class="container max-w-screen-2lg mx-auto"
+     style="background-color: rgba(255, 255, 255, 0.8); background-image: url('your-background-image-url'); background-size: cover; background-position: center;">
+
+    <div class="container w-full bg-white border-b border-slate-200 backdrop-blur-lg bg-opacity-80 ">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative flex h-32 justify-between items-center">
+                <div class="p-1">
+                    <a class="p-1 flex-auto" href="/">
+                        <img class="w-40 " src="/img/logo.png">
+                    </a>
+                </div>
+
+                <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
+                    <a href="/product/list"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium">스토어</a>
+                    <a th:unless="${@rq.successArtistRegistration}" href="/artist/register"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
+                    <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/store/create"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium">상품등록</a>
+                    <a href="/membership/price"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>
+                    <a href="/board/list"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium">커뮤니티</a>
+                    <a href="/store/cart"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium"> 🛒 </a>
+                    <a href="/member/login"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium"
+                       th:if="${@rq.logout}">Login</a>
+                    <a href="javascript:;" id="logout-link"
+                       class="text-gray-700 hover:text-teal-500 text-lg font-medium"
+                       th:if="${@rq.login}" onclick="$(this).next().submit();">Logout</a>
+                    <a href="/member/join"
+                       class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
+                       th:if="${@rq.logout}">Sign up
+                    </a>
+                    <a class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
+                       href="/member/me" th:if="${@rq.login}">MY
+                    </a>
+                    <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
+                    <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+<br>
+<div class="board-list-section">
+    <!-- ... your existing content ... -->
+    <div class="list-footer">
+        <div class="container max-w-screen mx-auto">
+            <div class="search-box border border-gray-400 rounded-md inline-block">
+                <select id="boardSearch" name="boardSearch" th:value="${bSearch}" class="border-none p-2 w-70 text-base">
+                    <option value="all" th:selected="${bSearch} == all">공지사항</option>
+                    <option value="title" th:selected="${bSearch} == title">게시판</option>
+                    <option value="content" th:selected="${bSearch} == content">Pro관</option>
+                    <option value="title_content" th:selected="${bSearch} == title_content">Primium</option>
+                    <option value="author" th:selected="${bSearch} == author">Basic</option>
+                    <option value="comment" th:selected="${bSearch} == comment">고객센터</option>
+                </select>
+                <input type="text" id="boardKeyword" name="boardKeyword" th:value="${bKw}" placeholder="검색어를 입력해주세요."
+                       class="border-l border-gray-400 pl-2 h-7" style="width: 1100px;">
+                <a th:onclick="_bSearch()" class="search-btn p-2 text-black text-sm hover:cursor-pointer">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
 <main layout:fragment="main"></main>
+<footer class="bg-gray-800 text-white py-4">
+    <div class="container mx-auto flex items-center justify-between">
+        <!-- 왼쪽 블럭: 로고 이미지 -->
+        <div class="flex items-center">
+            <img src="/img/logo.png" alt="Logo" class="w-10 h-10 mr-2">
+            <span class="text-lg font-medium">저작거리</span>
+        </div>
+
+        <!-- 가운데 블럭: 텍스트 -->
+        <div class="text-left">
+            <p class="mb-2">기범 git</p>
+            <p class="mb-2">창빈 git</p>
+            <p class="mb-2">현아 git</p>
+            <p class="mb-2">사랑 git</p>
+            <p class="mb-2">다은 git</p>
+        </div>
+
+        <!-- 오른쪽 블럭: 연락처 및 저작권 정보 -->
+        <div class="text-right">
+            <p>고객센터: 123-456-7890</p>
+            <p><a href="/customer/question" class="text-teal-500 hover:underline">고객센터</a></p>
+            <p><a href="/artist/register" class="text-teal-500 hover:underline">작가등록</a></p>
+            <p>Copyright &copy; 2023 저작거리. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
 
 <script th:inline="javascript">
         // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
@@ -114,6 +171,7 @@
             });
         });
     });
+
 
 </script>
 

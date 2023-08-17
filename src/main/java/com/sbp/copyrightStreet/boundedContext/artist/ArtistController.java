@@ -27,8 +27,8 @@ public class ArtistController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
     public String register(Model model, ArtistCreateForm artistCreateForm, Principal principal) {
-        String logInUsername = principal.getName();
-        artistCreateForm.setUsername(logInUsername);
+        String loggedInUsername = principal.getName();
+        artistCreateForm.setUsername(loggedInUsername);
         return "artist/form";
     }
 
@@ -45,8 +45,7 @@ public class ArtistController {
                 artistCreateForm.getPhoneNumber(),
                 artistCreateForm.getEmail(),
                 artistCreateForm.getIntroDetail());
-
-        model.addAttribute("successArtistRegistration", true);
+            model.addAttribute("successArtistRegistration", true);
         LOGGER.info("Artist registration successful: " + model.getAttribute("successArtistRegistration"));
         return "redirect:/";
     }

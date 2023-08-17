@@ -18,27 +18,27 @@ import java.util.Optional;
 public class ProductService {
     private final ProductRepository productRepository;
 
-//    public void create(String name, int price) {
-//        Product p = new Product();
-//        p.setName(name);
-//        p.setPrice();
-//        p.setCreateDate(LocalDateTime.now());
-//        this.productRepository.save(p);
-//    }
-//
-//    public Page<Product> getList(int page, String kw) {
-//        List<Sort.Order> sorts = new ArrayList<>();
-//        sorts.add(Sort.Order.desc("createDate"));
-//        Pageable pageable = PageRequest.of(page, 8, Sort.by(sorts));
-//        return this.productRepository.findAllByKeyword(kw, pageable);
-//    }
-//
-//    public Product getProduct(Long id) {
-//        Optional<Product> product = this.productRepository.findById(id);
-//        if (product.isPresent()) {
-//            return product.get();
-//        } else {
-//            throw new RuntimeException("product not found");
-//        }
-//    }
+    public void create(String name, int price) {
+        Product p = new Product();
+        p.setName(name);
+        p.setPrice(price);
+        p.setCreateDate(LocalDateTime.now());
+        this.productRepository.save(p);
+    }
+
+    public Page<Product> getList(int page, String kw) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 8, Sort.by(sorts));
+        return this.productRepository.findAllByKeyword(kw, pageable);
+    }
+
+    public Product getProduct(Long id) {
+        Optional<Product> product = this.productRepository.findById(id);
+        if (product.isPresent()) {
+            return product.get();
+        } else {
+            throw new RuntimeException("product not found");
+        }
+    }
 }
