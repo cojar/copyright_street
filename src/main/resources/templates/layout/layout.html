@@ -48,7 +48,7 @@
                 <div class="flex-shrink-0 flex px-2 py-3 items-center space-x-8 ">
                     <a href="/product/list"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">스토어</a>
-                    <a th:unless="${@rq.successArtistRegistration}" href="/artist/register"
+                    <a href="/artist/register"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
                     <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/store/create"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">상품등록</a>
