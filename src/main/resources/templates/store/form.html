@@ -1,23 +1,53 @@
-<form th:action="@{/store/create}" method="post" enctype="multipart/form-data" >
-    <div>
+<html layout:decorate="~{layout/layout.html}">
 
-        <tr>
-            <input type="text" id="title" name="title">
-        </tr>
+<head>
+    <title>상품등록</title>
+</head>
 
-        <td>
-            <textarea name="content" id="content" cols="30" rows="10"></textarea>
-            <input type="file" name="file">
-        </td>
-        <label for="category">카테고리:</label>
-        <select id="category" name="category">
-            <option value="사진">사진</option>
-            <option value="동영상">동영상</option>
-            <option value="일러스트">일러스트</option>
-            <option value="PPT">PPT</option>
-            <option value="기타">기타</option>
-        </select>
-        <br>
-    </div>
-    <button type="submit">저장하기</button>
-</form>
+<body>
+
+
+<main layout:fragment="main">
+    <form th:action="@{/store/create}" th:object="${storeForm}" method="post" enctype="multipart/form-data" >
+        <div>
+
+            <ul>
+                <li class="type">상품명</li>
+                <li class="content">
+                    <input type="text" th:field="*{title}" placeholder="상품 이름을 등록해주세요.">
+                </li>
+            </ul>
+            <ul>
+                <li class="type">상품가격</li>
+                <li class="content">
+                    <input type="text" th:field="*{price}" placeholder="상품 가격을 등록해주세요.">
+                </li>
+            </ul>
+            <ul>
+                <li class="type">상품설명</li>
+                <li class="content">
+                    <input type="text" th:field="*{content}" placeholder="상품의 정보를 입력해주세요.">
+                </li>
+            </ul>
+<!--            <label for="category">카테고리:</label>-->
+<!--            <select id="category" name="category">-->
+<!--                <option value="사진">사진</option>-->
+<!--                <option value="동영상">동영상</option>-->
+<!--                <option value="일러스트">일러스트</option>-->
+<!--                <option value="PPT">PPT</option>-->
+<!--                <option value="기타">기타</option>-->
+<!--            </select>-->
+            <br>
+        </div>
+        <button type="submit">저장하기</button>
+    </form>
+</main>
+
+</body>
+
+</html>
+
+
+
+
+
