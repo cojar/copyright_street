@@ -13,12 +13,12 @@ spring:
       client:
         registration:
           kakao:
-            clientId: hashID
-            scope:
+            clientId: d242caacaeef4e7e50acc0b0df1bec34
+            scope: profile_nickname, account_email
             client-name: Kakao
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8020/login/oauth2/code/kakao
-            client-authentication-method: POST
+            client-authentication-method: client_secret_post
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
