@@ -7,8 +7,10 @@
 <main layout:fragment="main">
     <link rel="stylesheet" type="text/css" th:href="@{/boardList.css}">
 
-    <a th:href="@{/board/create}" class="registration">게시물 등록</a>
 
+    <div class="container max-w-screen mx-auto">
+        <br>
+        <a th:href="@{/board/create}" class="registration">게시물 등록</a>
     <table>
         <thead>
         <tr>
@@ -37,7 +39,8 @@
         </tr>
         </tbody>
     </table>
-
+    </div>
+    <br>
     <!-- 페이징처리 시작 -->
     <div th:if="${!paging.isEmpty()}">
         <div class="d-flex justify-content-center">
@@ -61,6 +64,11 @@
             </ul>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </main>
 
 

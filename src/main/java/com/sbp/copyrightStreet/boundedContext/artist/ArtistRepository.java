@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.artist;
 
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
