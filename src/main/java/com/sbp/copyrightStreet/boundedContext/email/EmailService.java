@@ -52,7 +52,7 @@ public class EmailService {
 
 
             String imageFilePath = "/Users/munchangbin/Documents/static/sample1.jpg";
-
+//머지는 다됫어? 어제 내가 보채서 푸쉬받긴햇는데
             // 파일 추가
             FileDataSource fds = new FileDataSource(imageFilePath);
             messageHelper.addAttachment(MimeUtility.encodeText("sample1.jpg", "UTF-8", "B"), fds);

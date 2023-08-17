@@ -50,6 +50,9 @@
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium">커뮤니티</a>
                 <a href="/store/cart"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium"> 🛒 </a>
+                <sec:authorize access="isAuthenticated()">
+                <a href="/mypage/myProfile"
+                   class="text-gray-700 hover:text-teal-500 text-lg font-medium">마이페이지 </a>
                 <a href="/member/login"
                    class="text-gray-700 hover:text-teal-500 text-lg font-medium"
                    th:if="${@rq.logout}">Login</a>
