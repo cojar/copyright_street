@@ -23,7 +23,7 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
-    private final Member member;
+
 
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
