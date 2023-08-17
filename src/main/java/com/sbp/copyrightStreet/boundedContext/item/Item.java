@@ -1,6 +1,5 @@
 package com.sbp.copyrightStreet.boundedContext.item;
 
-import com.sbp.copyrightStreet.boundedContext.file.File;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

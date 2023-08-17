@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
+@Component
 @Builder // Member.builder().providerTypeCode(providerTypeCode) .. 이런식으로 쓸 수 있게 해주는
 @NoArgsConstructor // @Builder 붙이면 이거 필수
 @AllArgsConstructor // @Builder 붙이면 이거 필수
@@ -43,6 +45,8 @@ public class Member {
 
     @Column(unique = true)
     private String loginId;
+
+    private LocalDateTime lastLoginDate;
 
 
     @OneToOne // 1:1

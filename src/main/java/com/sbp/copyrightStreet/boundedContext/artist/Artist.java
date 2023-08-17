@@ -1,7 +1,4 @@
 package com.sbp.copyrightStreet.boundedContext.artist;
-import com.sbp.copyrightStreet.boundedContext.file.File;
-import com.nimbusds.openid.connect.sdk.claims.Address;
-import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
