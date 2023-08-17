@@ -27,7 +27,7 @@ public class CartController {
     @GetMapping("/cart")
     public String cart( Model model,Principal principal) {
         Optional<Member> member = memberService.findByUsername(principal.getName());
-        Optional<Cart> cartItems = cartService.getCartItems(member.get());
+        List<Cart> cartItems = cartService.getList(member.get());
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("memberId",member.get().getId());
         return "store/cart";
@@ -40,7 +40,6 @@ public class CartController {
         Cart cart =this.cartService.getCartFromStore(store.get());
         cart.setMember(member.get());//멤버에 저장.
         this.cartService.add(cart);
-
         return "redirect:/store/cart";
     }
     @PreAuthorize("isAuthenticated()")

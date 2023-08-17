@@ -17,9 +17,9 @@ public class CartService {
 
     private final CartRepository cartRepository;
 
-    public Optional<Cart> getCartItems(Member member) {
+    public List<Cart> getList(Member member) {
 
-        return cartRepository.findById(member);
+        return cartRepository.findByMember(member);
     }
 
     public void deleteCartItem(Integer id) {

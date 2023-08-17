@@ -94,5 +94,20 @@ public class StoreService {
     }
 
 
-
+    public Store cart(Integer id) {
+        Optional<Store> store = this.storeRepository.findById(id);
+        if (store.isPresent()) {
+            Store store1 = store.get();
+            Cart cart = new Cart();
+            cart.setTitle(store1.getTitle());
+            cart.setContent(store1.getContent());
+            cart.setCreate_Date(LocalDateTime.now());
+            cart.setFilepath(store1.getFilepath());
+            cart.setFilename(store1.getFilename());
+            cart.setCategory(store1.getCategory());
+            cart.setStore(store1);
+            this.cartRepository.save(cart);
+        }
+        return null;
+    }
 }

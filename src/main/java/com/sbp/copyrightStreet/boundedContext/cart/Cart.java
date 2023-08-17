@@ -38,7 +38,6 @@
         @ManyToOne
         private Member member;
 
-
         public String getFile() {
             return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static", "");
         }

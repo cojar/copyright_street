@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.store;
 
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 @Getter
@@ -35,7 +37,10 @@ public class Store {
     private String category;
     public String getFile(){
         return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static","");
+
     }
+    @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE)
+    private List<Cart> cartList;
 
 
 }

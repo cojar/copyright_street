@@ -4,6 +4,7 @@ package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
 
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -50,7 +51,8 @@ public class Member {
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Board> boardList;
-    @OneToOne // 1:1
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private  List<Cart> cartList;
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
     public List<? extends GrantedAuthority> getGrantedAuthorities() {
