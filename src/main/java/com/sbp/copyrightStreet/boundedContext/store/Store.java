@@ -22,6 +22,8 @@ public class Store {
     @Column
     private String content;
 
+    private String price;
+
     private LocalDateTime create_Date;
 
     private String filepath;
