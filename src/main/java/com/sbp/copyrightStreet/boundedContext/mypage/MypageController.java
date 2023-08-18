@@ -1,8 +1,12 @@
 package com.sbp.copyrightStreet.boundedContext.mypage;
 
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberModifyForm;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
+import com.sbp.copyrightStreet.boundedContext.store.Store;
+import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -23,12 +28,13 @@ public class MypageController {
     private final MypageService mypageService;
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
-
+    private final CartService cartService;
+    private StoreService storeService;
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/myProfile")
     public String mypage(Model model, Principal principal) {
         Member member = this.memberService.getUser(principal.getName());
-        model.addAttribute("member",member);
+        model.addAttribute("member", member);
         return "mypage/mypage";
     }
 
@@ -56,6 +62,8 @@ public class MypageController {
 
         return "redirect:/mypage/myProfile";
     }
+
+
 
 }
 

@@ -22,7 +22,6 @@
 
         private final MemberRepository memberRepository;
 
-        private final Member member;
 
         public Optional<Member> findByUsername(String username) {
             return memberRepository.findByUsername(username);

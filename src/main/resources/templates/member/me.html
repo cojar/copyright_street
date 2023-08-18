@@ -11,6 +11,13 @@
     <div>이름 : <span th:text="${@rq.member.username}"></span></div>
     <div>가입날짜 : <span th:text="${#temporals.format(@rq.member.createDate, 'yyyy-MM-dd HH:mm')}"></span></div>
     <div>수정날짜 : <span th:text="${#temporals.format(@rq.member.modifyDate, 'yyyy-MM-dd HH:mm')}"></span></div>
+    <div>장바구니목록 :
+        <table>
+            <tr th:each="cart : ${cartList}">
+                <td th:text="${cart.title}"></td>
+            </tr>
+        </table>
+    </div>
 </main>
 
 

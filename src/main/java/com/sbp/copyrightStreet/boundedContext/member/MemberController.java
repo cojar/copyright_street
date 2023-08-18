@@ -2,6 +2,8 @@ package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.base.rq.Rq;
 import com.sbp.copyrightStreet.base.rsData.RsData;
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.core.Authentication;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/member") // 액션 URL의 공통 접두어
@@ -24,6 +28,7 @@ public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
     private final Member member;
+    private final CartService cartService;
 
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
@@ -64,9 +69,13 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()") // 로그인 해야만 접속가능
     @GetMapping("/me") // 로그인 한 나의 정보 보여주는 페이지
-    public String showMe() {
-
+    public String showMe(Model model , Principal principal) {
+        Optional<Member> member =this.memberService.findByUsername(principal.getName());
+        List<Cart> cartList = this.cartService.getList(member.get());
+        model.addAttribute("cartList",cartList);
+        model.addAttribute("memberID",member.get().getId());
         return "member/me";
+
     }
 
 
