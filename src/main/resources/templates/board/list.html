@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout/layout.html}">
 
 <head>
-    <title>메인</title>
+    <title>게시판</title>
 </head>
 <body>
 <main layout:fragment="main">
@@ -34,8 +34,8 @@
             <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td>
 
             <td th:text="${board.view}"></td>
+            <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}" ></td>
 
-            <td th:text="${board.createDate}"></td>
         </tr>
         </tbody>
     </table>

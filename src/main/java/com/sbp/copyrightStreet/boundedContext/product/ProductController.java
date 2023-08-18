@@ -3,6 +3,7 @@ package com.sbp.copyrightStreet.boundedContext.product;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,8 +22,10 @@ public class ProductController {
     public String list(Model model, @RequestParam(value="page", defaultValue = "0") int page,
                        @RequestParam(value="kw", defaultValue ="") String kw) {
         Page<Product> paging = productService.getList(page, kw);
+
         model.addAttribute("paging", paging);
         model.addAttribute("kw",  kw);
+
 
         return "product/list";
     }
