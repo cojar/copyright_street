@@ -1,21 +1,24 @@
 package com.sbp.copyrightStreet.boundedContext.mypage;
 
-import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberModifyForm;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
-import com.sbp.copyrightStreet.boundedContext.store.Store;
 import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import java.security.Principal;
 import java.util.List;
@@ -63,11 +66,41 @@ public class MypageController {
         return "redirect:/mypage/myProfile";
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/uploadProfileImage")
+    public String uploadProfileImage(@RequestParam("profileImage") MultipartFile file, Principal principal) {
+        try {
+            // 이미지 파일 종류 확인
+            if (!isValidImageFile(file)) {
+                return "mypage/mypage";
+            }
 
+            // 저장 경로 설정
+            String UPLOAD_DIR = "ProfileImg/";
+            File directory = new File(UPLOAD_DIR);
+            if (!directory.exists()) {
+                directory.mkdirs();
+            }
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(UPLOAD_DIR + principal.getName() + "_" + file.getOriginalFilename());
+            Files.write(path, bytes);
 
+            // 사용자 프로필 이미지 URL 업데이트
+            String imageUrl = "/" + UPLOAD_DIR + principal.getName() + "_" + file.getOriginalFilename();
+            memberService.updateProfileImage(principal.getName(), imageUrl);
+        } catch (Exception e) {
+            // 이미지 업로드 중 오류 발생
+            return "mypage/mypage";
+        }
+
+        return "redirect:/mypage/myProfile";
+    }
+
+    private boolean isValidImageFile(MultipartFile file) {
+        if (file.isEmpty()) {
+            return false;
+        }
+        String contentType = file.getContentType();
+        return contentType != null && (contentType.equals("image/jpeg") || contentType.equals("image/png"));
+    }
 }
-
-
-
-
-

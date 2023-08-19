@@ -105,5 +105,10 @@
             return passwordEncoder.matches(password, member.getPassword());
         }
 
+        public void updateProfileImage(String username, String imageUrl) {
+            Member member = getUser(username);
+            member.setProfileImage(imageUrl);
+            memberRepository.save(member);
         }
+    }
 
