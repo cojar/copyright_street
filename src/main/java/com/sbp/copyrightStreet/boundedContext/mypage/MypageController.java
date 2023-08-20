@@ -29,32 +29,32 @@ public class MypageController {
     public String mypage(Model model, Principal principal) {
         Member member = this.memberService.getUser(principal.getName());
         model.addAttribute("member",member);
-        return "mypage/mypage";
+        return "member/me";
     }
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/modifyPassword")
     public String modifyPassword(MemberModifyForm memberModifyForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
-            return "mypage/mypage";
+            return "member/me";
         }
 
         Member member = this.memberService.getUser(principal.getName());
         if (!memberService.confirmPassword(memberModifyForm.getPassword(), member)) {
             bindingResult.rejectValue("password", "passwordInCorrect",
                     "현재 비밀번호를 바르게 입력해주세요.");
-            return "mypage/mypage";
+            return "member/me";
         }
 
         // 비밀번호와 비밀번호 확인에 입력한 문자열이 서로 다르면 다시 입력 하도록
         if (!memberModifyForm.getNewPW().equals(memberModifyForm.getNewPW2())) {
             bindingResult.rejectValue("newPW2", "passwordInCorrect",
                     "입력한 비밀번호가 일치하지 않습니다.");
-            return "mypage/mypage";
+            return "member/me";
         }
         memberService.modifyPassword(memberModifyForm.getNewPW(), member);
 
-        return "redirect:/mypage/myProfile";
+        return "redirect:/member/me";
     }
 
 }

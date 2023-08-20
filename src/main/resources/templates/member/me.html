@@ -9,11 +9,64 @@
 <main layout:fragment="main">
     <div>번호 : <span th:text="${@rq.member.id}"></span></div>
     <div>이름 : <span th:text="${@rq.member.username}"></span></div>
+    <div>이메일 : <span th:text="${@rq.member.email}"></span></div>
     <div>가입날짜 : <span th:text="${#temporals.format(@rq.member.createDate, 'yyyy-MM-dd HH:mm')}"></span></div>
     <div>수정날짜 : <span th:text="${#temporals.format(@rq.member.modifyDate, 'yyyy-MM-dd HH:mm')}"></span></div>
+
+    <div>
+        <div>
+            <div class="title">개인정보 변경</div>
+            <hr>
+            <form id="changePasswordForm" action="/mypage/modifyPassword" method="Post">
+                <div class="password"> 기존 비밀번호</div>
+                <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password">
+                <div class="ps-title"> 비밀번호 변경</div>
+                <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password">
+                <div class="ps-check-title"> 비밀번호 변경 확인</div>
+                <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password">
+                <div id="passwordMatchMsg" style="display: none; color: red;"></div>
+                <button type="button" onclick="showConfirmation()">변경하기</button>
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <script>
+ function showConfirmation() {
+        const confirmation = confirm("정말 변경하시겠습니까?");
+
+        if (confirmation) {
+                    document.getElementById("changePasswordForm").submit();
+        }
+    }
+
+
+        const presentPWInput = document.getElementById("password");
+        const newPWInput = document.getElementById("newPW");
+        const newPW2Input = document.getElementById("newPW2");
+        const passwordMatchMsg = document.getElementById("passwordMatchMsg");
+
+        newPW2Input.addEventListener("input", function() {
+            const newPWValue = newPWInput.value;
+            const newPW2Value = newPW2Input.value;
+
+            if (newPWValue !== newPW2Value) {
+                passwordMatchMsg.textContent = "입력한 비밀번호가 일치하지 않습니다.";
+                passwordMatchMsg.style.display = "block";
+            } else {
+                passwordMatchMsg.textContent = "";
+                passwordMatchMsg.style.display = "none";
+            }
+        });
+    </script>
 </main>
-
-
 </body>
 
 </html>
