@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.store;
 
 import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
@@ -42,5 +43,10 @@ public class Store {
     @OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE)
     private List<Cart> cartList;
 
+    @OneToMany
+    private List<Store> storeList;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member; // Store와 Member 간의 관계 설정
 
 }

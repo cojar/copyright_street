@@ -5,6 +5,7 @@ import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.cart.CartRepository;
 import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import com.sbp.copyrightStreet.boundedContext.home.controller.DataNotFoundException;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -31,13 +32,14 @@ public class StoreService {
     }
 
 
-    public void create(String title, String content, String category, MultipartFile file) throws Exception {
+    public void create(Member member,String title, String content, String category, MultipartFile file) throws Exception {
         String projectPath = System.getProperty("user.dir") + "//src//main//resources//static//files";
         UUID uuid = UUID.randomUUID();
         String fileName = uuid + "_" + file.getOriginalFilename();
         File savefile = new File(projectPath, fileName);
         file.transferTo(savefile);
         Store store = new Store();
+        store.setMember(member);
         store.setTitle(title);
         store.setContent(content);
         store.setCategory(category);
@@ -48,7 +50,7 @@ public class StoreService {
     }
 
 
-    public Page<Store> getList(int page,String kw) {
+    public Page<Store> getList(int page, String kw) {
         Pageable pageable = PageRequest.of(page, 3); // page 값 1 감소
         return this.storeRepository.findAll(pageable);
     }
@@ -109,5 +111,9 @@ public class StoreService {
             this.cartRepository.save(cart);
         }
         return null;
+    }
+    public List<Store> list(Member member ){
+
+        return this.storeRepository.findByMember(member);
     }
 }

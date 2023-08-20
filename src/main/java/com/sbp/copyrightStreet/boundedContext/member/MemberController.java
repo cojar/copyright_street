@@ -4,8 +4,11 @@ import com.sbp.copyrightStreet.base.rq.Rq;
 import com.sbp.copyrightStreet.base.rsData.RsData;
 import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.cart.CartService;
+import com.sbp.copyrightStreet.boundedContext.store.Store;
+import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +32,7 @@ public class MemberController {
     private final Rq rq;
     private final Member member;
     private final CartService cartService;
+    private final StoreService storeService;
 
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
@@ -72,8 +76,10 @@ public class MemberController {
     public String showMe(Model model , Principal principal) {
         Optional<Member> member =this.memberService.findByUsername(principal.getName());
         List<Cart> cartList = this.cartService.getList(member.get());
+        List<Store> storeList = this.storeService.list(member.get());
         model.addAttribute("cartList",cartList);
         model.addAttribute("memberID",member.get().getId());
+        model.addAttribute("storeList",storeList);
         return "member/me";
 
     }

@@ -18,6 +18,13 @@
             </tr>
         </table>
     </div>
+    <div>내가 쓴글:
+        <table>
+            <tr th:each="store : ${storeList}">
+                <td th:text="${store.title}"></td>
+            </tr>
+        </table>
+    </div>
 </main>
 
 
