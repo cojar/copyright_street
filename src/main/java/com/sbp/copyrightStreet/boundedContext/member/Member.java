@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
+import com.sbp.copyrightStreet.boundedContext.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -43,8 +44,12 @@ public class Member {
     private String loginId;
     private String nickname;
 
+
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Board> boardList;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Product> productList;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
