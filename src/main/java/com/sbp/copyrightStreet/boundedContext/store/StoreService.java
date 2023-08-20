@@ -102,11 +102,11 @@ public class StoreService {
             Cart cart = new Cart();
             cart.setTitle(store1.getTitle());
             cart.setContent(store1.getContent());
-            cart.setCreate_Date(LocalDateTime.now());
+            cart.setCreateDate(LocalDateTime.now());
             cart.setFilepath(store1.getFilepath());
             cart.setFilename(store1.getFilename());
             cart.setCategory(store1.getCategory());
-            cart.setStore(store1);
+//            cart.setStore(store1);
             this.cartRepository.save(cart);
         }
     }

@@ -36,15 +36,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-        if("admin".equals(username)){
+        if ("admin".equals(member.getLoginId())) {
             authorities.add(new SimpleGrantedAuthority(UserRole.ADMIN.getValue()));
+        } else if ("artist".equals(username)) {
+            authorities.add(new SimpleGrantedAuthority(UserRole.ARTIST.getValue()));
         } else {
             authorities.add(new SimpleGrantedAuthority(UserRole.USER.getValue()));
         }
 
-
-
         return new User(member.getUsername(), member.getPassword(), authorities);
     }
 }
-

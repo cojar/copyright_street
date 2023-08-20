@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
@@ -43,7 +44,10 @@ public class Member {
     @Column(unique = true)
     private String loginId;
     private String nickname;
+//    private String userRole;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Cart> cartList;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Board> boardList;

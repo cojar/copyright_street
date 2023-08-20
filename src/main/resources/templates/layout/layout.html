@@ -56,7 +56,7 @@
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>
                     <a href="/board/list"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">커뮤니티</a>
-                    <a href="/store/cart"
+                    <a href="/cart/list"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"> 🛒 </a>
                     <a th:href="@{/member/login}"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"
@@ -73,8 +73,10 @@
                     </a>
                     <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
                     <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
+                    <a class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
+                       href="/adm" sec:authorize="hasAuthority('ADMIN')">관리자
+                    </a>
                 </div>
-
             </div>
         </div>
     </div>
