@@ -14,7 +14,7 @@
     <h1>마이 페이지</h1>
     <!-- 프로필 이미지 시작 -->
     <div class="relative w-40 h-40 mx-auto mt-10">
-        <img id="profileImage" src="profileImage.jpg" alt="프로필 이미지" class="w-full h-full rounded-full object-cover">
+        <img id="profileImage" th:src="${member.profileImage}" class="w-full h-full rounded-full object-cover">
         <button id="editButton"
             class="absolute bottom-0 right-0 w-10 h-10 p-1 bg-gray-200 rounded-full cursor-pointer focus:outline-none focus:ring-2">
             ✎
@@ -24,11 +24,45 @@
         </button>
     </div>
     <!-- 프로필 이미지 끝 -->
+    <table>
+        <tr>
+            <td>UserId:</td>
+            <td th:text="${member.username}"></td>
+        </tr>
+        <tr>
+            <td>UserEmail:</td>
+            <td th:text="${member.email}"></td>
+        </tr>
+    </table>
+
+    <div>
+        <div>
+            <div class="title">개인정보 변경</div>
+            <hr>
+            <form action="/mypage/modifyPassword" method="Post">
+                <div class="password"> 기존 비밀번호</div>
+                <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password">
+                <div class="ps-title"> 비밀번호 변경</div>
+                <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password">
+                <div class="ps-check-title"> 비밀번호 변경 확인</div>
+                <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password">
+                <div id="passwordMatchMsg" style="display: none; color: red;"></div>
+                <button type="submit">변경하기</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        var csrfTokenValue = [[${ _csrf.token }]];
+        var csrfHeaderName = [[${ _csrf.headerName }]];
+
+    </script>
 
     <script>
         // CSRF 토큰 값 가져오기
-        const csrfToken = document.querySelector("meta[name='_csrf']").content;
-        const csrfTokenHeader = document.querySelector("meta[name='_csrf_header']").content;
+        const csrfToken = csrfTokenValue;
+        const csrfTokenHeader = csrfHeaderName;
 
         // 파일 업로드
         document.getElementById("uploadFile").addEventListener("change", function () {
@@ -49,42 +83,13 @@
                         alert("프로필 이미지 업로드에 실패했습니다.");
                     }
                 } else {
-                    alert("서버 에러가 발생했습니다.");
+                    alert("에러가 발생했습니다.");
                 }
             };
             xhr.send(formData);
         });
 
     </script>
-    <table>
-        <tr>
-            <td>UserId:</td>
-            <td th:text="${member.username}"></td>
-        </tr>
-        <tr>
-            <td>UserEmail:</td>
-            <td th:text="${member.email}"></td>
-        </tr>
-    </table>
-
-
-    <div>
-        <div>
-            <div class="title">개인정보 변경</div>
-            <hr>
-            <form action="/mypage/modifyPassword" method="Post">
-                <div class="password"> 기존 비밀번호</div>
-                <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password">
-                <div class="ps-title"> 비밀번호 변경</div>
-                <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password">
-                <div class="ps-check-title"> 비밀번호 변경 확인</div>
-                <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password">
-                <div id="passwordMatchMsg" style="display: none; color: red;"></div>
-                <button type="submit">변경하기</button>
-            </form>
-
-        </div>
-    </div>
 
     <script>
         const presentPWInput = document.getElementById("password");
@@ -106,6 +111,7 @@
         });
 
     </script>
+
 </body>
 
 </html>

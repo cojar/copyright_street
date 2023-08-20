@@ -1,11 +1,14 @@
 package com.sbp.copyrightStreet.boundedContext.mypage;
 
+import com.sbp.copyrightStreet.base.dto.UploadResponse;
 import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberModifyForm;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,8 +24,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Controller
@@ -68,11 +69,11 @@ public class MypageController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/uploadProfileImage")
-    public String uploadProfileImage(@RequestParam("profileImage") MultipartFile file, Principal principal) {
+    public ResponseEntity<UploadResponse> uploadProfileImage(@RequestParam("profileImage") MultipartFile file, Principal principal) {
         try {
             // 이미지 파일 종류 확인
             if (!isValidImageFile(file)) {
-                return "mypage/mypage";
+                return ResponseEntity.badRequest().body(new UploadResponse("error", "Invalid image file type"));
             }
 
             // 저장 경로 설정
@@ -86,14 +87,16 @@ public class MypageController {
             Files.write(path, bytes);
 
             // 사용자 프로필 이미지 URL 업데이트
-            String imageUrl = "/" + UPLOAD_DIR + principal.getName() + "_" + file.getOriginalFilename();
+            String imageUrl = "/ProfileImg/" + principal.getName() + "_" + file.getOriginalFilename();
             memberService.updateProfileImage(principal.getName(), imageUrl);
+
+            return ResponseEntity.ok(new UploadResponse("success", imageUrl));
+
         } catch (Exception e) {
             // 이미지 업로드 중 오류 발생
-            return "mypage/mypage";
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new UploadResponse("error", "Image upload failed"));
         }
 
-        return "redirect:/mypage/myProfile";
     }
 
     private boolean isValidImageFile(MultipartFile file) {
