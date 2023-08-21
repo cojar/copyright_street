@@ -84,15 +84,15 @@ public class StoreService {
         this.storeRepository.save(store);
     }
 
-    @Transactional
-    public void delete(Integer storeId) {
-        Store store = this.getStore(storeId);
-
-        List<Cart> cartList = this.cartRepository.findByStoreId(storeId);
-        this.cartRepository.deleteAll(cartList);
-
-        this.storeRepository.delete(store);
-    }
+//    @Transactional
+//    public void delete(Integer storeId) {
+//        Store store = this.getStore(storeId);
+//
+//        List<Cart> cartList = this.cartRepository.findByStoreId(storeId);
+//        this.cartRepository.deleteAll(cartList);
+//
+//        this.storeRepository.delete(store);
+//    }
 
 
     public void cart(Integer id) {

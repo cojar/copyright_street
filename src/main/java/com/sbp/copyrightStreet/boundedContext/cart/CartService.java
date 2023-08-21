@@ -23,8 +23,8 @@ public class CartService {
         cartRepository.deleteById(id);
     }
 
-    public void deleteCartItemsByStoreId(Integer storeId) {
-        List<Cart> cartList = cartRepository.findByStoreId(storeId);
+    public void deleteCartItemsByStoreId(Member member) {
+        List<Cart> cartList = cartRepository.findByMember(member);
         cartRepository.deleteAll(cartList);
     }
 
@@ -34,5 +34,9 @@ public class CartService {
         c.setMember(member);
         c.setCreateDate(LocalDateTime.now());
         this.cartRepository.save(c);
+    }
+
+    public List<Cart> getList(Member member) {
+        return this.cartRepository.findByMember(member);
     }
 }

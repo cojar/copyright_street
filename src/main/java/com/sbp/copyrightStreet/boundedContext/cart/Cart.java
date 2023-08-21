@@ -17,7 +17,7 @@
     public class Cart {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private Long id;
+        private Integer id;
 
         private String title;
 
@@ -35,7 +35,6 @@
         private Member member;
 
         @ManyToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "store_id")
         private Product product;
 
         public String getFile() {

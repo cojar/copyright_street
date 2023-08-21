@@ -24,20 +24,24 @@ public class CartController {
     private final CartService cartService;
     private final MemberService memberService;
 
-    @PreAuthorize("isAuthenticated(")
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/list")
-    public String cart(Model model) {
-        List<Cart> cartItems = cartService.getCartItems();
-        model.addAttribute("cartItems", cartItems);
+    public String list (Principal principal, Model model) {
+        Member member = memberService.getUser(principal.getName());
+        List<Cart> cartList = this.cartService.getList(member);
+        model.addAttribute("cartList", cartList);
+
         return "cart/list";
     }
 
-    @PreAuthorize("isAuthenticated(")
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/add/{id}")
-    public String add(@PathVariable Long id, Principal principal){
+    public String add (@PathVariable Long id, Principal principal) {
         Product product = productService.getProduct(id);
-        Member member = memberService.getUserByLoginId(principal.getName());
+        Member member = memberService.getUser(principal.getName());
+
         this.cartService.add(product, member);
+
         return "redirect:/cart/list";
     }
 
