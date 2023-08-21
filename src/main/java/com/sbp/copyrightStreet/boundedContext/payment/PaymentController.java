@@ -1,29 +1,23 @@
 package com.sbp.copyrightStreet.boundedContext.payment;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 import lombok.RequiredArgsConstructor;
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.ResponseErrorHandler;
-import org.springframework.web.client.RestTemplate;
 
-import java.security.Principal;
-
-import javax.annotation.PostConstruct;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
-import java.util.HashMap;
-import java.util.Map;
 
 @RequiredArgsConstructor
 @Controller
@@ -31,71 +25,91 @@ import java.util.Map;
 public class PaymentController {
 
     private final MemberService memberService;
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final PaymentService paymentService;
 
-    @PostConstruct
-    private void init() {
-        restTemplate.setErrorHandler(new ResponseErrorHandler() {
-            @Override
-            public boolean hasError(ClientHttpResponse response) {
-                return false;
-            }
-
-            @Override
-            public void handleError(ClientHttpResponse response) {
-            }
-        });
-    }
-
-    @Value("${secret.key}")
-    private final String SECRET_KEY;
+    @Value("${payment.secretKey}")
+    private String paymentSecretKey;
 
     @PreAuthorize("isAuthenticated()")
-    @RequestMapping("{id}/success")
-    public String confirmPayment(
-            @PathVariable("id") Integer id, Principal principal,
-            @RequestParam String paymentKey, @RequestParam String orderId, @RequestParam Long amount,
-            Model model) throws Exception {
+    @GetMapping("/success")
+    public String paymentResult(
+            Model model,
+            @RequestParam(value = "orderId") String orderId,
+            @RequestParam(value = "amount") Integer amount,
+            @RequestParam(value = "paymentKey") String paymentKey) throws Exception {
+
+        Base64.Encoder encoder = Base64.getEncoder();
+        byte[] encodedBytes = encoder.encode(paymentSecretKey.getBytes("UTF-8"));
+        String authorizations = "Basic " + new String(encodedBytes, 0, encodedBytes.length);
+
+        URL url = new URL("https://api.tosspayments.com/v1/payments/" + paymentKey);
+
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("Authorization", authorizations);
+        connection.setRequestProperty("Content-Type", "application/json");
+        connection.setRequestMethod("POST");
+        connection.setDoOutput(true);
+        JSONObject obj = new JSONObject();
+        obj.put("orderId", orderId);
+        obj.put("amount", amount);
+
+        OutputStream outputStream = connection.getOutputStream();
+        outputStream.write(obj.toString().getBytes("UTF-8"));
+
+        int code = connection.getResponseCode();
+        boolean isSuccess = code == 200 ? true : false;
+        model.addAttribute("isSuccess", isSuccess);
+
+        InputStream responseStream = isSuccess ? connection.getInputStream() : connection.getErrorStream();
+
+        Reader reader = new InputStreamReader(responseStream, StandardCharsets.UTF_8);
+        JSONParser parser = new JSONParser();
+        JSONObject jsonObject = (JSONObject) parser.parse(reader);
+        responseStream.close();
+
+        Payment savedPayment = paymentService.savePayment(jsonObject);
+        model.addAttribute("paymentInfo", savedPayment);     //db에 결제 정보 저장
+        model.addAttribute("payment.orderNum", savedPayment.getOrderNum());
 
         Member member = this.memberService.getUserByLoginId(orderId);
+        model.addAttribute("payment.customerName", member.getUsername());
 
-        HttpHeaders headers = new HttpHeaders();
-        // headers.setBasicAuth(SECRET_KEY, ""); // spring framework 5.2 이상 버전에서 지원
-        headers.set("Authorization", "Basic " + Base64.getEncoder().encodeToString((SECRET_KEY + ":").getBytes()));
-        headers.setContentType(MediaType.APPLICATION_JSON);
 
-        Map<String, String> payloadMap = new HashMap<>();
-        payloadMap.put("orderId", orderId);
-        payloadMap.put("amount", String.valueOf(amount));
+        model.addAttribute("responseStr", jsonObject.toJSONString());
+        System.out.println(jsonObject.toJSONString());
 
-        HttpEntity<String> request = new HttpEntity<>(objectMapper.writeValueAsString(payloadMap), headers);
+        model.addAttribute("method", (String) jsonObject.get("method"));
+        model.addAttribute("orderName", (String) jsonObject.get("orderName"));
 
-        ResponseEntity<JsonNode> responseEntity = restTemplate.postForEntity(
-                "https://api.tosspayments.com/v1/payments/" + paymentKey, request, JsonNode.class);
-
-        if (responseEntity.getStatusCode() == HttpStatus.OK) {
-            JsonNode successNode = responseEntity.getBody();
-            model.addAttribute("orderId", successNode.get("orderId").asText());
-            String secret = successNode.get("secret").asText(); // 가상계좌의 경우 입금 callback 검증을 위해서 secret을 저장하기를 권장함
-            return "membership/success";
+        if (((String) jsonObject.get("method")) != null) {
+            if (((String) jsonObject.get("method")).equals("카드")) {
+                model.addAttribute("cardNumber", (String) ((JSONObject) jsonObject.get("card")).get("number"));
+            } else if (((String) jsonObject.get("method")).equals("가상계좌")) {
+                model.addAttribute("accountNumber", (String) ((JSONObject) jsonObject.get("virtualAccount")).get("accountNumber"));
+            } else if (((String) jsonObject.get("method")).equals("계좌이체")) {
+                model.addAttribute("bank", (String) ((JSONObject) jsonObject.get("transfer")).get("bank"));
+            } else if (((String) jsonObject.get("method")).equals("휴대폰")) {
+                model.addAttribute("customerMobilePhone", (String) ((JSONObject) jsonObject.get("mobilePhone")).get("customerMobilePhone"));
+            }
         } else {
-            JsonNode failNode = responseEntity.getBody();
-            model.addAttribute("message", failNode.get("message").asText());
-            model.addAttribute("code", failNode.get("code").asText());
-            return "membership/fail";
+            model.addAttribute("code", (String) jsonObject.get("code"));
+            model.addAttribute("message", (String) jsonObject.get("message"));
         }
+
+        return "success";
     }
 
-    @PreAuthorize("isAuthenticated()")
-    @RequestMapping("{id}/fail")
-    public String failPayment(@RequestParam String message,
-                              @RequestParam String code,
-                              Model model, Principal principal) {
+    @GetMapping("/fail")
+    public String paymentResult(
+            Model model,
+            @RequestParam(value = "message") String message,
+            @RequestParam(value = "code") Integer code
+    ) throws Exception {
 
-        model.addAttribute("message", message);
         model.addAttribute("code", code);
-        return "membership/fail";
+        model.addAttribute("message", message);
+
+        return "fail";
     }
 
 
