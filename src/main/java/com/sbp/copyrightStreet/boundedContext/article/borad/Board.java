@@ -28,7 +28,8 @@ public class Board {
     private Member author; //글쓴이
 
     private String category; //분류 카테고리
-    //
+
+
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList; //댓글
 

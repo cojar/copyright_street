@@ -21,47 +21,85 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="board, loop : ${paging}">
+<!--    <tr th:each="board, loop : ${paging}">-->
+<!--        <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>-->
+<!--        <td><span th:text="${board.category}"></span></td>-->
+<!--        <td>-->
+<!--            <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>-->
+<!--        </td>-->
+
+<!--        <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td>-->
+
+<!--        <td th:text="${board.view}"></td>-->
+
+<!--        <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>-->
+
+
+
+    <tr class="text-center" th:each="board, loop : ${paging}">
         <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
-        <td><span th:text="${board.category}"></span></td>
-        <td>
+        <td><span th:text="${board.category}"></span>
+        <td class="text-start">
             <a th:href="@{|/board/detail/${board.id}|}" th:text="${board.title}"></a>
+            <span class="text-danger small ms-2" th:if="${#lists.size(board.commentList) > 0}"
+                  th:text="${#lists.size(board.commentList)}">
+        </span>
         </td>
-<!--        <td><span th:if="${question.author != null}" th:text="${question.author.username}"></span></td>-->
-
         <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td>
-
         <td th:text="${board.view}"></td>
+        <td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></td>
 
-        <td th:text="${board.createDate}"></td>
+
     </tr>
     </tbody>
 </table>
 
 <!-- 페이징처리 시작 -->
 <div th:if="${!paging.isEmpty()}">
-    <div class="d-flex justify-content-center">
-        <ul class="pagination justify-content-center">
-            <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
-                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number}">
-                    <span>이전</span>
-                </a>
-            </li>
-            <li class="page-item"
-                th:classappend="${page == paging.number+1} ? 'active'"
-                th:each="page: ${#numbers.sequence(1, paging.totalPages)}"
-                th:if="${page >= paging.number-5 and page <= paging.number+5}">
-                <a class="page-link" href="javascript:void(0)" th:data-page="${page}" th:text="${page}"></a>
-            </li>
-            <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
-                <a class="page-link" href="javascript:void(0)" th:data-page="${paging.number+2}">
-                    <span>다음</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{|?page=${paging.number}|}">
+                <span>이전</span>
+            </a>
+        </li>
+        <li th:each="page: ${#numbers.sequence(1, paging.totalPages)}"
+            th:if="${page >= paging.number-4 and page <= paging.number+4}"
+            th:classappend="${page == paging.number} ? 'active'"
+            class="page-item">
+            <a th:text="${page}" class="page-link" th:href="@{|?page=${page}|}"></a>
+        </li>
+        <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+            <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                <span>다음</span>
+            </a>
+        </li>
+    </ul>
 </div>
+
 <!-- 페이징처리 끝 -->
 
+
+<div th:if="${!paging.isEmpty()}">
+    <ul class="pagination justify-content-center">
+        <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">
+            <a class="page-link"
+               th:href="@{|?page=${paging.number-1}|}">
+                <span>이전</span>
+            </a>
+        </li>
+        <li th:each="page: ${#numbers.sequence(0, paging.totalPages-1)}"
+            th:if="${page >= paging.number-5 and page <= paging.number+5}"
+            th:classappend="${page == paging.number} ? 'active'"
+            class="page-item">
+            <a th:text="${page}" class="page-link" th:href="@{|?page=${page-1}|}"></a>
+        </li>
+        <li class="page-item" th:classappend="${!paging.hasNext} ? 'disabled'">
+            <a class="page-link" th:href="@{|?page=${paging.number+1}|}">
+                <span>다음</span>
+            </a>
+        </li>
+    </ul>
+</div>
 </body>
 </html>

@@ -61,11 +61,9 @@ public class BoardService {
         this.boardRepository.save(board);
     }
 
-    public void delete(Board board  ) {
+    public void delete(Board board) {
         this.boardRepository.delete(board);
     }
-
-
 
 
 

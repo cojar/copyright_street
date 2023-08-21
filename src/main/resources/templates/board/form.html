@@ -8,10 +8,10 @@
 <body>
 <h5>질문등록</h5>
 <form th:object="${questionForm}" method="post">
-    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-    <!--<form action="/board/create" th:object="${boardForm}"  method="post">-->
-    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+    <form action="/board/create" th:object="${boardForm}"  method="post">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <select name="category">
         <option value="">카테고리를선택해주세요</option>
         <option value="자유">자유</option>
