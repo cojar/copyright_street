@@ -1,0 +1,44 @@
+<html layout:decorate="~{layout/layout.html}">
+
+<head>
+  <title>장바구니</title>
+</head>
+
+<body>
+<main layout:fragment="main">
+  <div class="container">
+    <h1 class="t-text-[1.2rem] t-font-bold">장바구니</h1>
+    <div class="t-mt-[10px] t-overflow-x-auto t-whitespace-nowrap">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th><input type="checkbox"></th>
+          <th>이미지</th>
+          <th>상품명</th>
+          <th>가격</th>
+          <th>구매/삭제</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cart : ${cartList}">
+          <td><input type="checkbox"></td>
+          <td><img class="t-w-[50px] t-h-[50px] sm:t-w-[150px] sm:t-h-[150px] t-object-cover rounded"
+                   width="100px" height="100px"  th:src="@{|/gen/${product.thumbnailImg}|}" alt="상품이미지"></td>
+          <td th:text="${cart.product.name}"></td>
+          <td>
+            <span th:text="@{|\ ${cart.product.price}|}"></span>
+          </td>
+          <td>
+            <a href="" type="button" class="btn btn-primary">구매</a>
+            <a href="#" type="button" class="btn btn-danger">삭제</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>>
+</main>
+</body>
+
+</html>
+

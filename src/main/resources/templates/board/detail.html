@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="~{layout/layout.html}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>게시판 디테일</title>
+    <title>상품등록</title>
 </head>
 <body>
+<main layout:fragment="main">
 
-<div class="my-3">
-    <a th:href="@{|/board/modify/${board.id}|}"
-       th:text="수정"></a>
-    <a href="javascript:void(0);" th:data-uri="@{|/board/delete/${board.id}|}"
-       th:text="삭제"></a>
-</div>
+    <div class="my-3">
+        <a th:href="@{|/board/modify/${board.id}|}"
+           th:text="수정"></a>
+        <a href="javascript:void(0);" th:data-uri="@{|/board/delete/${board.id}|}"
+           th:text="삭제"></a>
+    </div>
 
     <h3 th:text="${board.title}"></h3>
     <p th:text="${board.content}"></p>
@@ -31,9 +31,8 @@
 
 
     <a th:href="@{/board/list}">목록</a>
-<th:block layout:fragment="script"></th:block>
-
-<script layout:fragment="script" type='text/javascript'>
+    <th:block layout:fragment="script"></th:block>
+    <script layout:fragment="script" type='text/javascript'>
 const delete_elements = document.getElementsByClassName("delete");
 Array.from(delete_elements).forEach(function(element) {
     element.addEventListener('click', function() {
@@ -43,5 +42,7 @@ Array.from(delete_elements).forEach(function(element) {
     });
 });
 </script>
+</main>
 </body>
+
 </html>

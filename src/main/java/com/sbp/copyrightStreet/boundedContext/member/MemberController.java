@@ -24,7 +24,6 @@ public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
 
-
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
     public String showJoin() {
@@ -38,20 +37,16 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             for (int i = 0; i < bindingResult.getErrorCount(); i++) {
                 System.out.println(bindingResult.getAllErrors().get(i));
-            }//.
+            }
             return "member/join";
-            ///
         }
-
         if (!joinForm.getPassword().equals(joinForm.getPassword2())) {
             System.out.println("password confirm error");
             bindingResult.rejectValue("passwordCheck", "passwordInCorrect",
                     "입력한 비밀번호가 일치하지 않습니다.");
             return "member/join";
         }
-
         memberService.join(joinForm.getUsername(), joinForm.getLoginId(), joinForm.getPassword(), joinForm.getEmail(), joinForm.getPhoneNumber());
-
         redirectAttributes.addFlashAttribute("signupSuccess", true);
         return "redirect:/member/login";
     }
