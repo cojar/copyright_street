@@ -1,8 +1,8 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
-import com.sbp.copyrightStreet.boundedContext.article.recomment.Recomment;
-import com.sbp.copyrightStreet.util.UserRole;
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.product.Product;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -34,28 +34,26 @@ public class Member {
     @LastModifiedDate // 아래 칼럼에는 값이 자동으로 들어간다.(UPDATE 할 때 마다)
     private LocalDateTime modifyDate;
     private String providerTypeCode; // 일반회원인지, 카카오로 가입한 회원인지, 구글로 가입한 회원인지
-
-    private UserRole authority;
-
     @Column(unique = true)
     private String username;
-
     private String password;
-
     @Column
     private String email;
-
     private String phoneNumber;
 
     @Column(unique = true)
     private String loginId;
-
     private String nickname;
+//    private String userRole;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Cart> cartList;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Board> boardList;
 
-
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Product> productList;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
