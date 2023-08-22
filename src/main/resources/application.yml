@@ -7,7 +7,7 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/copyright_street?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: root
-    password: rlqja123
+    password:
   security:
     oauth2:
       client:
@@ -61,8 +61,6 @@ logging:
     prefix: classpath:/templates/
     suffix: .html
     cache: false #
-custom:
-  genFileDirPath: C:\Users\chlrlqja\Pictures\genFile
 
 
 

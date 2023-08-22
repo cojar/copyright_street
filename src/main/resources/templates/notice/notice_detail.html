@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/layout.html}"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>notice_detail</title>
+</head>
+<body>
+<main layout:fragment="main">
+<h1 th:text="${notice.title}"></h1>
+<div th:text="${notice.content}"></div>
+
+<a th:href="@{|/notice/modify/${notice.id}|}" sec:authorize="hasRole('ADMIN')">수정</a>
+<a th:href="@{|/notice/delete/${notice.id}|}" sec:authorize="hasRole('ADMIN')">삭제</a>
+<a th:href="@{|/notice/list|}">목록</a>
+</main>
+</body>
+</html>

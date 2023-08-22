@@ -10,6 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,7 +23,9 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor // @Builder 붙이면 이거 필수
 @EntityListeners(AuditingEntityListener.class) // @CreatedDate, @LastModifiedDate 작동하게 허용
 @ToString // 디버그를 위한
-@Entity // 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
+@Entity// 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
+@Component
+@Setter
 @Getter // 아래 필드에 대해서 전부다 게터를 만든다. private Long id; => public Long getId() { ... }
 @Setter
 public class Member {
@@ -40,6 +43,8 @@ public class Member {
     @Column
     private String email;
     private String phoneNumber;
+
+    private String nickname;
 
     @Column(unique = true)
     private String loginId;
