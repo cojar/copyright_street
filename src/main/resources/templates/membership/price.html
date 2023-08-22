@@ -48,18 +48,15 @@
             </div>
 
         </div>
-
-    </main>
-    <!-- 토스페이먼츠 결제창 SDK 추가 -->
-    <script src="https://js.tosspayments.com/v1"></script>
-    <script th:inline="javascript">
-        let orderId = /*[[ ${payment.orderNum} ]]*/ ;
-        let customerName = /*[[ ${member.UserName} ]]*/;
-        let createDate = /*[[ ${payment.createDate} ]]*/ ;
+        <!-- 토스페이먼츠 결제창 SDK 추가 -->
+        <script src="https://js.tosspayments.com/v1"></script>
+        <script th:inline="javascript">
+        let orderId = new Date().getTime();
+        let customerName = /*[[ ${member.username} ]]*/;
 
         let tossPayments = TossPayments("test_ck_qLlDJaYngroEyp7RMDx3ezGdRpXx");
 
-        let path = "/";
+        let path = "/payment/";
         let successUrl = window.location.origin + path + "success";
         let failUrl = window.location.origin + path + "fail";
         let callbackUrl = window.location.origin + path + "va_callback";
@@ -149,6 +146,9 @@
         }
 
     </script>
+
+    </main>
+
 </body>
 
 </html>

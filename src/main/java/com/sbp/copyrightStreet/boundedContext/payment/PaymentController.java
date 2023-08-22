@@ -24,11 +24,21 @@ import java.util.Base64;
 @RequestMapping("/payment")
 public class PaymentController {
 
-    private final MemberService memberService;
-    private final PaymentService paymentService;
-
     @Value("${payment.secretKey}")
     private String paymentSecretKey;
+    private final PaymentService paymentService;
+    private final MemberService memberService;
+
+    @GetMapping("/detail")
+    public String detail(Model model, JSONObject jsonObject, String orderId){
+        Payment savedPayment = paymentService.savePayment(jsonObject);
+        model.addAttribute("paymentInfo", savedPayment);     //db에 결제 정보 저장
+        model.addAttribute("payment.orderNum", savedPayment.getOrderNum());
+
+        Member member = this.memberService.getUserByLoginId(orderId);
+        model.addAttribute("payment.customerName", member.getUsername());
+        return "membership/detail";
+    }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/success")
@@ -67,14 +77,6 @@ public class PaymentController {
         JSONObject jsonObject = (JSONObject) parser.parse(reader);
         responseStream.close();
 
-        Payment savedPayment = paymentService.savePayment(jsonObject);
-        model.addAttribute("paymentInfo", savedPayment);     //db에 결제 정보 저장
-        model.addAttribute("payment.orderNum", savedPayment.getOrderNum());
-
-        Member member = this.memberService.getUserByLoginId(orderId);
-        model.addAttribute("payment.customerName", member.getUsername());
-
-
         model.addAttribute("responseStr", jsonObject.toJSONString());
         System.out.println(jsonObject.toJSONString());
 
@@ -96,7 +98,7 @@ public class PaymentController {
             model.addAttribute("message", (String) jsonObject.get("message"));
         }
 
-        return "success";
+        return "membership/success";
     }
 
     @GetMapping("/fail")
@@ -109,7 +111,7 @@ public class PaymentController {
         model.addAttribute("code", code);
         model.addAttribute("message", message);
 
-        return "fail";
+        return "membership/fail";
     }
 
 

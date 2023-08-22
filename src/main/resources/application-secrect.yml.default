@@ -1,4 +1,4 @@
 spring:
   security:
-      payment:
-       secretKey: test_sk_oeqRGgYO1r50Ak6dYX5VQnN2Eyaz
+payment:
+  secretKey: 'securetKey'

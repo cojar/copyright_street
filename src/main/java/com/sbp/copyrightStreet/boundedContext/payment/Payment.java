@@ -19,8 +19,6 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;   //순번
 
-    private String paymentKey;  //
-
     private String method; //주문방법
 
     @Column(nullable = false)
