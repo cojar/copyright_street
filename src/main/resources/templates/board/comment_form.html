@@ -1,7 +1,7 @@
 <html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <div layout:fragment="comment" class="container">
   <h5 class="my-3 border-bottom pb-2">댓글 수정</h5>
-  <form th:object="${commentForm}" method="post">
+  <form th:action="@{|/comment/modify/${comment.id}|}" method="post">
     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
     <div th:replace="~{form_errors :: formErrorsFragment}"></div>
     <div class="mb-3">

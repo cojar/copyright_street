@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.article.comment;
 
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,6 +22,9 @@ public class Comment {
     private LocalDateTime createDate;
 
     private LocalDateTime modifyDate; // 수정일
+
+    @ManyToOne
+    private Member author;
 
 
     @ManyToOne
