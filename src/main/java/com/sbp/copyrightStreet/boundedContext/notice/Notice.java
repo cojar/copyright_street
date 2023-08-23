@@ -2,6 +2,8 @@ package com.sbp.copyrightStreet.boundedContext.notice;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
@@ -20,14 +22,16 @@ public class Notice {
     private Integer id;
 
     @Column(length = 200)
-    private String title;
+    private String title;// 제목
 
     @Column(columnDefinition = "TEXT")
-    private String content;
+    private String content;// 내용
 
     @Column
-    private String admin;
-    private LocalDateTime createDate;
-    private LocalDateTime ModifyDate;
-    private int hitCount;
+    private String admin;// 작성자
+
+    @CreatedDate
+    private LocalDateTime createDate;//작성시간
+
+    private int hitCount;//조회수
 }

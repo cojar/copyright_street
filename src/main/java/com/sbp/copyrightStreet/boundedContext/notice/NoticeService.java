@@ -12,11 +12,12 @@ import java.util.Optional;
 public class NoticeService {
     private final NoticeRepository noticeRepository;
 
-    public void Create(String title, String content) {
+    public void Create(String title, String content, String admin) {
         Notice notice = new Notice();
         notice.setTitle(title);
         notice.setContent(content);
         notice.setCreateDate(LocalDateTime.now());
+        notice.setAdmin(admin);
         this.noticeRepository.save(notice);
     }
     public List<Notice> List() {

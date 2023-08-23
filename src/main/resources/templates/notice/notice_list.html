@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="" layout:decorate="~{layout/layout.html}">
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="" layout:decorate="~{layout/layout.html}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,29 +10,32 @@
 </head>
 <body>
 <main layout:fragment="main">
-<table>
-    <thead>
-    <tr>
-        <th>분류</th>
-        <th>제목</th>
-        <th>작성일시</th>
-        <th>작성자</th>
-        <th>조회수</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="notice: ${noticeList}">
-        <td>공지</td>
-        <td>
-            <a th:href="@{|/notice/detail/${notice.id}|}" th:text="${notice.title}"></a>
-        </td>
-        <td th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></td>
-        <td>관리자</td>
-        <td th:text="${notice.hitCount}"></td>
-    </tr>
-    </tbody>
-</table>
-<a th:href="@{|/notice/create|}" >등록</a>
+    <a th:href="@{|/notice/create|}" >등록</a>
+    <table>
+        <thead>
+        <tr>
+            <th>분류</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
+            <th>작성 일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="notice: ${noticeList}">
+            <td>공지</td>
+            <td>
+                <a th:href="@{|/notice/detail/${notice.id}|}" th:text="${notice.title}"></a>
+            </td>
+            <td th:text="${notice.admin}"></td>
+            <td th:text="${notice.hitCount}"></td>
+
+            <td th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
 </main>
 </body>
 </html>

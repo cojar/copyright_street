@@ -30,8 +30,8 @@ public class NoticeController {
     }
 
     @PostMapping("/create")
-    public String Create(@RequestParam String title, @RequestParam String content) {
-        this.noticeService.Create(title, content);
+    public String Create(@RequestParam String title, @RequestParam String content, @RequestParam String admin) {
+        this.noticeService.Create(title, content, admin);
         return "redirect:/notice/list";
     }
 

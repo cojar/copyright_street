@@ -7,12 +7,14 @@
 </head>
 <body>
 <main layout:fragment="main">
-<h1 th:text="${notice.title}"></h1>
-<div th:text="${notice.content}"></div>
+    <h1 th:text="${notice.title}"></h1>
+    <div th:text="${notice.content}"></div>
+    <div th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></div>
 
-<a th:href="@{|/notice/modify/${notice.id}|}" sec:authorize="hasRole('ADMIN')">수정</a>
-<a th:href="@{|/notice/delete/${notice.id}|}" sec:authorize="hasRole('ADMIN')">삭제</a>
-<a th:href="@{|/notice/list|}">목록</a>
+
+    <a th:href="@{|/notice/modify/${notice.id}|}" >수정</a>
+    <a th:href="@{|/notice/delete/${notice.id}|}" >삭제</a>
+    <a th:href="@{|/notice/list|}">목록</a>
 </main>
 </body>
 </html>
