@@ -48,14 +48,6 @@ public class ProductService {
         return createdProduct.getId();
     }
 
-    public void create(String name, String description, int price){
-        Product p = new Product();
-        p.setName(name);
-        p.setPrice(price);
-        p.setDescription(description);
-        p.setCreateDate(LocalDateTime.now());
-        this.productRepository.save(p);
-    }
 
     public Page<Product> getList(int page, String kw) {
         List<Sort.Order> sorts = new ArrayList<>();

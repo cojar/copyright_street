@@ -23,7 +23,7 @@
         <tr th:each="cart : ${cartList}">
           <td><input type="checkbox"></td>
           <td><img class="t-w-[50px] t-h-[50px] sm:t-w-[150px] sm:t-h-[150px] t-object-cover rounded"
-                   width="100px" height="100px"  th:src="@{|/gen/${product.thumbnailImg}|}" alt="상품이미지"></td>
+                   width="100px" height="100px"  src="https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg" alt="상품이미지"></td>
           <td th:text="${cart.product.name}"></td>
           <td>
             <span th:text="@{|\ ${cart.product.price}|}"></span>
