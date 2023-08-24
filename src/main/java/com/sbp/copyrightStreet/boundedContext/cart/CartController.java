@@ -50,4 +50,6 @@ public class CartController {
         this.cartService.deleteCartItem(id); // 카트 내용 삭제 메서드 추가
         return "redirect:/store/cart";
     }
+
+
 }
