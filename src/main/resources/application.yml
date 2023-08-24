@@ -61,8 +61,6 @@ logging:
     prefix: classpath:/templates/
     suffix: .html
     cache: false #
-custom:
-  genFileDirPath: C:\Users\chlrlqja\Pictures\genFile
 
 
 
