@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="" layout:decorate="~{layout/layout.html}"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>notice_list</title>
+</head>
+<body>
+<main layout:fragment="main">
+    <a th:href="@{|/notice/create|}" >등록</a>
+    <table>
+        <thead>
+        <tr>
+            <th>분류</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>조회수</th>
+            <th>작성 일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="notice: ${noticeList}">
+            <td>공지</td>
+            <td>
+                <a th:href="@{|/notice/detail/${notice.id}|}" th:text="${notice.title}"></a>
+            </td>
+            <td th:text="${notice.admin}"></td>
+            <td th:text="${notice.hitCount}"></td>
+
+            <td th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+</main>
+</body>
+</html>

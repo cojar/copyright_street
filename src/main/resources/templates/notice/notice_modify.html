@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:layout="" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>notice_modify</title>
+</head>
+<body>
+<main layout:fragment="main">
+    <form th:action="@{|/notice/modify/${notice.id}|}" th:object="${noticeForm}" method="post">
+        <input type="text" name="title" th:value="${notice.title}">
+        <br>
+        <textarea name="content" id="content" cols="30" rows="10" th:text="${notice.content}"
+                  th:value="${notice.content}"></textarea>
+        <button type="submit">등록</button>
+    </form>
+</main>
+</body>
+</html>
