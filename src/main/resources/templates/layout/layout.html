@@ -50,20 +50,20 @@
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">스토어</a>
                     <a th:unless="${@rq.successArtistRegistration}" href="/artist/register"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">작가등록</a>
-                    <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/store/create"
+                    <a th:if="${@rq.isLogin} and ${@rq.successArtistRegistration}" href="/product/create"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">상품등록</a>
                     <a href="/membership/price"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">라이센스</a>
                     <a href="/board/list"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium">커뮤니티</a>
-                    <a href="/store/cart"
+                    <a href="/cart/list"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"> 🛒 </a>
-                    <a href="/member/login"
+                    <a th:href="@{/member/login}"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"
-                       th:if="${@rq.logout}">Login</a>
+                       th:if="${@rq.logout}">로그인</a>
                     <a href="javascript:;" id="logout-link"
                        class="text-gray-700 hover:text-teal-500 text-lg font-medium"
-                       th:if="${@rq.login}" onclick="$(this).next().submit();">Logout</a>
+                       th:if="${@rq.login}" onclick="$(this).next().submit();">로그아웃</a>
                     <a href="/member/join"
                        class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
                        th:if="${@rq.logout}">Sign up
@@ -73,8 +73,10 @@
                     </a>
                     <form th:if="${@rq.login}" hidden th:action="|/member/logout|" method="POST"></form>
                     <span th:if="${@rq.login}" th:text="|${@rq.member.username}님 환영합니다.|"></span>
+                    <a class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm "
+                       href="/adm" sec:authorize="hasAuthority('ADMIN')">관리자
+                    </a>
                 </div>
-
             </div>
         </div>
     </div>
@@ -124,7 +126,7 @@
         <!-- 오른쪽 블럭: 연락처 및 저작권 정보 -->
         <div class="text-right">
             <p>고객센터: 123-456-7890</p>
-            <p><a href="/customer/question" class="text-teal-500 hover:underline">고객센터</a></p>
+            <p><a href="/notice/list" class="text-teal-500 hover:underline">고객센터</a></p>
             <p><a href="/artist/register" class="text-teal-500 hover:underline">작가등록</a></p>
             <p>Copyright &copy; 2023 저작거리. All rights reserved.</p>
         </div>

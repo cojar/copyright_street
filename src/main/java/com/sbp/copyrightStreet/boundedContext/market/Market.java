@@ -27,9 +27,6 @@ public class Market {
     @OneToOne
     private Member member;
 
-    @OneToMany(mappedBy = "market", cascade = CascadeType.REMOVE)
-    private List<Product> productList;
-
     @CreatedDate
     private LocalDateTime createDate;
 

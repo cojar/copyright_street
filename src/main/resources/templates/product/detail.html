@@ -16,7 +16,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-[auto,1fr] gap-4">
           <div class="md:col-start-1 md:col-end-2">
-            <img class="w-full max-w-[500px] h-full max-h-[500px] rounded ml-30" src="https://image.utoimage.com/preview/cp901541/2019/10/201910020680_500.jpg" alt="상품이미지">
+            <img class="w-full max-w-[500px] h-full max-h-[500px] rounded ml-30" th:src="@{|/gen/${product.thumbnailImg}|}" alt="상품이미지">
           </div>
           <div class="list-group md:col-start-2 md:col-end-3">
             <li class="list-group-item flex items-center">
@@ -51,6 +51,8 @@
                   <form th:action="@{|/cart/add/${product.id}|}" method="POST">
                     <input type="submit" value="장바구니 담기" class="btn btn-outline-success">
                   </form>
+                  <button  onclick="pay();" class="btn btn-outline-primary">결제</button>
+
                 </div>
               </div>
             </li>
@@ -109,6 +111,42 @@
         </div>
       </div>
     </div>
+    <script src="https://js.tosspayments.com/v1"></script>
+    <script th:inline="javascript">
+    let amount = /*[[ ${product.price}]]*/;
+    let orderName = /*[[ ${product.title}]]*/;
+
+    let tossPayments = TossPayments("test_ck_oeqRGgYO1r50AM42j4oVQnN2Eyaz"); // 테스트 클라언트 키
+    let path = "/";
+    let successUrl = window.location.origin + path + "success";
+    let failUrl = window.location.origin + path + "fail";
+    let callbackUrl = window.location.origin + path + "va_callback";
+    let orderId = new Date().getTime();
+
+    function pay() {
+        const method = "카드";
+        const requestJson = {
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": orderName,
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": "박토스",
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "useInternationalCardOnly": false,
+            "flowMode": "DEFAULT",
+            "discountCode": null,
+            "appScheme": null
+        }
+        tossPayments.requestPayment(method, requestJson)
+    }
+</script>
   </section>
 </main>
 

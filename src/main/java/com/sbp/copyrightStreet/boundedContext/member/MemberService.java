@@ -15,14 +15,13 @@
 
     @Slf4j
     @Service
-    @RequiredArgsConstructor// 아래 메서드들이 전부 readonly 라는 것을 명시, 나중을 위해
+    @RequiredArgsConstructor
     @Transactional
     public class MemberService {
         private final PasswordEncoder passwordEncoder;
 
         private final MemberRepository memberRepository;
 
-        private final Member member;
 
         public Optional<Member> findByUsername(String username) {
             return memberRepository.findByUsername(username);

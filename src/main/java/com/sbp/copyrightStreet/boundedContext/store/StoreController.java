@@ -65,11 +65,11 @@ public class StoreController {
         return "redirect:/copy/store";
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        this.storeService.delete(id);
-        return "redirect:/copy/store";
-    }
+//    @GetMapping("/delete/{id}")
+//    public String delete(@PathVariable("id") Integer id) {
+//        this.storeService.delete(id);
+//        return "redirect:/copy/store";
+//    }
 
 
 

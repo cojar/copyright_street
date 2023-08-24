@@ -1,7 +1,9 @@
 package com.sbp.copyrightStreet.boundedContext.product;
 
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.hash.Hash;
 import com.sbp.copyrightStreet.boundedContext.market.Market;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.storequestion.Question;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -38,13 +40,18 @@ public class Product {
     private String description;//설명
 
     @ManyToOne
-    private Market market;
+    private Member member;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Question> questionList;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
     private List<Hash> hashList;
+
+    private String thumbnailImg;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<Cart> cartList;
 
     @CreatedDate
     private LocalDateTime createDate;
