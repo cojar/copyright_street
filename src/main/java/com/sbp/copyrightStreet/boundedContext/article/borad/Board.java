@@ -10,6 +10,8 @@ import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
+
 
 @Getter
 @Setter
@@ -32,8 +34,8 @@ public class Board {
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList; //댓글
 
-    //    @ManyToMany
-//    private Set<Member> voter; //추천
+        @ManyToMany
+    Set<Member> voter; //추천
     @Column(columnDefinition = "integer default 0", nullable = false)
     private int view;
 
