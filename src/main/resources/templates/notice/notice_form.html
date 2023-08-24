@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="" layout:decorate="~{layout/layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>notice_form</title>
+</head>
+<body>
+<main layout:fragment="main">
+<form th:action="@{|/notice/create|}" method="post">
+    <input type="text" name="title">
+    <br>
+    <textarea name="content" id="content" cols="50" rows="10"></textarea>
+    <br>
+    <input type="text" name="admin" value="글쓴이">
+    <button type="submit">등록</button>
+</form>
+</main>
+</body>
+</html>
