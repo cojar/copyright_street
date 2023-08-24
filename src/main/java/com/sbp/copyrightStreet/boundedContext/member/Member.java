@@ -55,15 +55,15 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private  List<Cart> cartList;
 
-<<<<<<< HEAD
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Store> storeList;
 
 
 
-=======
+
     private String profileImage;
->>>>>>> cd00ce8ff48e4ad2e3357c5503a7cd5de292b0f5
+
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격
     public List<? extends GrantedAuthority> getGrantedAuthorities() {
