@@ -1,0 +1,37 @@
+<html layout:decorate="~{layout/layout.html}">
+
+<head>
+  <title>상품등록</title>
+</head>
+<body>
+<main layout:fragment="main">
+  <h1>상품등록</h1>
+  <br>
+  <form th:action="@{/product/create}" method="post"  enctype="multipart/form-data">
+    제목 : <input type="text" name="name"> <br>
+    내용 : <input type="text" name="description"> <br>
+    가격 : <input type="number" name="price"> <br>
+    썸네일: <input type="file" name="thumbnail" accept="img/png, image/gif, image/jpeg"> <br>
+    <button type="submit">전송</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</main>
+</body>
+
+
+
+<script>
+  document.getElementById("productForm").addEventListener("submit", function(event) {
+    var redirectUrl = "/product/detail";
+    window.location.href = redirectUrl;
+    event.preventDefault();
+  });
+</script>
+</html>
+

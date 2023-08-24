@@ -19,13 +19,13 @@ public class Market {
     private Long id;
 
     private String email;
+
     private String name;
+
     private String info;
+
     @OneToOne
     private Member member;
-
-    @OneToMany(mappedBy = "market", cascade = CascadeType.REMOVE)
-    private List<Product> productList;
 
     @CreatedDate
     private LocalDateTime createDate;

@@ -1,32 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
+
+<html layout:decorate="~{layout/layout.html}">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>상품등록</title>
 </head>
-
 <body>
-<h5>질문등록</h5>
-<form th:object="${questionForm}" method="post">
-    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
+<main layout:fragment="main">
+    <h1>컨텐츠 생성 페이지</h1>
+    <h5>질문등록</h5>
+    <form th:object="${boardForm}" method="post" >
 
-    <!--<form action="/board/create" th:object="${boardForm}"  method="post">-->
-    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />-->
-    <select name="category">
-        <option value="">카테고리를선택해주세요</option>
-        <option value="자유">자유</option>
-        <option value="작가">작가</option>
-        <option value="스토어">스토어</option>
-    </select>
-    <div class="mb-3">
-        <label for="subject" class="form-label">제목</label>
-        <input type="text" name="title" id="subject">
-    </div>
-    <div class="mb-3">
-        <label for="content" class="form-label">내용</label>
-        <textarea name="content" id="content" rows="10"></textarea>
-    </div>
-    <button type="submit">저장하기</button>
-</form>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <select name="category">
+            <option value="자유">자유</option>
+            <option value="작가">작가</option>
+            <option value="스토어">스토어</option>
+        </select>
+        <div class="mb-3">
+            <label for="subject" class="form-label">제목</label>
+            <input type="text" name="title" id="subject">
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">내용</label>
+            <textarea name="content" id="content" rows="10"></textarea>
+        </div>
+        <button type="submit">저장하기</button>
+    </form>
+
+</main>
+
+<script>
+    function validateForm() {
+        var title = document.getElementById("subject").value;
+        var content = document.getElementById("content").value;
+
+        var titleError = document.querySelector("span[th:if*='title']");
+        var contentError = document.querySelector("span[th:if*='content']");
+
+        titleError.innerHTML = "";
+        contentError.innerHTML = "";
+
+        var isValid = true;
+
+        if (title.trim() === "") {
+            titleError.innerHTML = "제목은 필수 입력사항입니다.";
+            isValid = false;
+        }
+
+        if (content.trim() === "") {
+            contentError.innerHTML = "내용은 필수 입력사항입니다.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+</script>
+
+
 </body>
+
 </html>

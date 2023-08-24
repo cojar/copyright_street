@@ -84,15 +84,15 @@ public class StoreService {
         this.storeRepository.save(store);
     }
 
-    @Transactional
-    public void delete(Integer storeId) {
-        Store store = this.getStore(storeId);
-
-        List<Cart> cartList = this.cartRepository.findByStoreId(storeId);
-        this.cartRepository.deleteAll(cartList);
-
-        this.storeRepository.delete(store);
-    }
+//    @Transactional
+//    public void delete(Integer storeId) {
+//        Store store = this.getStore(storeId);
+//
+//        List<Cart> cartList = this.cartRepository.findByStoreId(storeId);
+//        this.cartRepository.deleteAll(cartList);
+//
+//        this.storeRepository.delete(store);
+//    }
 
 
     public void cart(Integer id) {
@@ -102,11 +102,11 @@ public class StoreService {
             Cart cart = new Cart();
             cart.setTitle(store1.getTitle());
             cart.setContent(store1.getContent());
-            cart.setCreate_Date(LocalDateTime.now());
+            cart.setCreateDate(LocalDateTime.now());
             cart.setFilepath(store1.getFilepath());
             cart.setFilename(store1.getFilename());
             cart.setCategory(store1.getCategory());
-            cart.setStore(store1);
+//            cart.setStore(store1);
             this.cartRepository.save(cart);
         }
     }

@@ -3,9 +3,12 @@ package com.sbp.copyrightStreet.boundedContext.store;
 
 import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.cart.CartRepository;
+import com.sbp.copyrightStreet.boundedContext.file.File;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -62,11 +65,11 @@ public class StoreController {
         return "redirect:/copy/store";
     }
 
-    @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") Integer id) {
-        this.storeService.delete(id);
-        return "redirect:/copy/store";
-    }
+//    @GetMapping("/delete/{id}")
+//    public String delete(@PathVariable("id") Integer id) {
+//        this.storeService.delete(id);
+//        return "redirect:/copy/store";
+//    }
 
 
 
