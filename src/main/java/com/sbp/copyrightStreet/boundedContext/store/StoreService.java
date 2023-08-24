@@ -1,21 +1,26 @@
 package com.sbp.copyrightStreet.boundedContext.store;
 
 
+import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
 import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.cart.CartRepository;
 import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import com.sbp.copyrightStreet.boundedContext.home.controller.DataNotFoundException;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
+import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -49,10 +54,24 @@ public class StoreService {
         this.storeRepository.save(store);
     }
 
+    private Specification<Store> search(String kw) {
+        return new Specification<Store>() {
+            @Override
+            public Predicate toPredicate(Root<Store> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+                query.distinct(true);
+                return cb.like(root.get("title"), "%" + kw + "%");
+            }
+        };
+    }
+
 
     public Page<Store> getList(int page, String kw) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("create_Date"));
+
         Pageable pageable = PageRequest.of(page, 3); // page 값 1 감소
-        return this.storeRepository.findAll(pageable);
+        Specification<Store> spec = search(kw);
+        return this.storeRepository.findAll(spec,pageable);
     }
 
     public Store getStore(Integer id) {

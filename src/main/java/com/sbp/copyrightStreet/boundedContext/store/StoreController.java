@@ -38,11 +38,7 @@ public class StoreController {
         model.addAttribute("kw", kw);
         return "store/list";
     }
-    @GetMapping("/copy/list")
-    public String list(){
 
-        return "store/list";
-    }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
@@ -83,6 +79,8 @@ public class StoreController {
         this.storeService.modify(id, title, content, category, file);
         return "redirect:/store/list";
     }
+
+
 
     @GetMapping("/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
