@@ -6,25 +6,31 @@
 <body>
 <main layout:fragment="main">
 
-    <div class="my-3">
-        <a th:href="@{|/board/modify/${board.id}|}"
-           th:text="수정"></a>
-        <a href="javascript:void(0);" th:data-uri="@{|/board/delete/${board.id}|}"
-           th:text="삭제"></a>
-    </div>
+        <a th:href="@{|/board/modify/${board.id}|}" sec:authorize="isAuthenticated()" th:if="${board.author !=null and #authentication.getPrincipal().getUsername == board.author.username}">수정</a>
+        <a th:href="@{|/board/delete/${board.id}|}" sec:authorize="isAuthenticated()" th:if="${board.author !=null and #authentication.getPrincipal().getUsername == board.author.username}">삭제</a>
+    <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+    <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td>
+
+
 
     <h3 th:text="${board.title}"></h3>
     <p th:text="${board.content}"></p>
 
     <h5 th:text="|${#lists.size(board.commentList)}개의 답변이 있습니다.|"></h5>
     <div>
-        <ul>
-            <li th:each="comment : ${board.commentList}" th:text="${comment.content}"></li>
+        <ul th:each="comment : ${board.commentList}">
+            <div>답변내용<li  th:text="${comment.content}"></li></div>
+            <td>답변 작성자 : <span th:if="${comment.author != null}" th:text="${comment.author.username}"></span></td>
+            <div>답변 작성 일자 : <div th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></div></div>
+
+            <a th:href="@{|/comment/delete/${comment.id}|}" sec:authorize="isAuthenticated()" th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}">댓글 삭제</a>
+
+
         </ul>
     </div>
     <div class="p-1 bg-dark text-white" th:text="${board.category}"></div>
     <form th:action="@{|/comment/create/${board.id}|}" method="post">
-        <textarea name="content" id="content" rows="15"></textarea>
+        <textarea name="content" id="content"></textarea>
         <input type="submit" value="답변등록">
     </form>
 

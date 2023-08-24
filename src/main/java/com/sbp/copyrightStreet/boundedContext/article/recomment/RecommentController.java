@@ -23,17 +23,17 @@ public class RecommentController {
     private final CommentService commentService;
     private final RecommentService recommentService;
 
-    @PostMapping("/create/{id}")
-    public String createRecomment(Model model, @PathVariable("id") Integer id, @Valid RecommentForm recommentForm, BindingResult bindingResult, Principal principal){
-
-        Comment comment = this.commentService.getComment(id);
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("comment", comment);
-            return "board/detail";
-        }
-        this.commentService.create(comment.getBoard(), recommentForm.getRecomment());
-        return String.format("redirect:/board/detail/%s#comment_%s",
-                comment.getBoard().getId(), comment.getId());
-    }
+//    @PostMapping("/create/{id}")
+//    public String createRecomment(Model model, @PathVariable("id") Integer id, @Valid RecommentForm recommentForm, BindingResult bindingResult, Principal principal){
+//
+//        Comment comment = this.commentService.getComment(id);
+//
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("comment", comment);
+//            return "board/detail";
+//        }
+//        this.commentService.create(comment.getBoard(), recommentForm.getRecomment());
+//        return String.format("redirect:/board/detail/%s#comment_%s",
+//                comment.getBoard().getId(), comment.getId());
+//    }
 }
