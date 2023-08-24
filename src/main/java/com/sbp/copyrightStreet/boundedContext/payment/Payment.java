@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.payment;
 
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -25,13 +26,16 @@ public class Payment {
     private Long amount;   //가격 basic:15000, primium:29000, pro:49000
 
     @Column(nullable = false)
-    private String orderNum; //주문번호
+    private String orderNum; //주문번호 <-orderId
 
-    @Column(nullable = false)
-    private String orderName;  //상품이름
+    @Column
+    private String orderName;  //라이센스이름
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
     private LocalDateTime paymentDate;  // 결제날짜
 
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member; // member 객체와 다:1 관계
 }

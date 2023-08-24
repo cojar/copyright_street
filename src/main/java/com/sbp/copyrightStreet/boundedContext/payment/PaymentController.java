@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -26,31 +24,26 @@ public class PaymentController {
 
     @Value("${payment.secretKey}")
     private String paymentSecretKey;
+
     private final PaymentService paymentService;
     private final MemberService memberService;
-
-    @GetMapping("/detail")
-    public String detail(Model model, JSONObject jsonObject, String orderId){
-        Payment savedPayment = paymentService.savePayment(jsonObject);
-        model.addAttribute("paymentInfo", savedPayment);     //db에 결제 정보 저장
-        model.addAttribute("payment.orderNum", savedPayment.getOrderNum());
-
-        Member member = this.memberService.getUserByLoginId(orderId);
-        model.addAttribute("payment.customerName", member.getUsername());
-        return "membership/detail";
-    }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/success")
     public String paymentResult(
             Model model,
-            @RequestParam(value = "orderId") String orderId,
-            @RequestParam(value = "amount") Integer amount,
-            @RequestParam(value = "paymentKey") String paymentKey) throws Exception {
+            @RequestParam String orderId,
+            @RequestParam Integer amount,
+            @RequestParam String paymentKey) throws Exception {
 
         Base64.Encoder encoder = Base64.getEncoder();
-        byte[] encodedBytes = encoder.encode(paymentSecretKey.getBytes("UTF-8"));
-        String authorizations = "Basic " + new String(encodedBytes, 0, encodedBytes.length);
+        byte[] encodedBytes = encoder.encode(paymentSecretKey.getBytes(StandardCharsets.UTF_8));
+        String authorizations = "Basic  " + new String(encodedBytes, StandardCharsets.UTF_8);
+
+//        String authorizations = "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSICsgOg==";
+
+
+
 
         URL url = new URL("https://api.tosspayments.com/v1/payments/" + paymentKey);
 
@@ -62,6 +55,7 @@ public class PaymentController {
         JSONObject obj = new JSONObject();
         obj.put("orderId", orderId);
         obj.put("amount", amount);
+
 
         OutputStream outputStream = connection.getOutputStream();
         outputStream.write(obj.toString().getBytes("UTF-8"));
@@ -80,8 +74,11 @@ public class PaymentController {
         model.addAttribute("responseStr", jsonObject.toJSONString());
         System.out.println(jsonObject.toJSONString());
 
+        model.addAttribute("amount",(Integer) jsonObject.get("amount"));
         model.addAttribute("method", (String) jsonObject.get("method"));
         model.addAttribute("orderName", (String) jsonObject.get("orderName"));
+        model.addAttribute("orderId",(String) jsonObject.get("orderId"));
+
 
         if (((String) jsonObject.get("method")) != null) {
             if (((String) jsonObject.get("method")).equals("카드")) {
@@ -98,8 +95,42 @@ public class PaymentController {
             model.addAttribute("message", (String) jsonObject.get("message"));
         }
 
+
+        // 결제 정보를 데이터베이스에 저장
+        Payment payment = this.paymentService.savePayment(jsonObject);
+        //저장된 결제정보를 모델에 추가
+
+
+//        Long pId = 1;
+//        String title = "123";
+//
+//        this.paymentService.save(pId, title);
+
         return "membership/success";
     }
+
+    //결제 정보 상세
+//    @GetMapping("/detail")
+//    public String detail(Model model,
+//                         @RequestParam String method,
+//                         @RequestParam Long amount,
+//                         @RequestParam String orderId,
+//                         @RequestParam String orderName) {
+//
+//        // 결제 정보를 JSON 객체에 저장
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put("method", method);
+//        jsonObject.put("amount", amount);
+//        jsonObject.put("orderId", orderId);
+//        jsonObject.put("orderName", orderName);
+//
+//        // 결제 정보를 데이터베이스에 저장
+//        Payment payment = this.paymentService.savePayment(jsonObject);
+//        //저장된 결제정보를 모델에 추가
+//        model.addAttribute("paymentInfo", payment);
+//
+//        return "redirect:/mypage/detail";
+//    }
 
     @GetMapping("/fail")
     public String paymentResult(

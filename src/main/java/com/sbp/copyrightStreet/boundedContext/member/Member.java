@@ -1,5 +1,6 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
+import com.sbp.copyrightStreet.boundedContext.payment.Payment;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -45,6 +46,8 @@ public class Member {
     @Column(unique = true)
     private String loginId;
 
+    @OneToMany(mappedBy = "member")
+    private List<Payment> payment = new ArrayList<>();  //payment 타입의 객체리스트에 1:다 관계
 
     @OneToOne // 1:1
 
