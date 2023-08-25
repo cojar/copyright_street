@@ -1,5 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
+
+import com.sbp.copyrightStreet.boundedContext.payment.Payment;
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
 import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.product.Product;
@@ -51,6 +53,10 @@ public class Member {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Cart> cartList;
+
+
+    @OneToMany(mappedBy = "member")
+    private List<Payment> payment = new ArrayList<>();  //payment 타입의 객체리스트에 1:다 관계
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Board> boardList;

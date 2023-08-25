@@ -37,11 +37,13 @@ public class PaymentController {
             @RequestParam String paymentKey) throws Exception {
 
         Base64.Encoder encoder = Base64.getEncoder();
-        byte[] encodedBytes = encoder.encode(paymentSecretKey.getBytes(StandardCharsets.UTF_8));
-        String authorizations = "Basic  " + new String(encodedBytes, StandardCharsets.UTF_8);
 
-//        String authorizations = "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSICsgOg==";
+        String authString = paymentKey + ":" + paymentSecretKey;
+        byte[] encodedBytes = encoder.encodeToString(authString.getBytes(StandardCharsets.UTF_8)).getBytes();
+        String authorizations = "Basic " + new String(encodedBytes, 0, encodedBytes.length);
 
+//      String authorizations = "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSICsgOg==";
+//        Authorization: Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSICsgOg==
 
 
 
@@ -74,10 +76,11 @@ public class PaymentController {
         model.addAttribute("responseStr", jsonObject.toJSONString());
         System.out.println(jsonObject.toJSONString());
 
-        model.addAttribute("amount",(Integer) jsonObject.get("amount"));
+
         model.addAttribute("method", (String) jsonObject.get("method"));
         model.addAttribute("orderName", (String) jsonObject.get("orderName"));
-        model.addAttribute("orderId",(String) jsonObject.get("orderId"));
+        model.addAttribute("orderId", (String) jsonObject.get("orderId"));
+        model.addAttribute("amount", (Integer) jsonObject.get("amount"));
 
 
         if (((String) jsonObject.get("method")) != null) {
@@ -99,12 +102,6 @@ public class PaymentController {
         // 결제 정보를 데이터베이스에 저장
         Payment payment = this.paymentService.savePayment(jsonObject);
         //저장된 결제정보를 모델에 추가
-
-
-//        Long pId = 1;
-//        String title = "123";
-//
-//        this.paymentService.save(pId, title);
 
         return "membership/success";
     }
@@ -133,17 +130,15 @@ public class PaymentController {
 //    }
 
     @GetMapping("/fail")
-    public String paymentResult(
-            Model model,
-            @RequestParam(value = "message") String message,
-            @RequestParam(value = "code") Integer code
-    ) throws Exception {
+
+    public String paymentResult(Model model,
+                                @RequestParam(value = "message") String message,
+                                @RequestParam(value = "code") Integer code) throws Exception {
 
         model.addAttribute("code", code);
         model.addAttribute("message", message);
 
         return "membership/fail";
     }
-
 
 }

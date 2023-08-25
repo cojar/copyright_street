@@ -6,192 +6,192 @@
 </head>
 
 <body>
-<main layout:fragment="main">
+    <main layout:fragment="main">
 
-    <div class="h-screen p-10">
-        <div class="p-2 max-w-screen-lg  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-            <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
-                <div class="px-6 py-8">
-                    <h3 class="text-3xl font-bold mb-4 text-purple-600">Basic</h3>
-                    <p class="text-lg text-gray-600 mb-8">BASIC 요금제 설명</p>
-                    <h2 amount="15,000" class="text-5xl font-bold mb-8 text-purple-600">15,000원</h2>
-                    <button onclick="paymentBasic();" id="payment-button-basic" orderName="Basic 요금제"
+        <div class="h-screen p-10">
+            <div class="p-2 max-w-screen-lg  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
+                    <div class="px-6 py-8">
+                        <h3 class="text-3xl font-bold mb-4 text-purple-600">Basic</h3>
+                        <p class="text-lg text-gray-600 mb-8">BASIC 요금제 설명</p>
+                        <h2 amount="15,000" class="text-5xl font-bold mb-8 text-purple-600">15,000원</h2>
+                        <button onclick="paymentBasic();" id="payment-button-basic" orderName="Basic 요금제"
                             class="bg-purple-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-purple-700 transition duration-300 ease-in-out">
-                        결제하기
-                    </button>
+                            결제하기
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
-                <div class="px-6 py-8">
-                    <h3 class="text-3xl font-bold mb-4 text-green-600">Premium</h3>
-                    <p class="text-lg text-gray-600 mb-8"> PRIMIUM 요금제 설명</p>
-                    <h2 amount="29,000" class="text-5xl font-bold mb-8 text-green-600">29,000원</h2>
-                    <button onclick="paymentPremium();" id="payment-button-premium" orderName="Premium 요금제"
+                <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
+                    <div class="px-6 py-8">
+                        <h3 class="text-3xl font-bold mb-4 text-green-600">Premium</h3>
+                        <p class="text-lg text-gray-600 mb-8"> PRIMIUM 요금제 설명</p>
+                        <h2 amount="29,000" class="text-5xl font-bold mb-8 text-green-600">29,000원</h2>
+                        <button onclick="paymentPremium();" id="payment-button-premium" orderName="Premium 요금제"
                             class="bg-green-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-green-700 transition duration-300 ease-in-out">
-                        결제하기
-                    </button>
+                            결제하기
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
-                <div class="px-6 py-8">
-                    <h3 class="text-3xl font-bold mb-4 text-yellow-600">Pro</h3>
-                    <p class="text-lg text-gray-600 mb-8">PRO 요금제 설명</p>
-                    <h2 amount="49,000" class="text-5xl font-bold mb-8 text-yellow-600">49,000원</h2>
-                    <button onclick="paymentPro();" id="payment-button-pro" orderName="Pro 요금제"
+                <div class="outline outline-gray-200 rounded-lg overflow-hidden shadow-md bg-white">
+                    <div class="px-6 py-8">
+                        <h3 class="text-3xl font-bold mb-4 text-yellow-600">Pro</h3>
+                        <p class="text-lg text-gray-600 mb-8">PRO 요금제 설명</p>
+                        <h2 amount="49,000" class="text-5xl font-bold mb-8 text-yellow-600">49,000원</h2>
+                        <button onclick="paymentPro();" id="payment-button-pro" orderName="Pro 요금제"
                             class="bg-yellow-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-yellow-700 transition duration-300 ease-in-out">
-                        결제하기
-                    </button>
+                            결제하기
+                        </button>
+                    </div>
+
                 </div>
 
-            </div>
-
-            <!-- 라이센스 제공 기능안내 시작 -->
-            <div class="grid col-start-1 col-end-4">
-                <div>
-                    <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
-                        <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
-                            <table class="min-w-full leading-normal">
-                                <thead>
-                                <tr class="text text-center font font-bold">
-                                    <th scope="col"
-                                        class="px-5 py-3 text-sm font-bold text-left text-gray-800 uppercase bg-white border-b border-gray-300">
-                                        요금제별 제공기능
-                                    </th>
-                                    <th scope="col"
-                                        class="px-5 py-3 text-sm font-bold text-left text-gray-700 uppercase bg-white border-b border-gray-300">
-                                        무료
-                                    </th>
-                                    <th scope="col"
-                                        class="px-5 py-3 text-sm font-bold text-left text-purple-600 uppercase bg-white border-b border-gray-300">
-                                        베이직
-                                    </th>
-                                    <th scope="col"
-                                        class="px-5 py-3 text-sm font-bold text-left text-green-600 uppercase bg-white border-b border-gray-300">
-                                        프리미엄
-                                    </th>
-                                    <th scope="col"
-                                        class="px-5 py-3 text-sm font-bold text-left text-yellow-600 uppercase bg-white border-b border-gray-300">
-                                        프로
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <div class="flex items-center">
-                                            <div class="ml-3">
+                <!-- 라이센스 제공 기능안내 시작 -->
+                <div class="grid col-start-1 col-end-4">
+                    <div>
+                        <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
+                            <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
+                                <table class="min-w-full leading-normal">
+                                    <thead>
+                                        <tr class="text text-center font font-bold">
+                                            <th scope="col"
+                                                class="px-5 py-3 text-sm font-bold text-left text-gray-800 uppercase bg-white border-b border-gray-300">
+                                                요금제별 제공기능
+                                            </th>
+                                            <th scope="col"
+                                                class="px-5 py-3 text-sm font-bold text-left text-gray-700 uppercase bg-white border-b border-gray-300">
+                                                무료
+                                            </th>
+                                            <th scope="col"
+                                                class="px-5 py-3 text-sm font-bold text-left text-purple-600 uppercase bg-white border-b border-gray-300">
+                                                베이직
+                                            </th>
+                                            <th scope="col"
+                                                class="px-5 py-3 text-sm font-bold text-left text-green-600 uppercase bg-white border-b border-gray-300">
+                                                프리미엄
+                                            </th>
+                                            <th scope="col"
+                                                class="px-5 py-3 text-sm font-bold text-left text-yellow-600 uppercase bg-white border-b border-gray-300">
+                                                프로
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <div class="flex items-center">
+                                                    <div class="ml-3">
+                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                            기본 제공 기능 </p>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-gray-600 whitespace-no-wrap">
+                                                    ✔️ </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-purple-600 whitespace-no-wrap">
+                                                    ✔️ </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-green-600 whitespace-no-wrap">
+                                                    ✔️ </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-yellow-600 whitespace-no-wrap">
+                                                    ✔️ </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <div class="flex items-center">
+                                                    <div class="ml-3">
+                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                            워터마크 제거 기능 </p>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-gray-600 whitespace-no-wrap">
+                                                    - </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-purple-600 whitespace-no-wrap">
+                                                    50개 </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-green-600 whitespace-no-wrap">
+                                                    ✔️ </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-yellow-600 whitespace-no-wrap">
+                                                    ✔️ </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <div class="flex items-center">
+                                                    <div class="ml-3">
+                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                            사진 다운로드 개수 (차감형) </p>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    기본 제공 기능 </p>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-600 whitespace-no-wrap">
-                                            ✔️ </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-purple-600 whitespace-no-wrap">
-                                            ✔️ </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-green-600 whitespace-no-wrap">
-                                            ✔️ </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-yellow-600 whitespace-no-wrap">
-                                            ✔️ </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <div class="flex items-center">
-                                            <div class="ml-3">
+                                                    30개 </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    워터마크 제거 기능 </p>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-600 whitespace-no-wrap">
-                                            - </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-purple-600 whitespace-no-wrap">
-                                            50개 </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-green-600 whitespace-no-wrap">
-                                            ✔️ </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-yellow-600 whitespace-no-wrap">
-                                            ✔️ </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <div class="flex items-center">
-                                            <div class="ml-3">
+                                                    200개 </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    사진 다운로드 개수 (차감형) </p>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            30개 </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            200개 </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            500개 </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            무제한 </p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <div class="flex items-center">
-                                            <div class="ml-3">
+                                                    500개 </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
                                                 <p class="text-gray-900 whitespace-no-wrap">
-                                                    동영상 다운로드 개수 (차감형) </p>
-                                            </div>
-                                        </div>
-                                    </th>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            - </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            100개 </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            200개 </p>
-                                    </td>
-                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
-                                        <p class="text-gray-900 whitespace-no-wrap">
-                                            무제한 </p>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                                    무제한 </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <div class="flex items-center">
+                                                    <div class="ml-3">
+                                                        <p class="text-gray-900 whitespace-no-wrap">
+                                                            동영상 다운로드 개수 (차감형) </p>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    - </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    100개 </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    200개 </p>
+                                            </td>
+                                            <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    무제한 </p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
-    <!-- 토스페이먼츠 결제창 SDK 추가 -->
-    <script src="https://js.tosspayments.com/v1"></script>
-    <script th:inline="javascript">
+        </div>
+        <!-- 토스페이먼츠 결제창 SDK 추가 -->
+        <script src="https://js.tosspayments.com/v1"></script>
+        <script th:inline="javascript">
             let orderId = new Date().getTime();
             let customerName = /*[[ ${member.username} ]]*/;
 
@@ -284,7 +284,7 @@
 
         </script>
 
-</main>
+    </main>
 
 </body>
 
