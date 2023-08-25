@@ -5,6 +5,17 @@
     <title>Title</title>
 </head>
 <body>
+    <div class="row my-3">
+        <div class="col-6">
+            <a th:href="@{/store/create}" class="btn btn-primary">스토어 등록하기</a>
+        </div>
+        <div class="col-6">
+            <div class="input-group">
+                <input type="text" id="search_kw" class="form-control" th:value="${kw}">
+                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
+            </div>
+        </div>
+    </div>
 <tr th:each="store,loop : ${paging}">
     <td th:text="${paging.getTotalElements - (paging.number * paging.size) - loop.index}"></td>
     <div>

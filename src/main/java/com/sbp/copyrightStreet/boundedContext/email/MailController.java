@@ -53,8 +53,6 @@ public class MailController {
 
         map.put("joinCode", joinCode);
 
-        System.out.println(map);
-
         return map;
     }
 

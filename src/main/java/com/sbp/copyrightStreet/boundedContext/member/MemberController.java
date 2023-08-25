@@ -2,8 +2,13 @@ package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.base.rq.Rq;
 import com.sbp.copyrightStreet.base.rsData.RsData;
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.cart.CartService;
+import com.sbp.copyrightStreet.boundedContext.store.Store;
+import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +21,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.core.Authentication;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/member") // 액션 URL의 공통 접두어
@@ -23,6 +30,9 @@ import java.security.Principal;
 public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
+    private final Member member;
+    private final CartService cartService;
+    private final StoreService storeService;
 
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
@@ -37,16 +47,20 @@ public class MemberController {
         if (bindingResult.hasErrors()) {
             for (int i = 0; i < bindingResult.getErrorCount(); i++) {
                 System.out.println(bindingResult.getAllErrors().get(i));
-            }
+            }//.
             return "member/join";
+            ///
         }
+
         if (!joinForm.getPassword().equals(joinForm.getPassword2())) {
             System.out.println("password confirm error");
             bindingResult.rejectValue("passwordCheck", "passwordInCorrect",
                     "입력한 비밀번호가 일치하지 않습니다.");
             return "member/join";
         }
+
         memberService.join(joinForm.getUsername(), joinForm.getLoginId(), joinForm.getPassword(), joinForm.getEmail(), joinForm.getPhoneNumber());
+
         redirectAttributes.addFlashAttribute("signupSuccess", true);
         return "redirect:/member/login";
     }
@@ -59,9 +73,15 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()") // 로그인 해야만 접속가능
     @GetMapping("/me") // 로그인 한 나의 정보 보여주는 페이지
-    public String showMe() {
-
+    public String showMe(Model model , Principal principal) {
+        Optional<Member> member =this.memberService.findByUsername(principal.getName());
+        List<Cart> cartList = this.cartService.getList(member.get());
+        List<Store> storeList = this.storeService.list(member.get());
+        model.addAttribute("cartList",cartList);
+        model.addAttribute("memberID",member.get().getId());
+        model.addAttribute("storeList",storeList);
         return "member/me";
+
     }
 
 
