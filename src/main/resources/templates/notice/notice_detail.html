@@ -12,9 +12,12 @@
     <div th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></div>
 
 
-    <a th:href="@{|/notice/modify/${notice.id}|}" >수정</a>
-    <a th:href="@{|/notice/delete/${notice.id}|}" >삭제</a>
+    <a th:href="@{|/notice/modify/${notice.id}|}" sec:authorize="hasRole('ADMIN')">수정</a>
+    <a th:href="@{|/notice/delete/${notice.id}|}" sec:authorize="hasRole('ADMIN')">삭제</a>
     <a th:href="@{|/notice/list|}">목록</a>
+
+    <a th:if="${previousNotice}" th:href="@{|/notice/detail/${previousNotice.id}|}">이전글</a>
+    <a th:if="${nextNotice}" th:href="@{|/notice/detail/${nextNotice.id}|}">다음글</a>
 </main>
 </body>
 </html>
