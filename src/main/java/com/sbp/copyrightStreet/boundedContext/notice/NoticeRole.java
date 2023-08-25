@@ -7,8 +7,9 @@ public enum NoticeRole {
     ADMIN("ROLE_ADMIN"),
     USER("ROLE_USER");
 
-    NoticeRole(String value){
+    NoticeRole(String value) {
         this.value = value;
     }
+
     private String value;
 }
