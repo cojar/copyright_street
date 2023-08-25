@@ -10,6 +10,7 @@
   <div class="container">
     <h1 class="t-text-[1.2rem] t-font-bold">장바구니</h1>
     <div class="t-mt-[10px] t-overflow-x-auto t-whitespace-nowrap">
+      <div><a href="/prodoct/list">돌아가기</a></div>
       <table class="table table-hover">
         <thead>
         <tr>
@@ -30,17 +31,16 @@
             <span th:text="@{|\ ${cart.product.price}|}"></span>
           </td>
           <td>
-            <a href="" type="button" class="btn btn-primary">구매</a>
-            <a href="#" type="button" class="btn btn-danger">삭제</a>
+            <a href="" type="button">구매</a>
+            <a href="#" type="button">삭제</a>
           </td>
         </tr>
         </tbody>
       </table>
+      <a href="" type="button" >결제하기</a>
+
     </div>
   </div>
-  <script th:inline="javascript">
-    var orderId = /*[[${new java.util.Date().getTime()}]]*/; // 현재 시간을 밀리초로 가져옴
-</script>
   <script src="https://js.tosspayments.com/v1"></script>
   <script th:inline="javascript">
     let tossPayments = TossPayments("test_ck_BX7zk2yd8yPdLKg2DnErx9POLqKQ"); // 테스트 클라이언트 키

@@ -21,7 +21,9 @@
           <div class="md:col-start-1 md:col-end-2">
             <img class="w-full max-w-[500px] h-full max-h-[500px] rounded ml-30" th:src="@{|/gen/${product.thumbnailImg}|}" alt="상품이미지">
           </div>
+
           <div class="list-group md:col-start-2 md:col-end-3">
+            <ul>
             <li class="list-group-item flex items-center">
               <span class="w-16 inline-block">번호</span>
               <span th:text="${product.id}" class="badge bg-mint">{{product.id}}</span>
@@ -47,24 +49,23 @@
             </li>
             <li class="list-group-item">
               <div class="card t-mt-[30px]">
-                <div class="card-header">
-                  장바구니 담기
-                </div>
+
                 <div class="card-body">
                   <form th:action="@{|/cart/add/${product.id}|}" method="POST">
-                    <input type="submit" value="장바구니 담기" class="btn btn-outline-success">
+                    <input type="submit" value="장바구니 담기" class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">
                   </form>
-                  <button  onclick="pay();" class="btn btn-outline-primary">결제</button>
+                  <button  onclick="pay();" class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">결제</button>
 
                 </div>
               </div>
             </li>
+          </ul>
           </div>
         </div>
       </div>
 
       <div class="card t-mt-[30px]">
-        <div class="card-header">
+        <div >
           질문등록
         </div>
 
@@ -79,7 +80,7 @@
                 <label for="content" class="form-label">내용</label>
                 <textarea name="content" id="content" class="form-control" rows="10"></textarea>
               </div>
-              <input type="submit" value="등록하기" class="btn btn-primary my-2">
+              <input type="submit" value="등록하기" class="btn btn-success my-2">
             </div>
           </form>
           <div class="t-text-gray-400" sec:authorize="isAnonymous()" >
