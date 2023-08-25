@@ -1,10 +1,8 @@
 package com.sbp.copyrightStreet.boundedContext.artist;
 
-import com.sbp.copyrightStreet.DataNotFoundException;
-import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;  // Import Log4j's Logger
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,11 +10,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
-import java.io.IOException;
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.List;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -24,13 +22,13 @@ import java.util.List;
 public class ArtistController {
     private final ArtistService artistService;
     private final MemberService memberService;
+    private static final Logger LOGGER = LogManager.getLogger(ArtistController.class);
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/register")
     public String register(Model model, ArtistCreateForm artistCreateForm, Principal principal) {
-        Member member = memberService.getUserByLoginId(principal.getName());
-        artistCreateForm.setUsername(member.getUsername());
-
+        String loggedInUsername = principal.getName();
+        artistCreateForm.setUsername(loggedInUsername);
         return "artist/form";
     }
 
@@ -38,25 +36,18 @@ public class ArtistController {
     @PostMapping("/register")
     public String register(Model model,
                            @Valid ArtistCreateForm artistCreateForm,
-                           BindingResult bindingResult, Principal principal) throws IOException {
+                           BindingResult bindingResult, Principal principal){
         if (bindingResult.hasErrors()) {
-            return "registration-page";
+            return "artist/form";
         }
 
-        String username = principal.getName();
-        Member memberInfo = memberService.getUserByLoginId(username);
-
-        if (memberInfo == null) {
-            model.addAttribute("error", "유효하지 않은 사용자 정보입니다.");
-            return "error-page";
-        }
-
-        Member email = memberService.getUserByEmail(memberInfo.getEmail());
-        Artist artist = artistService.create(memberInfo,
+        Artist artist = artistService.create(artistCreateForm.getUsername(),
                 artistCreateForm.getPhoneNumber(),
-                email,
+                artistCreateForm.getEmail(),
                 artistCreateForm.getIntroDetail());
 
-        return String.format("redirect:/member/%s", memberInfo.getId());
+            model.addAttribute("successArtistRegistration", true);
+        LOGGER.info("Artist registration successful: " + model.getAttribute("successArtistRegistration"));
+        return "redirect:/";
     }
 }

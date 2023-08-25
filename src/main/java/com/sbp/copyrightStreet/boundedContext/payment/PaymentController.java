@@ -37,12 +37,14 @@ public class PaymentController {
             @RequestParam String paymentKey) throws Exception {
 
         Base64.Encoder encoder = Base64.getEncoder();
+
         String authString = paymentKey + ":" + paymentSecretKey;
         byte[] encodedBytes = encoder.encodeToString(authString.getBytes(StandardCharsets.UTF_8)).getBytes();
         String authorizations = "Basic " + new String(encodedBytes, 0, encodedBytes.length);
 
 //      String authorizations = "Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSICsgOg==";
 //        Authorization: Basic dGVzdF9za196WExrS0V5cE5BcldtbzUwblgzbG1lYXhZRzVSICsgOg==
+
 
 
         URL url = new URL("https://api.tosspayments.com/v1/payments/" + paymentKey);
@@ -128,13 +130,15 @@ public class PaymentController {
 //    }
 
     @GetMapping("/fail")
-    public String paymentResult(Model model, @RequestParam(value = "message") String message, @RequestParam(value = "code") Integer code) throws Exception {
+
+    public String paymentResult(Model model,
+                                @RequestParam(value = "message") String message,
+                                @RequestParam(value = "code") Integer code) throws Exception {
 
         model.addAttribute("code", code);
         model.addAttribute("message", message);
 
         return "membership/fail";
     }
-
 
 }

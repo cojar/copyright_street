@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html layout:decorate="~{layout/layout.html}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:th="http://www.thymeleaf.org">
+<html layout:decorate="~{layout/layout.html}">
 
 <head>
     <title>작가등록</title>
@@ -8,29 +6,86 @@
 
 <body>
 
+
 <main layout:fragment="main">
+    <br>
+    <br>
+    <div class="component-title-bar container mx-auto">
+        <div class="section-article-write">
+            <div class="container mx-auto max-w-xl">
+                <div class="card bordered shadow-lg item-bt-1-not-last-child w-full p-5">
+                    <div class="card-title">
+                        <a href="javascript:history.back();" class="cursor-pointer">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                        <span>정보 입력</span>
+                    </div>
+                    <div class="px-3 py-5">
+                        <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post"
+                              class="grid form-type-1 mx-auto max-w-md p-5  bg-white">
+                            <!-- max-w-md 클래스 및 p-5 클래스 추가 -->
 
-    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post" class="p-10 flex flex-col gap-4">
-        <ul>
-            <li class="type">이름</li>
-            <li class="content">
-                <input type="text" th:value="${artistCreateForm.username}" disabled placeholder="이름을 입력해주세요.">
-                <input type="hidden" th:field="*{username}" placeholder="이름을 입력해주세요.">
-            </li>
-        </ul>
-        <ul>
-            <li class="type">번호</li>
-            <li class="content">
-                <input type="text" th:field="*{phoneNumber}" placeholder="연락처를 입력해주세요">
-            </li>
-        </ul>
-        <button id="btn-join-1" type="submit" class="btn btn-block btn-primary gap-1">
-            <i class="fa-solid fa-user-plus"></i>
-            <span>등록</span>
-        </button>
-    </form>
+                            <div class="form-control">
+                                <label class="form-label" for="username">이름</label>
+                                <input type="text" th:field="*{username}" class="input input-bordered w-1/2">
+                            </div>
+                            <br>
+                            <div class="form-control">
+                                <label class="form-label" for="phoneNumber">연락처</label>
+                                <input type="text" th:field="*{phoneNumber}" class="input input-bordered w-1/2">
+                            </div>
+                            <br>
+                            <div class="form-control">
+                                <label class="form-label" for="email">이메일</label>
+                                <input type="text" th:field="*{email}" class="input input-bordered w-1/2">
+                            </div>
+                            <br>
+                            <div class="form-control">
+                                <label class="form-label" for="email">포트폴리오</label>
+                                <input type="text" th:field="*{email}" class="input input-bordered">
+                            </div>
+                            <br>
+                            <div class="form-control">
+                                <label class="form-label" for="introDetail">간단한소개</label>
+                                <textarea name="introDetail" id="" cols="30" rows="4" type="text"
+                                          th:field="*{introDetail}" class="textarea textarea-bordered h-40"></textarea>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary btn-sm" style="width: 20%">등록</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
 </main>
+</div>
+$('input[type="file"].thumb-available').each(function(index, node) {
+const $node = $(node);
 
+$node.on('change', function () {
+const thumbSelector = $node.attr('data-thumb-selector');
+
+if (typeof (FileReader) != "undefined") {
+const evalStr = '$node.' + thumbSelector;
+var $imageHolder = eval(evalStr);
+$imageHolder.empty();
+
+var reader = new FileReader();
+reader.onload = function (e) {
+$("<img/>", {
+"src": e.target.result,
+"class": "max-w-sm block rounded border-2 border-gray-500"
+}).appendTo($imageHolder);
+}
+reader.readAsDataURL($(this)[0].files[0]);
+} else {
+alert("This browser does not support FileReader.");
+}
+});
+});
 </body>
 
 </html>

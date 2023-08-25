@@ -1,6 +1,5 @@
 package com.sbp.copyrightStreet.boundedContext.artist;
-import com.sbp.copyrightStreet.boundedContext.file.File;
-import com.nimbusds.openid.connect.sdk.claims.Address;
+
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -18,12 +17,11 @@ public class Artist {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @Column
+    private String username;
 
-    private Member username;
-
-    @OneToOne
-    private Member email;
+    @Column
+    private String email;
 
 
     private String phoneNumber;
@@ -32,9 +30,11 @@ public class Artist {
     @Column(columnDefinition = "TEXT")
     private String introDetail;
 
+    @OneToOne
+    private Member member;
 
-//    @Column
-//    private String portfolio; 파일업로드예정
+    @Column
+    private String portfolio;
 
     @CreatedDate
     private LocalDateTime createDate;

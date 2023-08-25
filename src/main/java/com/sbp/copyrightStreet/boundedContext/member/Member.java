@@ -1,14 +1,18 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
+
 import com.sbp.copyrightStreet.boundedContext.payment.Payment;
+import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.product.Product;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,8 +25,10 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor // @Builder 붙이면 이거 필수
 @EntityListeners(AuditingEntityListener.class) // @CreatedDate, @LastModifiedDate 작동하게 허용
 @ToString // 디버그를 위한
-@Entity // 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
+@Entity// 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
+@Component
 @Getter // 아래 필드에 대해서 전부다 게터를 만든다. private Long id; => public Long getId() { ... }
+@Setter
 public class Member {
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -35,20 +41,28 @@ public class Member {
     @Column(unique = true)
     private String username;
     private String password;
-
     @Column
     private String email;
-
-    private String birth;
-
     private String phoneNumber;
+
+    private String nickname;
 
     @Column(unique = true)
     private String loginId;
+//    private String userRole;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Cart> cartList;
+
 
     @OneToMany(mappedBy = "member")
     private List<Payment> payment = new ArrayList<>();  //payment 타입의 객체리스트에 1:다 관계
 
+    @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
+    private List<Board> boardList;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Product> productList;
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격

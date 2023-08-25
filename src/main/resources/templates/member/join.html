@@ -1,9 +1,7 @@
 <html layout:decorate="~{layout/layout.html}">
 
 <head>
-    <title>회원가입.</title>
-    <meta name="_csrf_header" th:content="${_csrf.headerName}">
-    <meta name="_csrf" th:content="${_csrf.token}">
+    <title>회원가입</title>
 </head>
 
 <body>
@@ -13,17 +11,17 @@
         function JoinForm__submit(form) {
             // username 이(가) 올바른지 체크
 
-            form.username.value = form.username.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
+            form.loginId.value = form.loginId.value.trim(); // 입력란의 입력값에 있을지 모르는 좌우공백제거
 
-            if (form.username.value.length == 0) {
+            if (form.loginId.value.length == 0) {
                 toastWarning('아이디를 입력해주세요.');
-                form.username.focus();
+                form.loginId.focus();
                 return;
             }
 
-            if (form.username.value.length < 4) {
+            if (form.loginId.value.length < 4) {
                 toastWarning('아이디를 4자 이상 입력해주세요.');
-                form.username.focus();
+                form.loginId.focus();
                 return;
             }
 
@@ -45,9 +43,9 @@
 
             form.submit(); // 폼 발송
         }
-
-
     </script>
+
+
 
 
     <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
@@ -55,6 +53,7 @@
             <input type="text" name="username" maxlength="30" placeholder="이름" class="input input-bordered">
         </div>
         <div>
+
             <input type="text" name="loginId" maxlength="30" placeholder="아이디" class="input input-bordered">
         </div>
 
@@ -87,6 +86,7 @@
   	</span>
         </div>
         <div>
+
         </div>
         <div>
             <input type="submit" value="회원가입" class="btn btn-primary">
@@ -97,6 +97,7 @@
 </body>
 
 </html>
+
 <script>
     var flag_dupl_mail = true; // 중복 메일 검사용
     var flag_dupl_use_mail = true; // 이메일 검사용
@@ -177,3 +178,4 @@
             });
         });
     </script>
+

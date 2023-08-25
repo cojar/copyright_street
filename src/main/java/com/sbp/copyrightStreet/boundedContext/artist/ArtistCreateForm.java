@@ -21,6 +21,8 @@ public class ArtistCreateForm {
     @NotEmpty
     private String phoneNumber;
 
+    private String email;
+
 //    @Column
 //    private String portfolio; 파일업로드예정
 

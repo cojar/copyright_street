@@ -9,10 +9,15 @@ import lombok.Setter;
 public class StoreForm {
 
     @NotEmpty
-    private String title;
+    private String title; // 상품이름
 
     @NotEmpty
-    private String content;
+    private String price;  // 상품가격
+
+    @NotEmpty
+    private String content; // 상품설명
+
+    private String category;
 
     @NotEmpty
     private String filepath;

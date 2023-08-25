@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>마이 페이지</title>
+</head>
+<body>
+<h1>마이 페이지</h1>
+<table>
+    <tr>
+        <td>UserId:</td>
+        <td th:text="${member.username}"></td>
+    </tr>
+    <tr>
+        <td>UserEmail:</td>
+        <td th:text="${member.email}"></td>
+    </tr>
+</table>
+
+
+<div>
+    <div>
+        <div class="title">개인정보 변경</div>
+        <hr>
+        <form action="/mypage/modifyPassword" method="Post">
+            <div class="password"> 기존 비밀번호</div>
+            <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password">
+            <div class="ps-title"> 비밀번호 변경</div>
+            <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password">
+            <div class="ps-check-title"> 비밀번호 변경 확인</div>
+            <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password">
+            <div id="passwordMatchMsg" style="display: none; color: red;"></div>
+            <button type="submit">변경하기</button>
+        </form>
+    </div>
+</div>
+
+<script>
+        const presentPWInput = document.getElementById("password");
+        const newPWInput = document.getElementById("newPW");
+        const newPW2Input = document.getElementById("newPW2");
+        const passwordMatchMsg = document.getElementById("passwordMatchMsg");
+
+        newPW2Input.addEventListener("input", function() {
+            const newPWValue = newPWInput.value;
+            const newPW2Value = newPW2Input.value;
+
+            if (newPWValue !== newPW2Value) {
+                passwordMatchMsg.textContent = "입력한 비밀번호가 일치하지 않습니다.";
+                passwordMatchMsg.style.display = "block";
+            } else {
+                passwordMatchMsg.textContent = "";
+                passwordMatchMsg.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
