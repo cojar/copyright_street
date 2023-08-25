@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.boundedContext.article.borad;
 
 import com.sbp.copyrightStreet.boundedContext.home.controller.DataNotFoundException;
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.criteria.CriteriaQuery;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -25,12 +26,13 @@ public class BoardService {
         return this.boardRepository.findAll();
     }
 
-    public void create(String title, String content, String category) {
+    public void create(String title, String content, String category, Member author) {
         Board b = new Board();
         b.setTitle(title);
         b.setContent(content);
         b.setCreateDate(LocalDateTime.now());
         b.setCategory(category);
+        b.setAuthor(author);
         this.boardRepository.save(b);
 
     }
@@ -54,9 +56,10 @@ public class BoardService {
         return this.boardRepository.findAll(pageable);
     }
 
-    public void modify(Board board, String title, String content) {
+    public void modify(Board board, String title, String content, String category) {
         board.setTitle(title);
         board.setContent(content);
+        board.setCategory(category);
         board.setModifyDate(LocalDateTime.now());
         this.boardRepository.save(board);
     }
