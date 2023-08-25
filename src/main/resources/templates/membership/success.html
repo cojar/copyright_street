@@ -2,23 +2,16 @@
 <html layout:decorate="~{layout/layout.html}">
 
 <head>
-    <title>주문 결제성공</title>
+  <title>주문 결제성공</title>
 </head>
 
 <body>
 <main layout:fragment="main">
-    <section class="section section-payment-fail container mx-auto">
-        <div>
-            주문 결제 성공
-        </div>
-
-        <div>
-            주문번호 : [[${orderId}]]
-        </div>
-
-        <div>[[${message}]]</div>
-        <div>[[${code}]]</div>
-    </section>
+  <section class="section section-payment-fail container mx-auto">
+    <th:block th:if="${#strings.equals(isSuccess, 'true')}">
+      <h1>결제 성공</h1>
+    </th:block>
+  </section>
 </main>
 </body>
 </html>
