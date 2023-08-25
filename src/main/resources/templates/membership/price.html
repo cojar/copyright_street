@@ -1,83 +1,12 @@
+<!DOCTYPE html>
 <html layout:decorate="~{layout/layout.html}">
 
 <head>
     <script src="https://cdn.tailwindcss.com/3.1.4"></script>
-
 </head>
 
 <body>
-
 <main layout:fragment="main">
-
-    <!-- 토스페이먼츠 결제창 SDK 추가 -->
-    <script src="https://js.tosspayments.com/v1/payment"></script>
-
-    <script th:inline="javascript">
-        const orderId = /*[[ ${payment.orderId} ]]*/ null;
-        const customerName = /*[[ ${payment.customerName} ]]*/ null;
-        const customerEmail = /*[[ ${payment.customerEmail} ]]*/ null;
-        const orderName = /*[[ ${payment.orderName} ]]*/ null;
-        const createDate = /*[[ ${payment.createDate} ]]*/ null;
-        const paySuccessYn = null;
-
-    </script>
-
-    <script>
-            const clientKey = 'test_ck_qLlDJaYngroEyp7RMDx3ezGdRpXx';
-
-            // ------  결제위젯 초기화 ------
-            const tossPayments = TossPayments(clientKey); // 회원 결제
-            function paymentBasic() {
-                tossPayments
-                    .requestPayment("카드", {
-                        amount: 15000,
-                        orderId: "order__" + orderId,
-                        orderName: "Basic 요금제",
-                        successUrl: "http://localhost:8020/success",
-                        failUrl: "http://localhost:8020/fail",
-                        customerEmail: customerEmail,
-                        customerName: customerName,
-                        createDate: createDate,
-                        paySuccessYn: paySuccessYn
-                    })
-                    .catch(handlePaymentError);
-            }
-            function paymentPremium() {
-                tossPayments
-                    .requestPayment("카드", {
-                        amount: 29000,
-                        orderId: "order__" + orderId,
-                        orderName: "Premium 요금제",
-                        successUrl: "http://localhost:8020/success",
-                        failUrl: "http://localhost:8020/fail",
-                        customerEmail: customerEmail,
-                        customerName: customerName
-                    })
-                    .catch(handlePaymentError);
-            }
-            function paymentPro() {
-                tossPayments
-                    .requestPayment("카드", {
-                        amount: 49000,
-                        orderId: "order__" + orderId,
-                        orderName: "Pro 요금제",
-                        successUrl: "http://localhost:8020/success",
-                        failUrl: "http://localhost:8020/fail",
-                        customerEmail: customerEmail,
-                        customerName: customerName,
-                    })
-                    .catch(handlePaymentError);
-            }
-
-            function handlePaymentError(error) {
-                if (error.code === 'USER_CANCEL') {
-                    // 결제 고객이 결제창을 닫았을 때 에러 처리
-                } else if (error.code === 'INVALID_CARD_COMPANY') {
-                    // 유효하지 않은 카드 코드에 대한 에러 처리
-                }
-            }
-
-    </script>
 
     <div class="h-screen p-10">
         <div class="p-2 max-w-screen-lg  mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
@@ -97,7 +26,6 @@
                     <h3 class="text-3xl font-bold mb-4 text-green-600">Premium</h3>
                     <p class="text-lg text-gray-600 mb-8"> PRIMIUM 요금제 설명</p>
                     <h2 amount="29,000" class="text-5xl font-bold mb-8 text-green-600">29,000원</h2>
-
                     <button onclick="paymentPremium();" id="payment-button-premium" orderName="Premium 요금제"
                             class="bg-green-600 text-white py-2 px-4 rounded-lg text-lg hover:bg-green-700 transition duration-300 ease-in-out">
                         결제하기
@@ -117,11 +45,247 @@
 
             </div>
 
+            <!-- 라이센스 제공 기능안내 시작 -->
+            <div class="grid col-start-1 col-end-4">
+                <div>
+                    <div class="px-4 py-4 -mx-4 overflow-x-auto sm:-mx-8 sm:px-8">
+                        <div class="inline-block min-w-full overflow-hidden rounded-lg shadow">
+                            <table class="min-w-full leading-normal">
+                                <thead>
+                                <tr class="text text-center font font-bold">
+                                    <th scope="col"
+                                        class="px-5 py-3 text-sm font-bold text-left text-gray-800 uppercase bg-white border-b border-gray-300">
+                                        요금제별 제공기능
+                                    </th>
+                                    <th scope="col"
+                                        class="px-5 py-3 text-sm font-bold text-left text-gray-700 uppercase bg-white border-b border-gray-300">
+                                        무료
+                                    </th>
+                                    <th scope="col"
+                                        class="px-5 py-3 text-sm font-bold text-left text-purple-600 uppercase bg-white border-b border-gray-300">
+                                        베이직
+                                    </th>
+                                    <th scope="col"
+                                        class="px-5 py-3 text-sm font-bold text-left text-green-600 uppercase bg-white border-b border-gray-300">
+                                        프리미엄
+                                    </th>
+                                    <th scope="col"
+                                        class="px-5 py-3 text-sm font-bold text-left text-yellow-600 uppercase bg-white border-b border-gray-300">
+                                        프로
+                                    </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <div class="flex items-center">
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    기본 제공 기능 </p>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-600 whitespace-no-wrap">
+                                            ✔️ </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-purple-600 whitespace-no-wrap">
+                                            ✔️ </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-green-600 whitespace-no-wrap">
+                                            ✔️ </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-yellow-600 whitespace-no-wrap">
+                                            ✔️ </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <div class="flex items-center">
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    워터마크 제거 기능 </p>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-600 whitespace-no-wrap">
+                                            - </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-purple-600 whitespace-no-wrap">
+                                            50개 </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-green-600 whitespace-no-wrap">
+                                            ✔️ </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-yellow-600 whitespace-no-wrap">
+                                            ✔️ </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <div class="flex items-center">
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    사진 다운로드 개수 (차감형) </p>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            30개 </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            200개 </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            500개 </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            무제한 </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <div class="flex items-center">
+                                            <div class="ml-3">
+                                                <p class="text-gray-900 whitespace-no-wrap">
+                                                    동영상 다운로드 개수 (차감형) </p>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            - </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            100개 </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            200개 </p>
+                                    </td>
+                                    <td class="px-5 py-3 text-sm bg-white border-b border-gray-200">
+                                        <p class="text-gray-900 whitespace-no-wrap">
+                                            무제한 </p>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+    <!-- 토스페이먼츠 결제창 SDK 추가 -->
+    <script src="https://js.tosspayments.com/v1"></script>
+    <script th:inline="javascript">
+            let orderId = new Date().getTime();
+            let customerName = /*[[ ${member.username} ]]*/;
+
+            let tossPayments = TossPayments("test_ck_qLlDJaYngroEyp7RMDx3ezGdRpXx");
+
+            let path = "/payment/";
+            let successUrl = window.location.origin + path + "success";
+            let failUrl = window.location.origin + path + "fail";
+            let callbackUrl = window.location.origin + path + "va_callback";
+
+            function paymentBasic() {
+                const method = "카드";
+                const requestJson = {
+                    "amount": "15000",
+                    "orderId": orderId,
+                    "orderName": "베이직",
+                    "successUrl": successUrl,
+                    "failUrl": failUrl,
+                    "cardCompany": null,
+                    "cardInstallmentPlan": null,
+                    "maxCardInstallmentPlan": null,
+                    "useCardPoint": false,
+                    "customerName": customerName,
+                    "customerEmail": null,
+                    "customerMobilePhone": null,
+                    "taxFreeAmount": null,
+                    "useInternationalCardOnly": false,
+                    "flowMode": "DEFAULT",
+                    "discountCode": null,
+                    "appScheme": null
+                }
+                tossPayments.requestPayment(method, requestJson)
+            }
+            function paymentPremium() {
+                const method = "카드";
+                const requestJson = {
+                    "amount": "29000",
+                    "orderId": orderId,
+                    "orderName": "프리미엄",
+                    "successUrl": successUrl,
+                    "failUrl": failUrl,
+                    "customerName": customerName,
+                    "customerEmail": null,
+                    "customerMobilePhone": null,
+                    "taxFreeAmount": null,
+                    "useInternationalCardOnly": false,
+                    "flowMode": "DEFAULT",
+                    "discountCode": null,
+                    "appScheme": null
+                }
+                tossPayments.requestPayment(method, requestJson)
+            }
+            function paymentPro() {
+                const method = "카드";
+                const requestJson = {
+                    "amount": "49000",
+                    "orderId": orderId,
+                    "orderName": "프로",
+                    "successUrl": successUrl,
+                    "failUrl": failUrl,
+                    "cardCompany": null,
+                    "cardInstallmentPlan": null,
+                    "maxCardInstallmentPlan": null,
+                    "useCardPoint": false,
+                    "customerName": customerName,
+                    "customerEmail": null,
+                    "customerMobilePhone": null,
+                    "taxFreeAmount": null,
+                    "useInternationalCardOnly": false,
+                    "flowMode": "DEFAULT",
+                    "discountCode": null,
+                    "appScheme": null
+                }
+                tossPayments.requestPayment(method, requestJson)
+            }
+
+            function pay(method, requestJson) {
+                console.log(requestJson);
+                tossPayments.requestPayment(method, requestJson)
+                    .catch(function (error) {
+
+                        if (error.code === "USER_CANCEL") {
+                            alert('유저가 취소했습니다.');
+                        } else {
+                            alert(error.message);
+                        }
+
+                    });
+            }
+
+        </script>
 
 </main>
+
 </body>
 
 </html>

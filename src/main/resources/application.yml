@@ -3,11 +3,13 @@ server:
 spring:
   profiles:
     active: dev
+    include: secret
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/copyright_street?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: root
     password: 1234
+
   security:
     oauth2:
       client:
@@ -63,6 +65,7 @@ logging:
     cache: false #
 custom:
   genFileDirPath: C:\Users\chlrlqja\Pictures\genFile
-
+payment:
+  secretKey: test_ck_BX7zk2yd8yPdLKg2DnErx9POLqKQ
 
 

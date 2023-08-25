@@ -1,3 +1,4 @@
+
 <html layout:decorate="~{layout/layout.html}">
 
 <head>
@@ -23,7 +24,7 @@
         <tr th:each="cart : ${cartList}">
           <td><input type="checkbox"></td>
           <td><img class="t-w-[50px] t-h-[50px] sm:t-w-[150px] sm:t-h-[150px] t-object-cover rounded"
-                   width="100px" height="100px"  src="https://cdn.travie.com/news/photo/first/201710/img_19975_1.jpg" alt="상품이미지"></td>
+                   width="100px" height="100px"  th:src="@{|/gen/${cart.product.thumbnailImg}|}" alt="상품이미지"></td>
           <td th:text="${cart.product.name}"></td>
           <td>
             <span th:text="@{|\ ${cart.product.price}|}"></span>
@@ -36,9 +37,46 @@
         </tbody>
       </table>
     </div>
-  </div>>
+  </div>
+  <script th:inline="javascript">
+    var orderId = /*[[${new java.util.Date().getTime()}]]*/; // 현재 시간을 밀리초로 가져옴
+</script>
+  <script src="https://js.tosspayments.com/v1"></script>
+  <script th:inline="javascript">
+    let tossPayments = TossPayments("test_ck_BX7zk2yd8yPdLKg2DnErx9POLqKQ"); // 테스트 클라이언트 키
+    let path = "/";
+    let successUrl = window.location.origin + path + "success";
+    let failUrl = window.location.origin + path + "fail";
+    let callbackUrl = window.location.origin + path + "va_callback";
+
+    function pay(amount, orderName, cartId) {
+        const method = "카드";
+        const requestJson = {
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": orderName,
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": "박토스",
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "useInternationalCardOnly": false,
+            "flowMode": "DEFAULT",
+            "discountCode": null,
+            "appScheme": null
+        };
+        tossPayments.requestPayment(method, requestJson);
+
+        // 클릭한 버튼이 어떤 row에 해당하는지 식별하여 추가적인 처리 가능
+        console.log("Clicked on Cart ID: " + cartId);
+    }
+</script>
 </main>
 </body>
 
 </html>
-
