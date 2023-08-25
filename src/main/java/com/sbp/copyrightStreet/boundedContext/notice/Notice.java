@@ -1,9 +1,9 @@
 package com.sbp.copyrightStreet.boundedContext.notice;
 
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
@@ -27,11 +27,18 @@ public class Notice {
     @Column(columnDefinition = "TEXT")
     private String content;// 내용
 
-    @Column
-    private String admin;// 작성자
+    @ManyToOne
+    private Member admin;// 작성자
 
     @CreatedDate
     private LocalDateTime createDate;//작성시간
 
     private int hitCount;//조회수
+
+    @Transient//JPA리포지터리를 사용할때 적용하는 어노테이션으로 데이터베이스에 저장되지 않고 일시적으로 사용하는 어노테이션
+    // 데이터베이스에 저장하려면 이 어노테이션을 사용하지 않아야 함
+    private Notice previous;
+    @Transient
+    private Notice next;
+
 }

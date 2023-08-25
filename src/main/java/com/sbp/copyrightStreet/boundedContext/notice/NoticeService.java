@@ -1,10 +1,18 @@
 package com.sbp.copyrightStreet.boundedContext.notice;
 
+import com.sbp.copyrightStreet.boundedContext.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,7 +20,7 @@ import java.util.Optional;
 public class NoticeService {
     private final NoticeRepository noticeRepository;
 
-    public void Create(String title, String content, String admin) {
+    public void Create(String title, String content, Member admin) {
         Notice notice = new Notice();
         notice.setTitle(title);
         notice.setContent(content);
@@ -20,8 +28,12 @@ public class NoticeService {
         notice.setAdmin(admin);
         this.noticeRepository.save(notice);
     }
-    public List<Notice> List() {
-        return this.noticeRepository.findAll();
+
+    public Page<Notice> getList(int page) {
+        List<Sort.Order> sorts = new ArrayList<>();
+        sorts.add(Sort.Order.desc("createDate"));
+        Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
+        return this.noticeRepository.findAll(pageable);
     }
 
     public Notice Detail(Integer id) {
@@ -35,11 +47,11 @@ public class NoticeService {
             return null;
         }
     }
-    public static void increaseHitCount() {
 
+    public static void increaseHitCount() {//조회수
     }
 
-    public void Modify(Notice notice,String title, String content) {
+    public void Modify(Notice notice, String title, String content) {
         notice.setTitle(title);
         notice.setContent(content);
         this.noticeRepository.save(notice);
@@ -49,5 +61,11 @@ public class NoticeService {
         this.noticeRepository.delete(notice);
     }
 
+    public Notice PreviousNotice(Integer id) {//이전글
+        return noticeRepository.findTopByIdLessThanOrderByIdDesc(id).orElse(null);
+    }
 
+    public Notice NextNotice(Integer id) {//다음글
+        return noticeRepository.findTopByIdGreaterThanOrderByIdAsc(id).orElse(null);
+    }
 }
