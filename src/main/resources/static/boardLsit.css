@@ -1,11 +1,11 @@
-
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  margin: 20px auto;
 }
 
-th, td {
+tr, th, td {
   padding: 10px;
   text-align: left;
   border-bottom: 1px solid #ddd;
@@ -28,23 +28,10 @@ a:hover {
   text-decoration: underline;
 }
 
-a.th-btn {
-  display: inline-block;
-  background-color: #007bff;
-  color: #fff;
-  padding: 8px 12px;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
 .d-flex.justify-content-center {
   display: flex;
   justify-content: center;
 }
-
-
-
-
 
 ul.pagination {
   display: flex;
@@ -82,9 +69,4 @@ ul.pagination li.disabled a {
   background-color: #f5f5f5;
   color: #ccc;
   border-color: #ddd;
-}
-
-.d-flex.justify-content-center {
-  display: flex;
-  justify-content: center;
 }
