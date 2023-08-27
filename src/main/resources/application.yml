@@ -63,6 +63,6 @@ logging:
     cache: false #
 custom:
   genFileDirPath: C:\Users\gim15\Pictures\genFIle
-
-
+payment:
+  secretKey: 'securetKey'
 
