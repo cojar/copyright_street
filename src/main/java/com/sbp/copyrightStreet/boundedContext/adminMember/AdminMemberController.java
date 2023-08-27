@@ -22,7 +22,7 @@ public class AdminMemberController {
 
     @GetMapping("/memberList")
     public String list(Model model) {
-        List<Member> memberList = this.memberService.getList();
+        List<Member> memberList = this.memberService.getAll();
         model.addAttribute("memberList", memberList);
 
         return "adm/member/list";

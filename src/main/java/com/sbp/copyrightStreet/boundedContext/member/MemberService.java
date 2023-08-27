@@ -104,7 +104,12 @@ public class MemberService {
         }
         return passwordEncoder.matches(password, member.getPassword());
     }
-
-
-
+    public List<Member> getAll() {
+        return this.memberRepository.findAll();
+    }
+    public void updateProfileImage(String username, String imageUrl) {
+        Member member = getUser(username);
+//            member.setProfileImage(imageUrl);
+        memberRepository.save(member);
+    }
 }
