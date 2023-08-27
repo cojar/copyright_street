@@ -9,12 +9,11 @@
 <table>
   <tr>
     <th>NO.</th>
-    <th>username</th>
-    <th>Emain</th>
-    <th>Phone</th>
+    <th>상품명</th>
+    <th>가격</th>
   </tr>
-  <tr th:each="cart : ${cartList}">
-    <td th:text="${cart.id}">NO.</td>
+  <tr th:each="cart : ${cartListo}">
+    <td th:text="${cart.product.id}">NO.</td>
     <td th:text="${cart.product.name}"></td>
     <td th:text="${cart.product.price}"></td>
   </tr>

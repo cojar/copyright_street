@@ -15,7 +15,8 @@
   </tr>
   <tr th:each="artist : ${artistList}">
     <td th:text="${artist.id}">NO.</td>
-    <td><a th:href="@{/admin/artistList/create}">${artist.username}</a>
+    <td> <a th:href="@{/adm/artistList/create/{id}(id=${artist.id})}" th:text="${artist.username}"></a>
+
     </td>
     <td th:text="${artist.email}"></td>
     <td th:text="${artist.phoneNumber}"></td>

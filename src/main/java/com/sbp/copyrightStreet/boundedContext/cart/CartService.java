@@ -43,4 +43,9 @@ public class CartService {
     public List<Cart> getAll() {
         return this.cartRepository.findAll();
     }
+
+    public List<Cart> getCartItemsByMemberId(Long id) {
+        return cartRepository.findByMemberId(id);
+
+    }
 }

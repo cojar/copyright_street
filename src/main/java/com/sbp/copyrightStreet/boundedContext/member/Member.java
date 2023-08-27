@@ -31,7 +31,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @Setter
 public class Member {
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @CreatedDate // 아래 칼럼에는 값이 자동으로 들어간다.(INSERT 할 때)
     private LocalDateTime createDate;
@@ -46,7 +46,6 @@ public class Member {
     private String phoneNumber;
 
     private String nickname;
-
     @Column(unique = true)
     private String loginId;
 //    private String userRole;
@@ -54,15 +53,15 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Cart> cartList;
 
-
     @OneToMany(mappedBy = "member")
-    private List<Payment> payment = new ArrayList<>();  //payment 타입의 객체리스트에 1:다 관계
+    private List<Payment> payment;  //payment 타입의 객체리스트에 1:다 관계
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.REMOVE)
     private List<Board> boardList;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Product> productList;
+
     @OneToOne // 1:1
 
     // 이 함수 자체는 만들어야 한다. 스프링 시큐리티 규격

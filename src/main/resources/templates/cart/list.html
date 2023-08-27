@@ -37,7 +37,7 @@
 <!--              justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">-->
 <!--                결제-->
 <!--              </button>-->
-              <button type="button" class="px-4 py-1 text-sm" th:attr="onclick=|pay('${cart.product.price}', '${cart.product.name}')|">바로구매</button>
+<!--              <button type="button" class="px-4 py-1 text-sm" th:attr="onclick=|pay('${cart.product.price}', '${cart.product.name}')|">바로구매</button>-->
               <a href="#" type="button">삭제</a>
             </td>
           </tr>
@@ -48,40 +48,40 @@
     </div>
   </section>
 </main>
-<button type="button" class="px-4 py-1 text-sm" th:attr="onclick=|pay('${cart.product.price}', '${cart.product.name}')|">바로구매</button>
-<script layout:fragment="script" type="text/javascript"></script>
-<script th:inline="javascript">
-    let tossPayments = TossPayments("test_ck_oeqRGgYO1r50AM42j4oVQnN2Eyaz"); // 테스트 클라언트 키
-    let path = "/";
-    let successUrl = window.location.origin + path + "success";
-    let failUrl = window.location.origin + path + "fail";
-    let callbackUrl = window.location.origin + path + "va_callback";
-    let orderId = new Date().getTime();
+<!--<button type="button" class="px-4 py-1 text-sm" th:attr="onclick=|pay('${cart.product.price}', '${cart.product.name}')|">바로구매</button>-->
+<!--<script layout:fragment="script" type="text/javascript"></script>-->
+<!--<script th:inline="javascript">-->
+<!--    let tossPayments = TossPayments("test_ck_oeqRGgYO1r50AM42j4oVQnN2Eyaz"); // 테스트 클라언트 키-->
+<!--    let path = "/";-->
+<!--    let successUrl = window.location.origin + path + "success";-->
+<!--    let failUrl = window.location.origin + path + "fail";-->
+<!--    let callbackUrl = window.location.origin + path + "va_callback";-->
+<!--    let orderId = new Date().getTime();-->
 
-    function pay(amount,orderName) {
-        const method = "카드";
-        const requestJson = {
-            "amount": amount,
-            "orderId": "sample-" + orderId,
-            "orderName": orderName,
-            "successUrl": successUrl,
-            "failUrl": failUrl,
-            "cardCompany": null,
-            "cardInstallmentPlan": null,
-            "maxCardInstallmentPlan": null,
-            "useCardPoint": false,
-            "customerName": "박토스",
-            "customerEmail": null,
-            "customerMobilePhone": null,
-            "taxFreeAmount": null,
-            "useInternationalCardOnly": false,
-            "flowMode": "DEFAULT",
-            "discountCode": null,
-            "appScheme": null
-        }
-        tossPayments.requestPayment(method, requestJson)
-    }
-</script>
+<!--    function pay(amount,orderName) {-->
+<!--        const method = "카드";-->
+<!--        const requestJson = {-->
+<!--            "amount": amount,-->
+<!--            "orderId": "sample-" + orderId,-->
+<!--            "orderName": orderName,-->
+<!--            "successUrl": successUrl,-->
+<!--            "failUrl": failUrl,-->
+<!--            "cardCompany": null,-->
+<!--            "cardInstallmentPlan": null,-->
+<!--            "maxCardInstallmentPlan": null,-->
+<!--            "useCardPoint": false,-->
+<!--            "customerName": "박토스",-->
+<!--            "customerEmail": null,-->
+<!--            "customerMobilePhone": null,-->
+<!--            "taxFreeAmount": null,-->
+<!--            "useInternationalCardOnly": false,-->
+<!--            "flowMode": "DEFAULT",-->
+<!--            "discountCode": null,-->
+<!--            "appScheme": null-->
+<!--        }-->
+<!--        tossPayments.requestPayment(method, requestJson)-->
+<!--    }-->
+<!--</script>-->
 </body>
 
 

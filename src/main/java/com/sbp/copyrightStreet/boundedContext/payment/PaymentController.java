@@ -107,27 +107,27 @@ public class PaymentController {
     }
 
     //결제 정보 상세
-//    @GetMapping("/detail")
-//    public String detail(Model model,
-//                         @RequestParam String method,
-//                         @RequestParam Long amount,
-//                         @RequestParam String orderId,
-//                         @RequestParam String orderName) {
-//
-//        // 결제 정보를 JSON 객체에 저장
-//        JSONObject jsonObject = new JSONObject();
-//        jsonObject.put("method", method);
-//        jsonObject.put("amount", amount);
-//        jsonObject.put("orderId", orderId);
-//        jsonObject.put("orderName", orderName);
-//
-//        // 결제 정보를 데이터베이스에 저장
-//        Payment payment = this.paymentService.savePayment(jsonObject);
-//        //저장된 결제정보를 모델에 추가
-//        model.addAttribute("paymentInfo", payment);
-//
-//        return "redirect:/mypage/detail";
-//    }
+    @GetMapping("/detail")
+    public String detail(Model model,
+                         @RequestParam String method,
+                         @RequestParam Long amount,
+                         @RequestParam String orderId,
+                         @RequestParam String orderName) {
+
+        // 결제 정보를 JSON 객체에 저장
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("method", method);
+        jsonObject.put("amount", amount);
+        jsonObject.put("orderId", orderId);
+        jsonObject.put("orderName", orderName);
+
+        // 결제 정보를 데이터베이스에 저장
+        Payment payment = this.paymentService.savePayment(jsonObject);
+        //저장된 결제정보를 모델에 추가
+        model.addAttribute("paymentInfo", payment);
+
+        return "redirect:/mypage/detail";
+    }
 
     @GetMapping("/fail")
 

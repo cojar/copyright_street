@@ -15,7 +15,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -62,10 +64,10 @@ public class AdminController {
         model.addAttribute("artistList", artistList);
         return "admin/artistList";
     }
-    @GetMapping("/artistList/create")
-    public String artistListCreate(Model model) {
-        List<Cart> cartList = this.cartService.getAll();
-        model.addAttribute("cartList", cartList);
+    @GetMapping("/artistList/create/{id}")
+    public String artistListCreate(@PathVariable Long id, Model model) {
+        List<Cart> cartListo = this.cartService.getCartItemsByMemberId(id);
+        model.addAttribute("cartListo", cartListo);
         return "admin/cartList";
     }
 }

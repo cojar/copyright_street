@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @SuperBuilder
+@AllArgsConstructor // @Builder 붙이면 이거 필수
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor
 public class Payment {
@@ -28,7 +29,7 @@ public class Payment {
     @Column(nullable = false)
     private String orderNum; //주문번호 <-orderId
 
-    @Column
+    @Column(nullable = false)
     private String orderName;  //라이센스이름
 
     @CreatedDate
@@ -36,6 +37,5 @@ public class Payment {
     private LocalDateTime paymentDate;  // 결제날짜
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
     private Member member; // member 객체와 다:1 관계
 }
