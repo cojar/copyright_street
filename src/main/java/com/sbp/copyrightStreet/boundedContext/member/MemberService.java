@@ -4,14 +4,22 @@
     import com.sbp.copyrightStreet.base.rsData.RsData;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
+    import org.springframework.data.domain.Page;
+    import org.springframework.data.domain.PageRequest;
+    import org.springframework.data.domain.Pageable;
+    import org.springframework.data.domain.Sort;
+    import org.springframework.data.jpa.domain.Specification;
     import org.springframework.security.crypto.password.PasswordEncoder;
     import org.springframework.stereotype.Service;
     import org.springframework.transaction.annotation.Transactional;
     import org.springframework.util.StringUtils;
 
     import java.time.LocalDateTime;
+    import java.util.ArrayList;
     import java.util.List;
     import java.util.Optional;
+
+    import static org.springframework.core.annotation.MergedAnnotations.search;
 
     @Slf4j
     @Service
@@ -104,8 +112,16 @@
             }
             return passwordEncoder.matches(password, member.getPassword());
         }
+        public List<Member> getList() {
+            return this.memberRepository.findAll();
+        }
 
 
+        public void delete(List<Integer> userIds){
+            this.memberRepository.deleteByIds(userIds);
+        }
 
         }
+
+
 
