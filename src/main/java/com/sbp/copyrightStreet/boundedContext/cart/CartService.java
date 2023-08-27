@@ -39,4 +39,8 @@ public class CartService {
     public List<Cart> getList(Member member) {
         return this.cartRepository.findByMember(member);
     }
+
+    public List<Cart> getAll() {
+        return this.cartRepository.findAll();
+    }
 }

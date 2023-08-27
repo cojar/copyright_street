@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>관리자 페이지</title>
+</head>
+<body>
+<h1>Artist</h1>
+<table>
+  <tr>
+    <th>NO.</th>
+    <th>username</th>
+    <th>Emain</th>
+    <th>Phone</th>
+  </tr>
+  <tr th:each="cart : ${cartList}">
+    <td th:text="${cart.id}">NO.</td>
+    <td th:text="${cart.product.name}"></td>
+    <td th:text="${cart.product.price}"></td>
+  </tr>
+</table>
+</body>
+</html>

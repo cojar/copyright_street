@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>관리자 페이지</title>
+</head>
+<body>
+<h1>Members</h1>
+<table>
+    <tr>
+        <th>NO.</th>
+        <th>loginId</th>
+        <th>username</th>
+        <th>Phone</th>
+    </tr>
+    <tr th:each="member : ${memberList}">
+        <td th:text="${member.id}">NO.</td>
+        <td th:text="${member.loginId}"></td>
+        <td th:text="${member.username}"></td>
+        <td th:text="${member.phoneNumber}"></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -67,4 +67,9 @@ public class ProductService {
             throw new RuntimeException("product not found");
         }
     }
+
+    public List<Product> getAll() {
+        return this.productRepository.findAll();
+
+    }
 }

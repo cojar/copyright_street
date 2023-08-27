@@ -26,6 +26,11 @@ public class ArtistService {
     }
 
     public boolean isRegistered(String username) {
+
         return this.artistRepository.findByUsername(username).isPresent();
+    }
+
+    public List<Artist> getAll() {
+       return this.artistRepository.findAll();
     }
 }
