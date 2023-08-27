@@ -1,0 +1,9 @@
+.content{
+  margin:10px;
+}
+.content> h1, div{
+  padding:10px;
+}
+a{
+  padding-left:10px;
+}
