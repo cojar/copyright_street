@@ -36,8 +36,7 @@ public class AdminMemberController {
     @GetMapping("/member/delete")
     @ResponseBody
     public List<Member> delete(@RequestParam(value = "userIds[]") List<Integer> userIds){
-        this.memberService.delete(userIds);
-        List<Member> memberList = this.memberService.getList();
+        List<Member> memberList = this.memberService.getAll();
         return memberList;
     }
 }
