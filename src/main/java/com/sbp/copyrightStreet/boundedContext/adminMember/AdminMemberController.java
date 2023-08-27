@@ -22,7 +22,7 @@ public class AdminMemberController {
 
     @GetMapping("/memberList")
     public String list(Model model) {
-        List<Member> memberList = this.memberService.getList();
+        List<Member> memberList = this.memberService.getAll();
         model.addAttribute("memberList", memberList);
 
         return "adm/member/list";
@@ -36,8 +36,8 @@ public class AdminMemberController {
     @GetMapping("/member/delete")
     @ResponseBody
     public List<Member> delete(@RequestParam(value = "userIds[]") List<Integer> userIds){
-        this.memberService.delete(userIds);
-        List<Member> memberList = this.memberService.getList();
+//        this.memberService.delete(userIds);
+        List<Member> memberList = this.memberService.getAll();
         return memberList;
     }
 }
