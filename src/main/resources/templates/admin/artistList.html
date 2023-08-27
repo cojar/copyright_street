@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>관리자 페이지</title>
+</head>
+<body>
+<h1>Artist</h1>
+<table>
+  <tr>
+    <th>NO.</th>
+    <th>username</th>
+    <th>Emain</th>
+    <th>Phone</th>
+  </tr>
+  <tr th:each="artist : ${artistList}">
+    <td th:text="${artist.id}">NO.</td>
+    <td><a th:href="@{/admin/artistList/create}">${artist.username}</a>
+    </td>
+    <td th:text="${artist.email}"></td>
+    <td th:text="${artist.phoneNumber}"></td>
+  </tr>
+</table>
+</body>
+</html>

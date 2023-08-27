@@ -29,4 +29,8 @@ public class ArtistService {
 
         return this.artistRepository.findByUsername(username).isPresent();
     }
+
+    public List<Artist> getAll() {
+       return this.artistRepository.findAll();
+    }
 }

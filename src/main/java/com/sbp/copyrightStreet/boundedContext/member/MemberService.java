@@ -11,6 +11,7 @@
     import org.springframework.util.StringUtils;
 
     import java.time.LocalDateTime;
+    import java.util.List;
     import java.util.Optional;
 
     @Slf4j
@@ -107,8 +108,11 @@
 
         public void updateProfileImage(String username, String imageUrl) {
             Member member = getUser(username);
-            member.setProfileImage(imageUrl);
+//            member.setProfileImage(imageUrl);
             memberRepository.save(member);
+        }
+        public List<Member> getAll() {
+            return this.memberRepository.findAll();
         }
     }
 
