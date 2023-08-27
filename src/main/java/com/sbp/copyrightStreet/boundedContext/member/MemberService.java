@@ -1,8 +1,7 @@
     package com.sbp.copyrightStreet.boundedContext.member;
 
-
+    import com.sbp.copyrightStreet.DataNotFoundException;
     import com.sbp.copyrightStreet.base.rsData.RsData;
-    import com.sbp.copyrightStreet.boundedContext.home.controller.DataNotFoundException;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
     import org.springframework.security.crypto.password.PasswordEncoder;
@@ -105,11 +104,19 @@
             }
             return passwordEncoder.matches(password, member.getPassword());
         }
+        public List<Member> getList() {
+            return this.memberRepository.findAll();
+        }
 
         public void updateProfileImage(String username, String imageUrl) {
             Member member = getUser(username);
 //            member.setProfileImage(imageUrl);
             memberRepository.save(member);
+
+        public void delete(List<Integer> userIds){
+            this.memberRepository.deleteByIds(userIds);
+        }
+
         }
         public List<Member> getAll() {
             return this.memberRepository.findAll();
