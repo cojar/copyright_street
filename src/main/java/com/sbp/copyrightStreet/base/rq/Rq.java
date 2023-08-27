@@ -1,6 +1,7 @@
 package com.sbp.copyrightStreet.base.rq;
 
 import com.sbp.copyrightStreet.base.rsData.RsData;
+import com.sbp.copyrightStreet.boundedContext.artist.ArtistService;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 
@@ -25,12 +26,14 @@ public class Rq {
     private final HttpSession session;
     private final User user;
     private Member member = null; // 레이지 로딩, 처음부터 넣지 않고, 요청이 들어올 때 넣는다.
+    private final ArtistService artistService;
 
-    public Rq(MemberService memberService, HttpServletRequest req, HttpServletResponse resp, HttpSession session) {
+    public Rq(MemberService memberService, HttpServletRequest req, HttpServletResponse resp, HttpSession session, ArtistService artistService) {
         this.memberService = memberService;
         this.req = req;
         this.resp = resp;
         this.session = session;
+        this.artistService = artistService;
 
         // 현재 로그인한 회원의 인증정보를 가져옴
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -39,6 +42,13 @@ public class Rq {
             this.user = (User) authentication.getPrincipal();
         } else {
             this.user = null;
+        }
+    }
+    public boolean isSuccessArtistRegistration() {
+        if(this.getMember() != null){
+        return this.artistService.isRegistered(this.getMember().getUsername());
+        }else{
+            return false;
         }
     }
 

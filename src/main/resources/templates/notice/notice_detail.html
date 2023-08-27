@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" layout:decorate="~{layout/layout.html}"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>notice_detail</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/notice/noticeDetail.css}">
+</head>
+<body>
+<main layout:fragment="main">
+    <div class=content>
+        <h1 th:text="${notice.title}"></h1>
+        <div th:text="${notice.content}"></div>
+        <div th:text="${#temporals.format(notice.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+
+
+        <a th:href="@{|/notice/modify/${notice.id}|}" sec:authorize="hasRole('ADMIN')">수정</a>
+        <a th:href="@{|/notice/delete/${notice.id}|}" sec:authorize="hasRole('ADMIN')">삭제</a>
+        <a th:href="@{|/notice/list|}">목록</a>
+
+        <a th:if="${previousNotice}" th:href="@{|/notice/detail/${previousNotice.id}|}">이전글</a>
+        <a th:if="${nextNotice}" th:href="@{|/notice/detail/${nextNotice.id}|}">다음글</a>
+    </div>
+</main>
+</body>
+</html>
+

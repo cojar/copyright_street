@@ -7,18 +7,18 @@ spring:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://127.0.0.1:3306/copyright_street?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
     username: root
-    password: 1234
+    password:
   security:
     oauth2:
       client:
         registration:
           kakao:
-            clientId: hashID
-            scope:
+            clientId: d242caacaeef4e7e50acc0b0df1bec34
+            scope: profile_nickname, account_email
             client-name: Kakao
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8020/login/oauth2/code/kakao
-            client-authentication-method: POST
+            client-authentication-method: client_secret_post
         provider:
           kakao:
             authorization-uri: https://kauth.kakao.com/oauth/authorize
@@ -33,10 +33,35 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
+
 logging:
   level:
     root: INFO
     com.sbp.copyrightStreet: DEBUG
     org.hibernate.orm.jdbc.bind: TRACE
     org.hibernate.orm.jdbc.extract: TRACE
+
+  mail:
+    # Google smtp server 사용
+    host: smtp.gmail.com
+    port: 587
+    username: soone4704@gmail.com #앱 비밀번호 발급받은 google 계정
+    password: krjpynplmioubwox #발급받은 앱 비밀번호
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+          auth: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false #
+custom:
+  genFileDirPath: C:\Users\gim15\Pictures\genFIle
+
 

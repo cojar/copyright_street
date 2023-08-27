@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com/3.1.4"></script>
+    <meta name="_csrf" content="${_csrf.token}" />
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
+    <title>마이 페이지</title>
+</head>
+
+<body>
+    <h1>마이 페이지</h1>
+    <!-- 프로필 이미지 시작 -->
+    <div class="relative w-40 h-40 mx-auto mt-10">
+        <img id="profileImage" th:src="${member.profileImage}" class="w-full h-full rounded-full object-cover">
+        <button id="editButton"
+            class="absolute bottom-0 right-0 w-10 h-10 p-1 bg-gray-200 rounded-full cursor-pointer focus:outline-none focus:ring-2">
+            ✎
+            <input type="file" id="uploadFile" name="profileImage" accept="image/*"
+                class="w-full h-full opacity-0 cursor-pointer"
+                style="position: absolute;top:0;left:-8px;margin-right: -100%;">
+        </button>
+    </div>
+    <!-- 프로필 이미지 끝 -->
+    <table>
+        <tr>
+            <td>UserId:</td>
+            <td th:text="${member.username}"></td>
+        </tr>
+        <tr>
+            <td>UserEmail:</td>
+            <td th:text="${member.email}"></td>
+        </tr>
+    </table>
+
+    <div>
+        <div>
+            <div class="title">개인정보 변경</div>
+            <hr>
+            <form action="/mypage/modifyPassword" method="Post">
+                <div class="password"> 기존 비밀번호</div>
+                <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password">
+                <div class="ps-title"> 비밀번호 변경</div>
+                <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password">
+                <div class="ps-check-title"> 비밀번호 변경 확인</div>
+                <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password">
+                <div id="passwordMatchMsg" style="display: none; color: red;"></div>
+                <button type="submit">변경하기</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script th:inline="javascript">
+        var csrfTokenValue = [[${ _csrf.token }]];
+        var csrfHeaderName = [[${ _csrf.headerName }]];
+
+    </script>
+
+    <script>
+        // CSRF 토큰 값 가져오기
+        const csrfToken = csrfTokenValue;
+        const csrfTokenHeader = csrfHeaderName;
+
+        // 파일 업로드
+        document.getElementById("uploadFile").addEventListener("change", function () {
+            const formData = new FormData();
+            formData.append("profileImage", this.files[0]);
+
+            // AJAX 요청
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/mypage/uploadProfileImage", true);
+            // CSRF 토큰 삽입, 갱신된 토큰 값으로 변경
+            xhr.setRequestHeader(csrfTokenHeader, csrfToken);
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    const jsonResponse = JSON.parse(xhr.responseText);
+                    if (jsonResponse.status === "success") {
+                        document.getElementById("profileImage").src = jsonResponse.imageUrl;
+                    } else {
+                        alert("프로필 이미지 업로드에 실패했습니다.");
+                    }
+                } else {
+                    alert("에러가 발생했습니다.");
+                }
+            };
+            xhr.send(formData);
+        });
+
+    </script>
+
+    <script>
+        const presentPWInput = document.getElementById("password");
+        const newPWInput = document.getElementById("newPW");
+        const newPW2Input = document.getElementById("newPW2");
+        const passwordMatchMsg = document.getElementById("passwordMatchMsg");
+
+        newPW2Input.addEventListener("input", function () {
+            const newPWValue = newPWInput.value;
+            const newPW2Value = newPW2Input.value;
+
+            if (newPWValue !== newPW2Value) {
+                passwordMatchMsg.textContent = "입력한 비밀번호가 일치하지 않습니다.";
+                passwordMatchMsg.style.display = "block";
+            } else {
+                passwordMatchMsg.textContent = "";
+                passwordMatchMsg.style.display = "none";
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

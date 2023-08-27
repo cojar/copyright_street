@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html layout:decorate="~{layout/layout.html}">
+
 <head>
-    <title>결제 성공</title>
-    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <title>주문 결제성공</title>
 </head>
+
 <body>
-<section>
-    <h1>결제 성공</h1>
-    <script>
-        const queryParams = new URLSearchParams(window.location.search);
-
-        console.log('paymentKey', queryParams.get('paymentKey'));
-        console.log('orderId', queryParams.get('orderId'));
-        console.log('amount:', queryParams.get('amount'));
-
-    </script>
-    <h3>주문번호: {{orderId}}</h3>
-</section>
+<main layout:fragment="main">
+  <section class="section section-payment-fail container mx-auto">
+    <th:block th:if="${#strings.equals(isSuccess, 'true')}">
+      <h1>결제 성공</h1>
+    </th:block>
+  </section>
+</main>
 </body>
 </html>

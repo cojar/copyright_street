@@ -1,10 +1,11 @@
     package com.sbp.copyrightStreet.boundedContext.cart;
 
 
+    import com.sbp.copyrightStreet.boundedContext.member.Member;
+    import com.sbp.copyrightStreet.boundedContext.product.Product;
     import jakarta.persistence.*;
     import lombok.Getter;
     import lombok.Setter;
-    import com.sbp.copyrightStreet.boundedContext.store.Store;
 
     import java.time.LocalDateTime;
 
@@ -20,8 +21,6 @@
 
         private String content;
 
-        private LocalDateTime create_Date;
-
         private String filepath;
 
         private String filename;
@@ -30,11 +29,18 @@
 
         private String category;
 
+        @ManyToOne
+        private Member member;
+
         @ManyToOne(cascade = CascadeType.ALL)
-        @JoinColumn(name = "store_id")
-        private Store store;
+        private Product product;
 
         public String getFile() {
             return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static", "");
+
+
         }
+        private LocalDateTime createDate;
+
+        private LocalDateTime modifyDate;
     }

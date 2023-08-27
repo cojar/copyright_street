@@ -1,16 +1,22 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
 import com.sbp.copyrightStreet.base.rq.Rq;
-import com.sbp.copyrightStreet.base.rsData.RsData;
+import com.sbp.copyrightStreet.boundedContext.cart.Cart;
+import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/member") // 액션 URL의 공통 접두어
@@ -18,6 +24,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
+    private final Member member;
+    private final CartService cartService;
+//    private final StoreService storeService;
 
     @PreAuthorize("isAnonymous()") // 오직 로그인 안한 사람만 접근 가능하다.
     @GetMapping("/join") // 회원가입 폼
@@ -44,7 +53,7 @@ public class MemberController {
             return "member/join";
         }
 
-        memberService.join(joinForm.getUsername(),joinForm.getLoginId(), joinForm.getPassword(),  joinForm.getEmail(), joinForm.getPhoneNumber());
+        memberService.join(joinForm.getUsername(), joinForm.getLoginId(), joinForm.getPassword(), joinForm.getEmail(), joinForm.getPhoneNumber());
 
         redirectAttributes.addFlashAttribute("signupSuccess", true);
         return "redirect:/member/login";
@@ -58,7 +67,21 @@ public class MemberController {
 
     @PreAuthorize("isAuthenticated()") // 로그인 해야만 접속가능
     @GetMapping("/me") // 로그인 한 나의 정보 보여주는 페이지
-    public String showMe() {
+    public String showMe(Model model , Principal principal) {
+        Optional<Member> member =this.memberService.findByUsername(principal.getName());
+        List<Cart> cartList = this.cartService.getList(member.get());
+//        List<Store> storeList = this.storeService.list(member.get());
+        model.addAttribute("cartList",cartList);
+        model.addAttribute("memberID",member.get().getId());
+//        model.addAttribute("storeList",storeList);
         return "member/me";
+
     }
+
+
+
+
+
 }
+
+

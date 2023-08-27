@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Store Detail</title>
+</head>
+<body>
+<p th:text="${store.content}"></p>
+<p>조회수: <span th:text="${store.hitCount}"></span></p>
+<!-- 이미지 표시 -->
+<img th:src="@{${store.file}}" alt="">
+<a th:href="@{|/store/modify/${store.id}|}">수정</a>
+<a th:href="@{|/store/delete/${store.id}|}">삭제</a>
+
+<form th:action="@{/store/cart}" method="post">
+    <input type="hidden" name="id" th:value="${store.id}" />
+    <button type="submit">장바구니에 추가</button>
+</form>
+</body>
+</html>

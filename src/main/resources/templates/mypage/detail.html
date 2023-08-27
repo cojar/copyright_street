@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout/layout.html}">
+
+<head>
+    <title>라이센스 결제내역</title>
+</head>
+
+<body>
+<main layout:fragment="main">
+
+    <section class="section section-payment-fail container mx-auto">
+        <th:block th:if="${#strings.equals(isSuccess, 'true')}">
+            <h1>결제 성공</h1>
+            <p>라이센스 : <span th:text="${orderName}"></span></p>
+            <p>결제방법 : <span th:text="${method}"></span></p>
+            <tr th:if="${#strings.equals(method, '카드')}">cardNumber
+                <td th:text="${cardNumber}"></td>
+            </tr>
+            <tr th:if="${#strings.equals(method, '가상계좌')}">accountNumber
+                <td th:text="${accountNumber}"></td>
+            </tr>
+            <tr th:if="${#strings.equals(method, '계좌이체')}">bank
+                <td th:text="${bank}"></td>
+            </tr>
+            <tr th:if="${#strings.equals(method, '휴대폰')}">customerMobilePhone
+                <td th:text="${customerMobilePhone}"></td>
+            </tr>
+        </th:block>
+
+    </section>
+</main>
+</body>
+</html>

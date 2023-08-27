@@ -1,0 +1,88 @@
+<html layout:decorate="~{layout/layout.html}">
+
+<head>
+  <script src="https://js.tosspayments.com/v1"></script>
+  <title>장바구니</title>
+</head>
+
+<body>
+<main layout:fragment="main">
+  <section layout:fragment="content" class="section-prod-list">
+    <div class="container">
+      <h1 class="t-text-[1.2rem] t-font-bold">장바구니</h1>
+      <div class="t-mt-[10px] t-overflow-x-auto t-whitespace-nowrap">
+        <div><a href="/product/list">돌아가기</a></div>
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th><input type="checkbox"></th>
+            <th>이미지</th>
+            <th>상품명</th>
+            <th>가격</th>
+            <th>구매/삭제</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="cart : ${cartList}">
+            <td><input type="checkbox"></td>
+            <td><img class="t-w-[50px] t-h-[50px] sm:t-w-[150px] sm:t-h-[150px] t-object-cover rounded"
+                     width="100px" height="100px"  th:src="@{|/gen/${cart.product.thumbnailImg}|}" alt="상품이미지"></td>
+            <td th:text="${cart.product.name}"></td>
+            <td>
+              <span th:text="@{|\ ${cart.product.price}|}"></span>
+            </td>
+            <td>
+<!--              <button th:onclick="|pay('${cart.product.price}', '${cart.product.name}')|"-->
+<!--                      value="결제" class="text-gray-800 bg-teal-500 w-32 hover:bg-teal-300 inline-flex items-center-->
+<!--              justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">-->
+<!--                결제-->
+<!--              </button>-->
+              <button type="button" class="px-4 py-1 text-sm" th:attr="onclick=|pay('${cart.product.price}', '${cart.product.name}')|">바로구매</button>
+              <a href="#" type="button">삭제</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <a href="" type="button" >결제하기</a>
+      </div>
+    </div>
+  </section>
+</main>
+<button type="button" class="px-4 py-1 text-sm" th:attr="onclick=|pay('${cart.product.price}', '${cart.product.name}')|">바로구매</button>
+<script layout:fragment="script" type="text/javascript"></script>
+<script th:inline="javascript">
+    let tossPayments = TossPayments("test_ck_oeqRGgYO1r50AM42j4oVQnN2Eyaz"); // 테스트 클라언트 키
+    let path = "/";
+    let successUrl = window.location.origin + path + "success";
+    let failUrl = window.location.origin + path + "fail";
+    let callbackUrl = window.location.origin + path + "va_callback";
+    let orderId = new Date().getTime();
+
+    function pay(amount,orderName) {
+        const method = "카드";
+        const requestJson = {
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": orderName,
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": "박토스",
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "useInternationalCardOnly": false,
+            "flowMode": "DEFAULT",
+            "discountCode": null,
+            "appScheme": null
+        }
+        tossPayments.requestPayment(method, requestJson)
+    }
+</script>
+</body>
+
+
+</html>
