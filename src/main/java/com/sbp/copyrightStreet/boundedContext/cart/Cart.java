@@ -6,8 +6,6 @@
     import jakarta.persistence.*;
     import lombok.Getter;
     import lombok.Setter;
-    import com.sbp.copyrightStreet.boundedContext.store.Store;
-    import org.springframework.data.annotation.CreatedDate;
 
     import java.time.LocalDateTime;
 

@@ -69,8 +69,9 @@ public class BoardService {
     }
 
 
+    public List<Board> getAll() {
 
+            return this.boardRepository.findAll();
 
-
-
+    }
 }

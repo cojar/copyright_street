@@ -1,11 +1,9 @@
 package com.sbp.copyrightStreet.boundedContext.cart;
 
 import com.sbp.copyrightStreet.boundedContext.member.Member;
-import com.sbp.copyrightStreet.boundedContext.member.MemberRepository;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
 import com.sbp.copyrightStreet.boundedContext.product.Product;
 import com.sbp.copyrightStreet.boundedContext.product.ProductService;
-import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor

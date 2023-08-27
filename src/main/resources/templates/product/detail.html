@@ -54,7 +54,8 @@
                   <form th:action="@{|/cart/add/${product.id}|}" method="POST">
                     <input type="submit" value="장바구니 담기" class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">
                   </form>
-                  <button  onclick="pay();" class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">결제</button>
+                  <button  onclick="pay();" value="결제" class="text-gray-800 bg-teal-500 w-32 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">
+                   결제 </button>
 
                 </div>
               </div>

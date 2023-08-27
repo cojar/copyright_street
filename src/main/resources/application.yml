@@ -33,10 +33,6 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
-  mvc:
-    static-path-pattern: /ProfileImg/**  #아래의 모든 파일 및 디렉터리에 접근이 가능
-    resources:
-      static-locations: classpath:/static/ProfileImg/,classpath:/static/  #위치 지정(외부파일로 수정필요)
 
 logging:
   level:
@@ -67,6 +63,5 @@ logging:
     cache: false #
 custom:
   genFileDirPath: C:\Users\gim15\Pictures\genFIle
-
 
 

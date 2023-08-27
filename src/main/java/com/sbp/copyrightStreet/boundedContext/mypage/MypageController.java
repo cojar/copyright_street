@@ -5,13 +5,10 @@ import com.sbp.copyrightStreet.boundedContext.cart.CartService;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.member.MemberModifyForm;
 import com.sbp.copyrightStreet.boundedContext.member.MemberService;
-import com.sbp.copyrightStreet.boundedContext.store.StoreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,7 +23,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.security.Principal;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -36,7 +32,7 @@ public class MypageController {
     private final MemberService memberService;
     private final PasswordEncoder passwordEncoder;
     private final CartService cartService;
-    private StoreService storeService;
+//    private StoreService storeService;
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/myProfile")
     public String mypage(Model model, Principal principal) {
