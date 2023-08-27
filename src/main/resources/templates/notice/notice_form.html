@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>notice_form</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/notice/notice.css}">
 </head>
 <body>
 <main layout:fragment="main">
     <form th:action="@{|/notice/create|}" method="post">
-        <input class="border-black" type="text" name="title">
+        <input type="text" name="title">
         <br>
-        <textarea class="border-black" name="content" id="content" cols="50" rows="10"></textarea>
+        <textarea class="border-black" name="content" id="content" rows="10"></textarea>
         <button type="submit">등록</button>
     </form>
 </main>

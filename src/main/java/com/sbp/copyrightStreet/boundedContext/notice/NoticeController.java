@@ -12,8 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
-
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/notice")
@@ -30,13 +28,13 @@ public class NoticeController {
     }
 
     @GetMapping("/create")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public String Create(NoticeForm noticeForm) {
         return "notice/notice_form";
     }
 
     @PostMapping("/create")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public String Create(@Valid NoticeForm noticeForm,
                          BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
@@ -60,7 +58,7 @@ public class NoticeController {
     }
 
     @GetMapping("/modify/{id}")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public String modify(Model model, @PathVariable("id") Integer id, NoticeForm noticeForm, Principal principal) {
         Notice notice = this.noticeService.Detail(id);
         if (!notice.getAdmin().getUsername().equals(principal.getName())) {
@@ -72,7 +70,7 @@ public class NoticeController {
     }
 
     @PostMapping("/modify/{id}")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public String modify(Model model, @Valid NoticeForm noticeForm, BindingResult bindingResult,
                          Principal principal, @PathVariable("id") Integer id) {
         if (bindingResult.hasErrors()) {
@@ -87,7 +85,7 @@ public class NoticeController {
     }
 
     @GetMapping("/delete/{id}")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("hasRole('ADMIN')")
     public String Delete(Model model, @PathVariable("id") Integer id, Principal principal) {
         Notice notice = this.noticeService.Detail(id);
         if (!notice.getAdmin().getUsername().equals(principal.getName())) {
