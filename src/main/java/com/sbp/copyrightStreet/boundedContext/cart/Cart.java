@@ -21,6 +21,8 @@
 
         private String title;
 
+
+
         private String content;
 
         private String filepath;
@@ -37,6 +39,9 @@
         @ManyToOne(cascade = CascadeType.ALL)
         private Product product;
 
+        @ManyToOne(cascade = CascadeType.ALL)
+        @JoinColumn(name = "store_id")
+        private Store store;
         public String getFile() {
             return filepath.replaceAll("/Users/munchangbin/Downloads/copyright_street/src/main/resources/static", "");
 
@@ -45,4 +50,6 @@
         private LocalDateTime createDate;
 
         private LocalDateTime modifyDate;
+
+
     }

@@ -135,4 +135,8 @@ public class StoreService {
 
         return this.storeRepository.findByMember(member);
     }
+
+    public void delete(Integer id) {
+
+    }
 }
