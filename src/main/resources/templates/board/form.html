@@ -1,8 +1,23 @@
 <html layout:decorate="~{layout/layout.html}">
+<head>
+    <title>게시글 등록</title>
+    <style>
+        .w-50 {
+            width: 50%;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .max-w-sm {
+            max-width: 100%;
+        }
+    </style>
+</head>
 <body>
 <main layout:fragment="main" class="container">
-    <h1>게시글 등록</h1>
-    <form th:object="${boardForm}" method="post" class="form-control w-full">
+    <h1 class="form-control w-50 mx-auto">게시글 등록</h1>
+    <form th:object="${boardForm}" method="post" class="form-control w-50 mx-auto">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <select name="category" class="select select-bordered w-full">
             <option value="자유">자유</option>
