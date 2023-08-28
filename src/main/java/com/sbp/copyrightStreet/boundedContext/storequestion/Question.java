@@ -23,4 +23,7 @@ public class Question extends BaseEntity {
 
     @ManyToOne
     private Product product;
+    public Question() {
+
+    }
 }

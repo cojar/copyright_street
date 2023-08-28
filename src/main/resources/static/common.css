@@ -962,3 +962,6 @@ html > body :is(h1, h2, h3, h4, h5, h6) {
     border-radius: 5px;
     cursor: pointer;
   }
+  .textarea-short {
+      height: 100px; /* Set your desired height here */
+  }
