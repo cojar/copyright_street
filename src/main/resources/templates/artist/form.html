@@ -19,7 +19,7 @@
 <main layout:fragment="main"  class="container">
     <h1 class="form-control w-50 mx-auto">작가등록</h1>
     <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post"
-          class="form-control w-50 mx-auto">
+          class="form-control w-50 mx-auto" enctype="multipart/form-data">
         <div>
             <label class="label" for="username">이름</label>
             <input type="text" th:field="*{username}" class="input input-bordered w-full">
@@ -43,10 +43,11 @@
             </div>
         <br>
                 <label for="attachedFiles">첨부 파일</label>
-                <input type="file" id="attachedFiles" name="attachedFiles" multiple>
+        <input type="file" name="portfolio" accept="img/png, image/gif, image/jpeg"> <br>
                 <br>
                 <button type="submit"  style="width: 20%" class="form-control w-50 mx-auto btn btn-accent">등록하기</button>
             </form>
+
         <br>
     <br>
     <br>
