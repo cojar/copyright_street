@@ -1,33 +1,20 @@
 package com.sbp.copyrightStreet.boundedContext.storeanswer;
 
 
+
+import com.sbp.copyrightStreet.base.BaseEntity;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.storequestion.Question;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
+import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
-
-@Getter
-@Setter
 @Entity
-public class Answer  {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long id;
-
+@SuperBuilder
+public class Answer extends BaseEntity {
     private String comment;
-
     @OneToOne
     private Member member;
-
     @OneToOne
     private Question question;
-
-    private LocalDateTime regTime;
-
-    private LocalDateTime modifyTime;
 }

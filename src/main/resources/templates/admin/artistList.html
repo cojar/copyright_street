@@ -9,14 +9,16 @@
 <table>
   <tr>
     <th>NO.</th>
-    <th>username</th>
-    <th>Emain</th>
+    <th>Username</th>
+    <th>Portfolio</th>
+    <th>Email</th>
     <th>Phone</th>
   </tr>
   <tr th:each="artist : ${artistList}">
     <td th:text="${artist.id}">NO.</td>
     <td><a th:href="@{/admin/artistList/create}" th:text="${artist.username}"></a>
     </td>
+    <td th:text="${artist.portfolio}"></td>
     <td th:text="${artist.email}"></td>
     <td th:text="${artist.phoneNumber}"></td>
   </tr>

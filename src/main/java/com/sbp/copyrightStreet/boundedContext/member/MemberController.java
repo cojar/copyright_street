@@ -24,7 +24,6 @@ import java.util.Optional;
 public class MemberController {
     private final MemberService memberService;
     private final Rq rq;
-    private final Member member;
     private final CartService cartService;
 //    private final StoreService storeService;
 

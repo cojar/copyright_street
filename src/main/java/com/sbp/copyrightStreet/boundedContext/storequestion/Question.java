@@ -1,26 +1,19 @@
 package com.sbp.copyrightStreet.boundedContext.storequestion;
 
 
+
+import com.sbp.copyrightStreet.base.BaseEntity;
 import com.sbp.copyrightStreet.boundedContext.member.Member;
 import com.sbp.copyrightStreet.boundedContext.product.Product;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
-import java.time.LocalDateTime;
-
-@Getter
-@Setter
 @Entity
-public class Question  {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private Long id;
-
-    private String title;
-
+@Getter
+@SuperBuilder(toBuilder = true)
+public class Question extends BaseEntity {
     private String content;
 
     @ManyToOne
@@ -28,10 +21,4 @@ public class Question  {
 
     @ManyToOne
     private Product product;
-
-    private LocalDateTime regTime;
-
-    private LocalDateTime modifyTime;
-
-
 }

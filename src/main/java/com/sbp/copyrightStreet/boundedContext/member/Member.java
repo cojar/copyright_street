@@ -1,12 +1,15 @@
 package com.sbp.copyrightStreet.boundedContext.member;
 
 
+import com.sbp.copyrightStreet.base.BaseEntity;
 import com.sbp.copyrightStreet.boundedContext.payment.Payment;
 import com.sbp.copyrightStreet.boundedContext.article.borad.Board;
 import com.sbp.copyrightStreet.boundedContext.cart.Cart;
 import com.sbp.copyrightStreet.boundedContext.product.Product;
+import com.sbp.copyrightStreet.boundedContext.storequestion.Question;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -20,23 +23,15 @@ import java.util.List;
 
 import static jakarta.persistence.GenerationType.IDENTITY;
 
-@Builder // Member.builder().providerTypeCode(providerTypeCode) .. 이런식으로 쓸 수 있게 해주는
-@NoArgsConstructor // @Builder 붙이면 이거 필수
-@AllArgsConstructor // @Builder 붙이면 이거 필수
-@EntityListeners(AuditingEntityListener.class) // @CreatedDate, @LastModifiedDate 작동하게 허용
-@ToString // 디버그를 위한
-@Entity// 아래 클래스는 member 테이블과 대응되고, 아래 클래스의 객체는 테이블의 row와 대응된다.
-@Component
-@Getter // 아래 필드에 대해서 전부다 게터를 만든다. private Long id; => public Long getId() { ... }
+@Entity
+@SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 @Setter
-public class Member {
-    @Id
-    @GeneratedValue(strategy = IDENTITY)
-    private Long id;
-    @CreatedDate // 아래 칼럼에는 값이 자동으로 들어간다.(INSERT 할 때)
-    private LocalDateTime createDate;
-    @LastModifiedDate // 아래 칼럼에는 값이 자동으로 들어간다.(UPDATE 할 때 마다)
-    private LocalDateTime modifyDate;
+@ToString
+public class Member extends BaseEntity {
+
     private String providerTypeCode; // 일반회원인지, 카카오로 가입한 회원인지, 구글로 가입한 회원인지
     @Column(unique = true)
     private String username;
@@ -54,6 +49,8 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Cart> cartList;
 
+    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    private List<Question> questionList;
 
     @OneToMany(mappedBy = "member")
     private List<Payment> payment = new ArrayList<>();  //payment 타입의 객체리스트에 1:다 관계

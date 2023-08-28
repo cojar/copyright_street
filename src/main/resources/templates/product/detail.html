@@ -15,9 +15,7 @@
         }
     </style>
 </head>
-
 <body>
-
 <main layout:fragment="main" class="container">
   <section layout:fragment="content" class="form-control w-50 mx-auto">
     <div class="container max-w-screen mx-auto">
@@ -128,6 +126,9 @@
         </div>
       </div>
     </div>
+  </section>
+</main>
+
     <script src="https://js.tosspayments.com/v1"></script>
     <script th:inline="javascript">
     let amount = /*[[ ${product.price}]]*/;
@@ -164,8 +165,8 @@
         tossPayments.requestPayment(method, requestJson)
     }
 </script>
-  </section>
-</main>
+
+
 
 
 </body>

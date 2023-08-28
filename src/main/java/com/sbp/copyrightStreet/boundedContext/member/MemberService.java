@@ -26,7 +26,15 @@ public class MemberService {
     public Optional<Member> findByUsername(String username) {
         return memberRepository.findByUsername(username);
     }
+    public Member findByUserName(String username) {
+        Optional<Member> member = memberRepository.findByUsername(username);
 
+        if (member.isPresent()) {
+            return member.get();
+        } else {
+            throw new RuntimeException("member not found");
+        }
+    }
     @Transactional // SELECT 이외의 쿼리에 대한 가능성이 아주 조금이라도 있으면 붙인다.
     // 일반 회원가입(소셜 로그인을 통한 회원가입이 아님)
     public RsData<Member> join(String username, String loginId, String password, String email, String phoneNumber) {
