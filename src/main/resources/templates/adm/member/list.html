@@ -1,55 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/172203/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>회원관리</title>
-</head>
-<body>
+<html layout:decorate="~{adm/layout/layout.html}">
+<main layout:fragment="main">
+    <div class="btn">
+        <button type="button" id="deleteButton" class="delete_btn"> 선택 삭제</button>
+    </div>
+    <table>
 
-<div class="btn">
-    <button type="button" id="deleteButton" class="delete_btn"> 선택 삭제</button>
-</div>
-<table>
+    <thead>
+    <tr>
+        <th>phoneNumber</th>
+        <th>email</th>
+        <th>loginID</th>
+        <th>createDate</th>
+        <th>providerTypeCode</th>
+        <th class="button_menu">선택</th>
 
-<thead>
-<tr>
-    <th>phoneNumber</th>
-    <th>email</th>
-    <th>loginID</th>
-    <th>createDate</th>
-    <th>providerTypeCode</th>
-    <th class="button_menu">선택</th>
+    </tr>
+    </thead>
+        <tbody>
+    <tr th:each="member : ${memberList}">
 
-</tr>
-</thead>
-    <tbody>
-<tr th:each="member : ${memberList}">
-
-    <td th:text="${member.phoneNumber}"></td>
-    <td>
-        <a th:href="@{|/adm/memberDetail/${member.id}|}" th:text="${member.email}"></a>
-    </td>
-    <td>
-        <span th:text="${member.loginId}"></span>
-    </td>
- <td><div th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}"></div></td>
+        <td th:text="${member.phoneNumber}"></td>
+        <td>
+            <a th:href="@{|/adm/memberDetail/${member.id}|}" th:text="${member.email}"></a>
+        </td>
+        <td>
+            <span th:text="${member.loginId}"></span>
+        </td>
+     <td><div th:text="${#temporals.format(member.createDate, 'yyyy-MM-dd HH:mm')}"></div></td>
 
 
-    <td th:text="${member.providerTypeCode}"></td>
+        <td th:text="${member.providerTypeCode}"></td>
 
-    <td class="button_menu">
-        <label class="user_check">
-            <input type="checkbox" name="user_check" th:value="${member.id}">
-        </label>
-    </td>
-</tr>
-</tbody>
-</table>
-
+        <td class="button_menu">
+            <label class="user_check">
+                <input type="checkbox" name="user_check" th:value="${member.id}">
+            </label>
+        </td>
+    </tr>
+    </tbody>
+    </table>
+</main>
 <script th:inline="javascript">
 
 

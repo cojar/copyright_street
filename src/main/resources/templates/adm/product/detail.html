@@ -1,0 +1,162 @@
+<html layout:decorate="~{layout/layout.html}">
+
+<head>
+  <title>내 정보</title>
+</head>
+
+<body>
+
+<main layout:fragment="main">
+  <section layout:fragment="content" class="section-prod-list">
+    <div class="container max-w-screen mx-auto">
+      <div class="card">
+        <div class="card-header">
+          <a href="/product/list">돌아가기</a>
+        </div>
+        <div class="card-header">
+          상품상세정보
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-[auto,1fr] gap-4">
+          <div class="md:col-start-1 md:col-end-2">
+            <img class="w-full max-w-[500px] h-full max-h-[500px] rounded ml-30" th:src="@{|/gen/${product.thumbnailImg}|}" alt="상품이미지">
+          </div>
+
+          <div class="list-group md:col-start-2 md:col-end-3">
+            <ul>
+            <li class="list-group-item flex items-center">
+              <span class="w-16 inline-block">번호</span>
+              <span th:text="${product.id}" class="badge bg-mint">{{product.id}}</span>
+            </li>
+            <li class="list-group-item flex items-center">
+              <span class="w-16 inline-block">상품명</span>
+              <span th:text="${product.name}" class="font-bold"></span>
+            </li>
+            <li class="list-group-item flex items-center">
+              <span class="w-16 inline-block">가격</span>
+              <span th:text="${product.price}" class="font-bold">{{product.sale_price|intcomma}}</span>원
+            </li>
+            <!-- TODO: 마켓정보 추가 -->
+            <!-- <li class="list-group-item flex items-center">
+              <span class="w-16 inline-block">마켓</span>
+              <span class="badge bg-primary"></span>
+            </li> -->
+            <li class="list-group-item flex items-center">
+              <span>등록날짜</span> <span th:text="${#temporals.format(product.createDate, 'yyyy-MM-dd HH:mm')}" ></span>
+            </li>
+            <li class="list-group-item flex items-center" th:if="${product.modifyDate != null}">
+              <span>수정날짜</span> <span th:text="${#temporals.format(product.modifyDate, 'yyyy-MM-dd HH:mm')}" class="badge bg-secondary"></span>
+            </li>
+            <li class="list-group-item">
+              <div class="card t-mt-[30px]">
+
+                <div class="card-body">
+                  <form th:action="@{|/cart/add/${product.id}|}" method="POST">
+                    <input type="submit" value="장바구니 담기" class="text-gray-800 bg-teal-500 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">
+                  </form>
+                  <button  onclick="pay();" value="결제" class="text-gray-800 bg-teal-500 w-32 hover:bg-teal-300 inline-flex items-center justify-center px-3 py-2 border border-transparent text-lg font-medium rounded-md shadow-sm ">
+                   결제 </button>
+
+                </div>
+              </div>
+            </li>
+          </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card t-mt-[30px]">
+        <div >
+          질문등록
+        </div>
+
+        <div class="card-body">
+          <form
+                  sec:authorize="isAuthenticated()"
+                  th:action="@{|/question/create/${product.id}|}"
+                  method="POST"
+          >
+            <div class="mb-3">
+              <div class="mb-3">
+                <label for="content" class="form-label">내용</label>
+                <textarea name="content" id="content" class="form-control" rows="10"></textarea>
+              </div>
+              <input type="submit" value="등록하기" class="btn btn-success my-2">
+            </div>
+          </form>
+          <div class="t-text-gray-400" sec:authorize="isAnonymous()" >
+            <a th:href="@{/member/login}">로그인</a> 후 이용해주세요.
+          </div>
+        </div>
+      </div>
+
+      <div class="card t-mt-[30px]">
+        <div class="card-header">
+          질문리스트
+        </div>
+        <ul th:if="${#lists.size(product.questionList)} > 0" class="list-group list-group-flush">
+          <li th:each="question : ${product.questionList}" class="list-group-item">
+            <span th:text="${question.id}" class="badge bg-secondary"></span>
+            <span th:text="${question.content}"></span>
+            <a th:href="@{|/question/modify/${question.id}|}"
+               sec:authorize="isAuthenticated()"
+               th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}"
+               class="btn btn-sm btn-primary"
+            >수정</a>
+            <a th:href="@{|/question/delete/${question.id}|}" class="btn btn-sm btn-warning"
+               sec:authorize="isAuthenticated()"
+               th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}"
+               onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
+          </li>
+        </ul>
+        <div th:unless="${#lists.size(product.questionList)} > 0" class="card-body">
+          <div class="t-text-gray-400">
+            질문이 없습니다
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://js.tosspayments.com/v1"></script>
+    <script th:inline="javascript">
+    let amount = /*[[ ${product.price}]]*/;
+    let orderName = /*[[ ${product.name}]]*/;
+
+    let tossPayments = TossPayments("test_ck_oeqRGgYO1r50AM42j4oVQnN2Eyaz"); // 테스트 클라언트 키
+    let path = "/";
+    let successUrl = window.location.origin + path + "success";
+    let failUrl = window.location.origin + path + "fail";
+    let callbackUrl = window.location.origin + path + "va_callback";
+    let orderId = new Date().getTime();
+
+    function pay() {
+        const method = "카드";
+        const requestJson = {
+            "amount": amount,
+            "orderId": "sample-" + orderId,
+            "orderName": orderName,
+            "successUrl": successUrl,
+            "failUrl": failUrl,
+            "cardCompany": null,
+            "cardInstallmentPlan": null,
+            "maxCardInstallmentPlan": null,
+            "useCardPoint": false,
+            "customerName": "박토스",
+            "customerEmail": null,
+            "customerMobilePhone": null,
+            "taxFreeAmount": null,
+            "useInternationalCardOnly": false,
+            "flowMode": "DEFAULT",
+            "discountCode": null,
+            "appScheme": null
+        }
+        tossPayments.requestPayment(method, requestJson)
+    }
+</script>
+  </section>
+</main>
+
+
+</body>
+
+</html>
+

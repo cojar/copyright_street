@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<html layout:decorate="~{adm/layout/layout.html}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>관리자 메인</title>
 </head>
 <body>
-<a href="/adm/list">등록된 회원</a>
-<a href="/adm/artistList">등록된 작가</a>
-<a th:href="@{/adm/product/create}" class="btn btn-primary">컨텐츠 등록</a>
-<a th:href="@{/adm/memberList}" class="btn btn-primary">회원관리</a>
-
+    <main layout:fragment="main"></main>
 </body>
+
 </html>
