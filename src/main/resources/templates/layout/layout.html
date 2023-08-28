@@ -33,7 +33,7 @@
 
 
 <!-- 공통 상단 -->
-<div class="container max-w-screen-2lg mx-auto"
+<div class="container max-w-screen mx-auto"
      style="background-color: rgba(255, 255, 255, 0.8); background-image: url('your-background-image-url'); background-size: cover; background-position: center;">
 
     <div class="container w-full bg-white border-b border-slate-200 backdrop-blur-lg bg-opacity-80 ">
@@ -82,34 +82,32 @@
             </div>
         </div>
     </div>
-</div>
-<br>
-<div class="board-list-section">
-    <!-- ... your existing content ... -->
-    <div class="list-footer">
-        <div class="container max-w-screen mx-auto">
-            <div class="search-box border border-gray-400 rounded-md inline-block">
-                <select id="boardSearch" name="boardSearch" th:value="${bSearch}"
-                        class="border-none p-2 w-70 text-base">
-                    <option value="all" th:selected="${bSearch} == all">공지사항</option>
-                    <option value="title" th:selected="${bSearch} == title">게시판</option>
-                    <option value="content" th:selected="${bSearch} == content">Pro관</option>
-                    <option value="title_content" th:selected="${bSearch} == title_content">Primium</option>
-                    <option value="author" th:selected="${bSearch} == author">Basic</option>
-                    <option value="comment" th:selected="${bSearch} == comment">고객센터</option>
-                </select>
-                <input type="text" id="boardKeyword" name="boardKeyword" th:value="${bKw}" placeholder="검색어를 입력해주세요."
-                       class="border-l border-gray-400 pl-2 h-7" style="width: 1100px;">
-                <a th:onclick="_bSearch()" class="search-btn p-2 text-black text-sm hover:cursor-pointer">
-                    <i class="fas fa-search"></i>
-                </a>
-            </div>
+
+    <br>
+
+    <div class="board-list-section">
+        <div class="search-box border border-gray-400 rounded-md">
+            <select id="boardSearch" name="boardSearch" th:value="${bSearch}"
+                    class="border-none p-2 w-70 text-base">
+                <option value="all" th:selected="${bSearch} == all">공지사항</option>
+                <option value="title" th:selected="${bSearch} == title">게시판</option>
+                <option value="content" th:selected="${bSearch} == content">Pro관</option>
+                <option value="title_content" th:selected="${bSearch} == title_content">Primium</option>
+                <option value="author" th:selected="${bSearch} == author">Basic</option>
+                <option value="comment" th:selected="${bSearch} == comment">고객센터</option>
+            </select>
+            <input type="text" id="boardKeyword" name="boardKeyword" th:value="${bKw}" placeholder="검색어를 입력해주세요."
+                   class="border-l border-gray-400 pl-2 h-7" style="width: 1100px;">
+            <a th:onclick="_bSearch()" class="search-btn p-2 text-black text-sm hover:cursor-pointer">
+                <i class="fas fa-search"></i>
+            </a>
         </div>
     </div>
-</div>
-<br>
-<main layout:fragment="main"></main>
-<footer class="bg-gray-800 text-white py-4">
+
+    <div class="flex-grow flex flex-col py-5">
+        <main layout:fragment="main" class="flex-grow flex flex-col"></main>
+    </div>
+    <footer class="bg-gray-800 text-white py-4">
     <div class="container mx-auto flex items-center justify-around space-x-4">
         <!-- 왼쪽 블럭: 로고 이미지 -->
         <div class="justify-around">
@@ -125,13 +123,13 @@
                 <span>최기범</span>
             </div>
             <div>
-                <span>1111@gmail.com</span>
+                <span>taecoo3@naver.com</span>
             </div>
             <div>
                 <span>총괄</span>
             </div>
             <div>
-                <a href="https://github.com/osoreee3">GIT</a>
+                <a href="https://github.com/osoreee3">Github</a>
             </div>
         </div>
         <div class="justify-around">
@@ -143,13 +141,13 @@
                     <span>문창빈</span>
                 </div>
                 <div>
-                    <span>1111@gmail.com</span>
+                    <span>vv4704@gmail.com</span>
                 </div>
                 <div>
                     <span>백엔드, 코드취합</span>
                 </div>
                 <div>
-                    <a href="https://github.com/MunChangBin">GIT</a>
+                    <a href="https://github.com/MunChangBin">Github</a>
                 </div>
             </div>
         </div>
@@ -162,13 +160,13 @@
                     <span>나현아</span>
                 </div>
                 <div>
-                    <span>1111@gmail.com</span>
+                    <span>hyun_aaaa@naver.com</span>
                 </div>
                 <div>
-                    <span> 백엔드, 프론트엔드</span>
+                    <span>백엔드, 프론트엔드</span>
                 </div>
                 <div>
-                    <a href="https://github.com/oourora">GIT</a>
+                    <a href="https://github.com/oourora">Github</a>
                 </div>
             </div>
         </div>
@@ -181,13 +179,13 @@
                     <span>김사랑</span>
                 </div>
                 <div>
-                    <span>1111@gmail.com</span>
+                    <span>02ove@naver.com</span>
                 </div>
                 <div>
                     <span>백엔드</span>
                 </div>
                 <div>
-                    <a href="https://github.com/kimsarang123">GIT</a>
+                    <a href="https://github.com/kimsarang123">Github</a>
                 </div>
             </div>
         </div>
@@ -200,13 +198,13 @@
                     <span>김다은</span>
                 </div>
                 <div>
-                    <span>1111@gmail.com</span>
+                    <span>1004ekdms2@naver.com</span>
                 </div>
                 <div>
                     <span>백엔드</span>
                 </div>
                 <div>
-                    <a href="https://github.com/kimdaeun12">GIT</a>
+                    <a href="https://github.com/kimdaeun12">Github</a>
                 </div>
             </div>
         </div>
@@ -217,6 +215,7 @@
         <p>Copyright &copy; 2023 저작거리. All rights reserved.</p>
     </div>
 </footer>
+</div>
 <th:block layout:fragmint="script"></th:block>
 <script th:inline="javascript">
     // 타임리프 문법(파라미터, ? 뒤에 입력된 매개변수들)
