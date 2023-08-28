@@ -1,34 +1,29 @@
-
 <html layout:decorate="~{layout/layout.html}">
-
-<head>
-    <title>상품등록</title>
-</head>
 <body>
-<main layout:fragment="main">
-    <h1>컨텐츠 생성 페이지</h1>
-    <h5>질문등록</h5>
-    <form th:object="${boardForm}" method="post" >
-
-            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        <select name="category">
+<main layout:fragment="main" class="container">
+    <h1>게시글 등록</h1>
+    <form th:object="${boardForm}" method="post"  class="form-control w-full">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <select name="category" class="select select-bordered w-full">
             <option value="자유">자유</option>
             <option value="작가">작가</option>
             <option value="스토어">스토어</option>
         </select>
-        <div class="mb-3">
-            <label for="subject" class="form-label">제목</label>
-            <input type="text" name="title" id="subject">
+        <div>
+            <label class="label">
+                <span class="label-text">제목</span>
+            </label>
+            <input type="text" name="title" id="subject" class="input input-bordered w-full">
         </div>
-        <div class="mb-3">
-            <label for="content" class="form-label">내용</label>
-            <textarea name="content" id="content" rows="10"></textarea>
+        <div>
+            <label class="label">
+                <span class="label-text">내용</span>
+            </label>
+            <textarea name="content" id="content" class="textarea textarea-bordered w-full max-w-none"></textarea>
         </div>
-        <button type="submit">저장하기</button>
+        <button type="submit" class="btn btn-accent">저장하기</button>
     </form>
-
 </main>
-
 <script>
     function validateForm() {
         var title = document.getElementById("subject").value;
