@@ -1,4 +1,4 @@
-package com.sbp.copyrightStreet.base.initData.initData;
+package com.sbp.copyrightStreet.base.initData;
 
 
 
