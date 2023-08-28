@@ -2,12 +2,24 @@
 
 <head>
   <title>내 정보</title>
+  <style>
+        .w-50 {
+            width: 50%;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .max-w-sm {
+            max-width: 100%;
+        }
+    </style>
 </head>
 
 <body>
 
-<main layout:fragment="main">
-  <section layout:fragment="content" class="section-prod-list">
+<main layout:fragment="main" class="container">
+  <section layout:fragment="content" class="form-control w-50 mx-auto">
     <div class="container max-w-screen mx-auto">
       <div class="card">
         <div class="card-header">
@@ -18,7 +30,7 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-[auto,1fr] gap-4">
-          <div class="md:col-start-1 md:col-end-2">
+          <div class="md:col-start-1 md:col-end-3">
             <img class="w-full max-w-[500px] h-full max-h-[500px] rounded ml-30" th:src="@{|/gen/${product.thumbnailImg}|}" alt="상품이미지">
           </div>
 
