@@ -30,13 +30,13 @@ public class NoticeController {
     }
 
     @GetMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String Create(NoticeForm noticeForm) {
         return "notice/notice_form";
     }
 
     @PostMapping("/create")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String Create(@Valid NoticeForm noticeForm,
                          BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {

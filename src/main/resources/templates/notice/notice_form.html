@@ -1,17 +1,25 @@
-<!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="" layout:decorate="~{layout/layout.html}">
+<html layout:decorate="~{layout/layout.html}">
 <head>
     <meta charset="UTF-8">
-    <title>notice_form</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/notice/notice.css}">
+    <title>공지사항 게시판</title>
 </head>
 <body>
-<main layout:fragment="main">
+<main layout:fragment="main" class="container">
+    <h1>공지사항 등록</h1>
     <form th:action="@{|/notice/create|}" method="post">
-        <input type="text" name="title">
-        <br>
-        <textarea class="border-black" name="content" id="content" rows="10"></textarea>
-        <button type="submit">등록</button>
+        <div class="form-control mt-[10px]">
+            <label class="label">
+                <span class="label-text">제목</span>
+            </label>
+                <input type="text" name="title" id="subject"  class="input input-bordered w-full">
+        </div>
+        <div>
+            <label class="label">
+                <span class="label-text">내용</span>
+            </label>
+            <textarea name="content" id="content" class="textarea textarea-bordered w-full max-w-none"></textarea>
+        </div>
+        <button type="submit" class="btn btn-accent">등록</button>
     </form>
 </main>
 </body>

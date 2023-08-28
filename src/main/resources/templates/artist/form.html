@@ -3,68 +3,54 @@
 <head>
     <title>작가등록</title>
 </head>
-
 <body>
-
-
-<main layout:fragment="main">
-    <br>
-    <br>
-    <div class="component-title-bar container mx-auto">
-        <div class="section-article-write">
-            <div class="container mx-auto max-w-xl">
-                <div class="card bordered shadow-lg item-bt-1-not-last-child w-full p-5">
-                    <div class="card-title">
-                        <a href="javascript:history.back();" class="cursor-pointer">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                        <span>정보 입력</span>
-                    </div>
-                    <div class="px-3 py-5">
-                        <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post"
-                              class="grid form-type-1 mx-auto max-w-md p-5  bg-white">
-                            <!-- max-w-md 클래스 및 p-5 클래스 추가 -->
-
-                            <div class="form-control">
-                                <label class="form-label" for="username">이름</label>
-                                <input type="text" th:field="*{username}" class="input input-bordered w-1/2">
-                            </div>
-                            <br>
-                            <div class="form-control">
-                                <label class="form-label" for="phoneNumber">연락처</label>
-                                <input type="text" th:field="*{phoneNumber}" class="input input-bordered w-1/2">
-                            </div>
-                            <br>
-                            <div class="form-control">
-                                <label class="form-label" for="email">이메일</label>
-                                <input type="text" th:field="*{email}" class="input input-bordered w-1/2">
-                            </div>
-                            <br>
-                            <div class="form-control">
-                                <form th:action="@{/copy/author}" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" name="recipientEmail" value="vv4704@gmail.com">
-
-                                    <label for="title">제목</label>
-                                    <input type="text" id="title" name="title" placeholder="제목"> <br>
-
-                                    <label for="message">메일 내용</label>
-                                    <textarea id="message" name="message" placeholder="메일 내용을 입력해주세요." cols="60" rows="20"></textarea> <br>
-
-                                    <label for="attachedFiles">첨부 파일</label>
-                                    <input type="file" id="attachedFiles" name="attachedFiles" multiple> <br> <!-- multiple 속성은 여러 파일 업로드를 지원하기 위함 -->
-
-                                    <button type="submit">발송</button>
-                                </form>
-                            </div>
-                            <br>
-                            <button type="submit" class="btn btn-primary btn-sm" style="width: 20%">등록</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<main layout:fragment="main"  class="container">
+    <h1>작가등록</h1>
+    <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post"
+          class="form-control w-full">
+        <!-- max-w-md 클래스 및 p-5 클래스 추가 -->
+        <div>
+            <label class="label" for="username">이름</label>
+            <input type="text" th:field="*{username}" class="input input-bordered w-full">
         </div>
         <br>
+        <div>
+            <label class="label" for="phoneNumber">연락처</label>
+            <input type="text" th:field="*{phoneNumber}" class="input input-bordered w-full">
+        </div>
         <br>
+        <div>
+            <label class="label" for="email">이메일</label>
+            <input type="text" th:field="*{email}" class="input input-bordered w-full">
+        </div>
+        <br>
+        <div class="form-control">
+            <form th:action="@{/copy/author}" method="post" enctype="multipart/form-data" class="form-control w-full">
+                <input type="hidden" name="recipientEmail" value="vv4704@gmail.com">
+
+                <label for="title" class="label">제목</label>
+                <input type="text" id="title" name="title" placeholder="제목" class="input input-bordered w-full"> <br>
+
+                <label for="message" class="label">소개 내용</label>
+                <textarea id="message" name="message" placeholder="소개해주세요." cols="60" rows="20" class="input input-bordered w-full"></textarea> <br>
+
+                <label for="attachedFiles" class="label">첨부 파일</label>
+                <input type="file" id="attachedFiles" name="attachedFiles" >
+                <br>
+                <!-- multiple 속성은 여러 파일 업로드를 지원하기 위함 -->
+
+                <button type="submit" class="btn btn-accent" style="width: 20%">발송</button>
+            </form>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-accent" style="width: 20%">등록</button>
+    </form>
+    </div>
+    </div>
+    </div>
+    </div>
+    <br>
+    <br>
     </div>
 </main>
 </div>

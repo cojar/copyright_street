@@ -6,26 +6,32 @@
 
 <body>
 
-<main layout:fragment="main">
-    <div>번호 : <span th:text="${@rq.member.id}"></span></div>
-    <div>이름 : <span th:text="${@rq.member.username}"></span></div>
-    <div>이메일 : <span th:text="${@rq.member.email}"></span></div>
-    <div>가입날짜 : <span th:text="${#temporals.format(@rq.member.createDate, 'yyyy-MM-dd HH:mm')}"></span></div>
-    <div>수정날짜 : <span th:text="${#temporals.format(@rq.member.modifyDate, 'yyyy-MM-dd HH:mm')}"></span></div>
+<main layout:fragment="main" class="container">
+    <h1 class="text-lg">마이페이지</h1>
+
+    <div class="text-lg self-end mb-2 pl-5 text-black-500 flex">번호 : <span th:text="${@rq.member.id}" class="h-5 rounded-md mr-2"></span></div>
+    <div class="text-lg self-end mb-2 pl-5 text-black-500 flex">이름 : <span th:text="${@rq.member.username}" class="h-5 rounded-md mr-2"></span></div>
+    <div class="text-lg self-end mb-2 pl-5 text-black-500 flex">이메일 : <span th:text="${@rq.member.email}" class="h-5 rounded-md mr-2"></span></div>
+    <div class="text-lg self-end mb-2 pl-5 text-black-500 flex">가입날짜 : <span class="h-5 rounded-md mr-2" th:text="${#temporals.format(@rq.member.createDate, 'yyyy-MM-dd HH:mm')}"></span></div>
+    <div class="text-lg self-end mb-2 pl-5 text-black-500 flex">수정날짜 : <span class="h-5 rounded-md mr-2" th:text="${#temporals.format(@rq.member.modifyDate, 'yyyy-MM-dd HH:mm')}"></span></div>
 
     <div>
         <div>
-            <div class="title">개인정보 변경</div>
+            <div class="text-lg">개인정보 변경</div>
             <hr>
             <form id="changePasswordForm" action="/mypage/modifyPassword" method="Post">
-                <div class="password"> 기존 비밀번호</div>
-                <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password">
-                <div class="ps-title"> 비밀번호 변경</div>
-                <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password">
-                <div class="ps-check-title"> 비밀번호 변경 확인</div>
-                <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password">
+                <div class="text-lg self-end mb-2 pl-5 text-black-500 flex"> 기존 비밀번호</div>
+                <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password" class="input input-bordered w-64" >
+                <div class="text-lg self-end mb-2 pl-5 text-black-500 flex"> 비밀번호 변경</div>
+                <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password" class="input input-bordered w-64">
+                <div class="text-lg self-end mb-2 pl-5 text-black-500 flex"> 비밀번호 변경 확인</div>
+                <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password" class="input input-bordered w-64">
                 <div id="passwordMatchMsg" style="display: none; color: red;"></div>
-                <button type="button" onclick="showConfirmation()">변경하기</button>
+                <br>
+                <br>
+                <div>
+                    <button type="button" onclick="showConfirmation()" class="btn btn-accent">변경하기</button>
+                </div>
             </form>
         </div>
     </div>

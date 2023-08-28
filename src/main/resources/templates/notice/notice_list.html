@@ -10,8 +10,9 @@
     <title>notice_list</title>
 </head>
 <body>
-<main layout:fragment="main">
-    <a th:href="@{|/notice/create|}" sec:authorize="hasRole('ADMIN')">등록</a>
+<main layout:fragment="main" class="container">
+    <a th:href="@{|/notice/create|}" sec:authorize="hasAuthority('ADMIN')" class="btn btn-accent float-right mb-5">
+        공지사항 등록</a>
     <table>
         <thead>
         <tr>
