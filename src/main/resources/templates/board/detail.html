@@ -25,11 +25,11 @@
         </div>
             <form class="flex mt-5" method="post" th:action="@{|/comment/create/${board.id}|}">
                 <textarea class="textarea textarea-bordered w-full max-w-none h-10" id="content" name="content"></textarea>
-                <input class="btn btn-accent justify-end" type="submit" value="답변등록">
+                <input class="btn btn-accent justify-end" type="submit" value="댓글등록">
             </form>
             <div class="card m-0 w-100 bg-base-10 shadow-xl">
                 <div class="card-body">
-                    답변내용
+                    댓글
                     <hr>
                     <ul th:each="comment : ${board.commentList}">
                         <h2 th:text="${board.title}"></h2>
