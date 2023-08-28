@@ -36,19 +36,17 @@
     <br>
     <div>
         <div>
-            <div class="text-lg">개인정보 변경</div>
+            <div class="form-control w-50 mx-auto">개인정보 변경</div>
             <hr>
             <br>
-            <form id="changePasswordForm" action="/mypage/modifyPassword" method="Post">
-                <div class="text-lg self-end mb-2 pl-5 text-black-500 flex"> 기존 비밀번호</div>
+            <form id="changePasswordForm" action="/mypage/modifyPassword" method="Post" class="form-control w-50 mx-auto">
+                <div> 기존 비밀번호</div>
                 <input id="password" name="password" placeholder="비밀번호를 입력해주세요." type="password" class="input input-bordered w-64" >
                 <br>
-                <br>
-                <div class="text-lg self-end mb-2 pl-5 text-black-500 flex"> 비밀번호 변경</div>
+                <div > 비밀번호 변경</div>
                 <input id="newPW" name="newPW" placeholder="새 비밀번호를 입력해주세요." type="password" class="input input-bordered w-64">
                 <br>
-                <br>
-                <div class="text-lg self-end mb-2 pl-5 text-black-500 flex"> 비밀번호 변경 확인</div>
+                <div > 비밀번호 변경 확인</div>
                 <input id="newPW2" name="newPW2" placeholder="새 비밀번호를 다시 입력해주세요." type="password" class="input input-bordered w-64">
                 <div id="passwordMatchMsg" style="display: none; color: red;"></div>
                 <br>
