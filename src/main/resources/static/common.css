@@ -949,3 +949,16 @@ html > body :is(h1, h2, h3, h4, h5, h6) {
     cursor: pointer;
 }
 
+  #attachedFiles {
+    display: none;
+  }
+
+  /* 사용자 정의 스타일을 가진 대체 버튼 */
+  .custom-file-button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
