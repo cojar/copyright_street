@@ -13,6 +13,7 @@
 <main layout:fragment="main" class="container">
     <a th:href="@{|/notice/create|}" sec:authorize="hasAuthority('ADMIN')" class="btn btn-accent float-right mb-5">
         공지사항 등록</a>
+    <a href="/notice/faq" class="btn btn-accent float-right mb-5">자주 묻는 질문</a>
     <table>
         <thead>
         <tr>

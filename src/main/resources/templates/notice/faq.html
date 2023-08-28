@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FAQ</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/notice/faq.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery 라이브러리 링크 추가 -->
+</head>
+<body>
+
+
+<section class="inquiry-section">
+    <h2>자주 묻는 질문</h2>
+    <div class="inquiry-list-box">
+        <ul>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 회원가입은 어떻게하나요?</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        상단 배너 오른쪽 회원가입 버튼을 클릭하여 회원가입을 진행하실 수 있습니다. 또한 카카오톡, 네이버, 구글로 연동하여 이용이 가능합니다.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 이미지를 다운받기 위해서는 회원가입을 해야하나요?</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        다운 뿐만 아니라 커뮤니티를 이용하더라도 회원가입은 필수입니다.
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 작가 등록은 어떻게 하나요?</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        고객님께서 로그인을 진행 후 상단 배너에서 작가등록 버튼을 클릭하여 필요한 정보를 입력하면 작가등록이 완료됩니다.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 커뮤니티에 악성 글들이 많습니다.</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        매일 커뮤니티를 확인하며 경고 후 제제를 하고 있습니다.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 라이센스를 구매하고 싶어요</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        상단 배너 라이센스 버튼을 클릭
+                        원하시는 라이센스를 선택하여 구매하기 버튼을 누르시면 됩니다.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 가격은 어디서 확인하나요?</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        가격은 상세페이지에서 확인하실 수 있습니다.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 회원정보 변경은 어떻게 하나요?</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        마이페이지에서 회원정보 수정이 가능합니다.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 결제 확인은 어디서하나요?</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        결제 확인은 마이페이지에서 가능합니다.
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="inquiry-question">
+                    <span>Q. 환불은 안되나요?</span>
+                </div>
+                <div class="inquiry-answer">
+                    <div>
+                        환불은 유선상담으로만 진행됩니다. 고객센터에 연락주시면 빠른 응대 도와드리겠습니다.
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>
+<!-- 구현 End -->
+
+</body>
+</html>
+<script>
+      function _faqBoxInit() {
+    $(".inquiry-list-box > ul > li").click(function() {
+      $(this).siblings(".hover").find(" > .inquiry-answer").stop().slideUp(300);
+      $(this).siblings(".hover").removeClass("hover");
+
+      if ($(this).hasClass("hover")) {
+        $(this).find(" > .inquiry-answer").stop().slideUp(300);
+        $(this).removeClass("hover");
+      }
+      else {
+        $(this).find(" > .inquiry-answer").stop().slideDown(300);
+        $(this).addClass("hover");
+      }
+    });
+
+    $(".inquiry-answer").click(function() {
+      return false;
+    });
+  }
+  _faqBoxInit();
+
+</script>
+</body>
+</html>

@@ -63,7 +63,6 @@ logging:
     suffix: .html
     cache: false #
 custom:
-  genFileDirPath: C:\Users\chlrlqja\Pictures
+  genFileDirPath: C/Users/ddani/Desktop/genFile/product
 payment:
-  secretKey: payment_key
-
+  secretKey: 'securetKey'

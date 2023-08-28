@@ -96,4 +96,10 @@ public class NoticeController {
         this.noticeService.Delete(notice);
         return "redirect:/notice/list";
     }
+
+    @GetMapping("/faq")
+    public String faq(){
+        return "/notice/faq";
+    }
+
 }

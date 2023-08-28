@@ -1,0 +1,33 @@
+.inquiry-section > h2 {
+    margin: 40px 0;
+}
+.inquiry-section > .inquiry-list-box {
+    background-color: #fff;
+    color: inherit;
+    padding: 10px;
+}
+.inquiry-section > .inquiry-list-box > ul > li {
+    padding:15px;
+}
+.inquiry-section > .inquiry-list-box > ul > li > .inquiry-question {
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 15px;
+}
+.inquiry-section > .inquiry-list-box > ul > li > .inquiry-question::after {
+    font-size: 0.8rem;
+    content: "▼";
+    float: right;
+}
+.inquiry-section > .inquiry-list-box > ul > li.hover > .inquiry-question::after {
+    font-size: 0.8rem;
+    content: "▲";
+}
+.inquiry-section > .inquiry-list-box > ul > li > .inquiry-answer {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    text-align: left;
+}
