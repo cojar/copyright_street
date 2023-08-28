@@ -34,7 +34,7 @@
     </table>
     </div>
     <!-- 페이징처리 시작 -->
-    <div>
+    <div th:if="${!paging.isEmpty()}">
         <div class="d-flex justify-content-center">
             <ul class="pagination justify-content-center">
                 <li class="page-item" th:classappend="${!paging.hasPrevious} ? 'disabled'">

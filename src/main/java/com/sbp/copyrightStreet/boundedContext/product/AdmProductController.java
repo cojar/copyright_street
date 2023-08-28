@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/adm/product")
 public class AdmProductController {
     private final ProductService productService;
-//
+
 
 
     @GetMapping("adm/product/detail/{id}")
