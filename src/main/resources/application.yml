@@ -63,7 +63,8 @@ logging:
     suffix: .html
     cache: false #
 custom:
-  genFileDirPath: C:\Users\chlrlqja\Pictures
+  genFileDirPath: C:\Users\choos\genFile
+  portfolioPath: C:\Users\choos\genFile
 payment:
   secretKey: payment_key
 

@@ -35,26 +35,19 @@
             <input type="text" th:field="*{email}" class="input input-bordered w-full">
         </div>
         <br>
-        <div class="form-control">
-            <form th:action="@{/copy/author}" method="post" enctype="multipart/form-data" class="form-control w-50 mx-auto">
-                <input type="hidden" name="recipientEmail" value="taecoo3@naver.com">
-
-                <label for="title" class="label">제목</label>
-                <input type="text" id="title" name="title" placeholder="제목" class="input input-bordered w-full"> <br>
-
+        <div>
                 <label for="message" class="label">소개 내용</label>
                 <textarea id="message" name="message" placeholder="소개해주세요." cols="100" rows="20" class="input input-bordered w-full"
-                style="height:300px"></textarea> <br>
-
+                style="height:300px">
+                </textarea>
+            </div>
+        <br>
                 <label for="attachedFiles">첨부 파일</label>
                 <input type="file" id="attachedFiles" name="attachedFiles" multiple>
                 <br>
-                <button type="submit" class="btn btn-accent" style="width: 20%">발송</button>
+                <button type="submit"  style="width: 20%" class="form-control w-50 mx-auto btn btn-accent">등록하기</button>
             </form>
-        </div>
         <br>
-        <button type="submit"  style="width: 20%" class="form-control w-50 mx-auto btn btn-accent">등록</button>
-    </form>
     <br>
     <br>
 </main>

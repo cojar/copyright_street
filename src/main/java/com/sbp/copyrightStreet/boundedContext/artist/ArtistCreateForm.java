@@ -23,7 +23,7 @@ public class ArtistCreateForm {
 
     private String email;
 
-//    @Column
-//    private String portfolio; 파일업로드예정
+    @Column
+    private String portfolio;
 
 }
