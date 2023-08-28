@@ -2,15 +2,27 @@
 
 <head>
     <title>내 정보</title>
+    <style>
+        .w-50 {
+            width: 50%;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .max-w-sm {
+            max-width: 100%;
+        }
+    </style>
 </head>
 
 <body>
 
 <main layout:fragment="main" class="container">
-    <h5 class="text-lg">마이페이지</h5>
+    <h5 class="form-control w-50 mx-auto">마이페이지</h5>
     <hr>
     <br>
-    <div class="container max-w-screen mx-auto">
+    <div class="form-control w-50 mx-auto">
         <div class="card m-0 w-100 bg-base-100">
             <div class="card-body border-2">
                 <div>번호         : <span th:text="${@rq.member.id}" class="h-5 rounded-md ml-10"></span></div>
