@@ -2,11 +2,23 @@
 <head>
     <meta charset="UTF-8">
     <title>공지사항 게시판</title>
+    <style>
+        .w-50 {
+            width: 50%;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .max-w-sm {
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
 <main layout:fragment="main" class="container">
-    <h1>공지사항 등록</h1>
-    <form th:action="@{|/notice/create|}" method="post">
+    <h1 class="form-control w-50 mx-auto">공지사항 등록</h1>
+    <form th:action="@{|/notice/create|}" method="post" class="form-control w-50 mx-auto">
         <div class="form-control mt-[10px]">
             <label class="label">
                 <span class="label-text">제목</span>

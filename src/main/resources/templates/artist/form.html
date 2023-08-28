@@ -2,13 +2,24 @@
 
 <head>
     <title>작가등록</title>
+    <style>
+        .w-50 {
+            width: 50%;
+        }
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .max-w-sm {
+            max-width: 100%;
+        }
+    </style>
 </head>
 <body>
 <main layout:fragment="main"  class="container">
-    <h1>작가등록</h1>
+    <h1 class="form-control w-50 mx-auto">작가등록</h1>
     <form th:action="@{/artist/register}" th:object="${artistCreateForm}" method="post"
-          class="form-control w-full">
-        <!-- max-w-md 클래스 및 p-5 클래스 추가 -->
+          class="form-control w-50 mx-auto">
         <div>
             <label class="label" for="username">이름</label>
             <input type="text" th:field="*{username}" class="input input-bordered w-full">
@@ -25,35 +36,29 @@
         </div>
         <br>
         <div class="form-control">
-            <form th:action="@{/copy/author}" method="post" enctype="multipart/form-data" class="form-control w-full">
-                <input type="hidden" name="recipientEmail" value="vv4704@gmail.com">
+            <form th:action="@{/copy/author}" method="post" enctype="multipart/form-data" class="form-control w-50 mx-auto">
+                <input type="hidden" name="recipientEmail" value="taecoo3@naver.com">
 
                 <label for="title" class="label">제목</label>
                 <input type="text" id="title" name="title" placeholder="제목" class="input input-bordered w-full"> <br>
 
                 <label for="message" class="label">소개 내용</label>
-                <textarea id="message" name="message" placeholder="소개해주세요." cols="60" rows="20" class="input input-bordered w-full"></textarea> <br>
+                <textarea id="message" name="message" placeholder="소개해주세요." cols="100" rows="20" class="input input-bordered w-full"
+                style="height:300px"></textarea> <br>
 
-                <label for="attachedFiles" class="label">첨부 파일</label>
-                <input type="file" id="attachedFiles" name="attachedFiles" >
+                <label for="attachedFiles">첨부 파일</label>
+                <input type="file" id="attachedFiles" name="attachedFiles" multiple>
                 <br>
-                <!-- multiple 속성은 여러 파일 업로드를 지원하기 위함 -->
-
                 <button type="submit" class="btn btn-accent" style="width: 20%">발송</button>
             </form>
         </div>
         <br>
-        <button type="submit" class="btn btn-accent" style="width: 20%">등록</button>
+        <button type="submit"  style="width: 20%" class="form-control w-50 mx-auto btn btn-accent">등록</button>
     </form>
-    </div>
-    </div>
-    </div>
-    </div>
     <br>
     <br>
-    </div>
 </main>
-</div>
+
 $('input[type="file"].thumb-available').each(function(index, node) {
 const $node = $(node);
 
