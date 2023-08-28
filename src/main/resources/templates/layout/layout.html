@@ -85,8 +85,8 @@
 
     <br>
 
-    <div class="board-list-section">
-        <div class="search-box border border-gray-400 rounded-md">
+    <div class="board-list-section" >
+        <div class="search-box border border-gray-400 rounded-md w-full">
             <select id="boardSearch" name="boardSearch" th:value="${bSearch}"
                     class="border-none p-2 w-70 text-base">
                 <option value="all" th:selected="${bSearch} == all">공지사항</option>
@@ -97,8 +97,8 @@
                 <option value="comment" th:selected="${bSearch} == comment">고객센터</option>
             </select>
             <input type="text" id="boardKeyword" name="boardKeyword" th:value="${bKw}" placeholder="검색어를 입력해주세요."
-                   class="border-l border-gray-400 pl-2 h-7" style="width: 1100px;">
-            <a th:onclick="_bSearch()" class="search-btn p-2 text-black text-sm hover:cursor-pointer">
+                   class="border-l border-gray-400 pl-2 h-7">
+            <a th:onclick="_bSearch()" class="search-btn p-3 text-black text-sm hover:cursor-pointer float-right">
                 <i class="fas fa-search"></i>
             </a>
         </div>
