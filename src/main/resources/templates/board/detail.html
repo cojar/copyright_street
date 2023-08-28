@@ -5,42 +5,57 @@
 </head>
 <body>
 <main layout:fragment="main">
-    <a th:href="@{|/board/modify/${board.id}|}" sec:authorize="isAuthenticated()" th:if="${board.author !=null and #authentication.getPrincipal().getUsername == board.author.username}">수정</a>
-    <a th:href="@{|/board/delete/${board.id}|}" sec:authorize="isAuthenticated()" th:if="${board.author !=null and #authentication.getPrincipal().getUsername == board.author.username}">삭제</a>
-    <div th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></div>
-    <td><span th:if="${board.author != null}" th:text="${board.author.username}"></span></td>
-
-    <h3 th:text="${board.title}"></h3>
-    <p th:text="${board.content}"></p>
-
-    <h5 th:text="|${#lists.size(board.commentList)}개의 답변이 있습니다.|"></h5>
-    <div>
-        <ul th:each="comment : ${board.commentList}">
-            <div>답변내용<li  th:text="${comment.content}"></li></div>
-            <td>답변 작성자 : <span th:if="${comment.author != null}" th:text="${comment.author.username}"></span></td>
-            <div>답변 작성 일자 : <div th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></div></div>
-            <a th:href="@{|/comment/delete/${comment.id}|}" sec:authorize="isAuthenticated()" th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}">댓글 삭제</a>
-        </ul>
+<div>
+    <div class="float-right mb-10">
+        <a class="btn btn-accent" sec:authorize="isAuthenticated()" th:href="@{|/board/modify/${board.id}|}" th:if="${board.author !=null and #authentication.getPrincipal().getUsername == board.author.username}">수정</a>
+        <a class="btn btn-accent" sec:authorize="isAuthenticated()" th:href="@{|/board/delete/${board.id}|}" th:if="${board.author !=null and #authentication.getPrincipal().getUsername == board.author.username}">삭제</a>
+        <a class="btn btn-accent" th:href="@{/board/list}">목록</a>
     </div>
-    <div class="p-1 bg-dark text-white" th:text="${board.category}"></div>
-    <form th:action="@{|/comment/create/${board.id}|}" method="post">
-        <textarea name="content" id="content"></textarea>
-        <input type="submit" value="답변등록">
-    </form>
-
-    <a th:href="@{/board/list}">목록</a>
-    <th:block layout:fragment="script"></th:block>
-    <script layout:fragment="script" type='text/javascript'>
-const delete_elements = document.getElementsByClassName("delete");
-Array.from(delete_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        if(confirm("정말로 삭제하시겠습니까?")) {
-            location.href = this.dataset.uri;
-        };
-    });
-});
-</script>
+</div>
+<div class="container max-w-screen mx-auto">
+        <div class="card m-0 w-100 bg-base-10 shadow-xl">
+            <div class="card-body">
+                제목<h2 th:text="${board.title}"></h2>
+                <hr>
+                내용<p th:text="${board.content}"></p>
+                <div class="card-actions justify-end">
+                    <button class="btn btn-sm btn-primary" th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm')}"></button>
+                </div>
+            </div>
+        </div>
+            <form class="flex mt-5" method="post" th:action="@{|/comment/create/${board.id}|}">
+                <textarea class="textarea textarea-bordered w-full max-w-none h-10" id="content" name="content"></textarea>
+                <input class="btn btn-accent justify-end" type="submit" value="답변등록">
+            </form>
+            <div class="card m-0 w-100 bg-base-10 shadow-xl">
+                <div class="card-body">
+                    답변내용
+                    <hr>
+                    <ul th:each="comment : ${board.commentList}">
+                        <h2 th:text="${board.title}"></h2>
+                        <div class="card-actions justify-end">
+                            <button class="btn btn-sm btn-primary" th:text="${#temporals.format(comment.createDate, 'yyyy-MM-dd HH:mm')}"></button>
+                            <button class="btn btn-sm" th:if="${comment.author != null}" th:text="${comment.author.username}"></button>
+                            <a class="btn btn-sm btn-error" sec:authorize="isAuthenticated()" th:href="@{|/comment/delete/${comment.id}|}" th:if="${comment.author != null and #authentication.getPrincipal().getUsername() == comment.author.username}">삭제</a>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <th:block layout:fragment="script"></th:block>
+        <script layout:fragment="script" type='text/javascript'>
+        const delete_elements = document.getElementsByClassName("delete");
+        Array.from(delete_elements).forEach(function(element) {
+            element.addEventListener('click', function() {
+                if(confirm("정말로 삭제하시겠습니까?")) {
+                    location.href = this.dataset.uri;
+                };
+            });
+        });
+        </script>
+    </div>
 </main>
+
 </body>
 
 </html>
