@@ -45,53 +45,52 @@
         }
     </script>
 
-
-
-
-    <form th:action method="POST" class="p-10 flex flex-col gap-4" onsubmit="JoinForm__submit(this); return false;">
-        <div>
-            <input type="text" name="username" maxlength="30" placeholder="이름" class="input input-bordered">
+    <section class="section section-login flex-grow flex flex-col items-center justify-center">
+        <div class="max-w-md w-full px-2 pt-4">
+            <h1 class="font-bold text-lg">
+                <i class="fa-solid fa-user-plus"></i>
+                회원가입
+            </h1>
+            <form th:action method="POST" class="flex flex-col gap-3" onsubmit="JoinForm__submit(this); return false;">
+                <div>
+                    <input type="text" name="username" maxlength="30" placeholder="이름" class="input input-bordered">
+                </div>
+                <div>
+                    <input type="text" name="loginId" maxlength="30" placeholder="아이디" class="input input-bordered">
+                </div>
+                <div>
+                    <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
+                </div>
+                <div>
+                    <input type="password" name="password2" maxlength="30" placeholder="비밀번호확인" class="input input-bordered">
+                </div>
+                <div>
+                    <input type="text" name="phoneNumber" placeholder="연락처" class="input input-bordered">
+                </div>
+                <div class="count-box">
+                    <p>
+                        <strong id="resultMailBox">Email</strong>
+                    </p>
+                    <i class="bi bi-at"></i>
+                    <span class="userEmail">
+                        <input placeholder="이메일을 입력하세요" class="input input-bordered" type="text" id="email"
+                           name="email" oninput="fn_emailChk_Ajax()"/>
+                        <button type="button" class="btn btn-accent" id="showDiv" onclick="fn_sendEmail_Ajax()">
+                            <i class="fa fa-search"></i>이메일 인증
+                        </button>
+                        <div style="display: none;" id="checkCodeDiv">
+                        <input type="text" id="inputCode" placeholder="인증코드 입력" class="input input-bordered"/>
+                        <button type="button" class="btn btn-accent" onclick="fn_checkCode()">확인</button>
+                        </div>
+                        <h6 style="color: green;">※ 이메일을 입력해주세요.</h6>
+                    </span>
+                </div>
+                <div>
+                    <input type="submit" value="회원가입" class="btn btn-accent">
+                </div>
+            </form>
         </div>
-        <div>
-
-            <input type="text" name="loginId" maxlength="30" placeholder="아이디" class="input input-bordered">
-        </div>
-
-        <div>
-            <input type="password" name="password" maxlength="30" placeholder="비밀번호" class="input input-bordered">
-        </div>
-        <div>
-            <input type="password" name="password2" maxlength="30" placeholder="비밀번호확인" class="input input-bordered">
-        </div>
-        <div>
-            <input type="text" name="phoneNumber" placeholder="연락처" class="input input-bordered">
-        </div>
-        <div class="count-box">
-            <p>
-                <strong id="resultMailBox">Email</strong>
-            </p>
-            <i class="bi bi-at"></i>
-            <span class="userEmail">
-		<input style="width: 60%; display: inline;" placeholder="이메일을 입력하세요" class="form-control" type="text" id="email"
-               name="email" oninput="fn_emailChk_Ajax()"/>
-		<button type="button" class="btn btn-outline-primary" id="showDiv" onclick="fn_sendEmail_Ajax()">
-			<i class="fa fa-search"></i>이메일 인증
-		</button>
-    <div style="display: none;" id="checkCodeDiv">
-      <input type="text" id="inputCode" style="width: 60%; display: inline;" placeholder="인증코드 입력"
-             class="form-control"/>
-      <button type="button" class="btn btn-outline-primary" onclick="fn_checkCode()">확인</button>
-    </div>
-  	<h6 style="color: green;">※ 이메일을 입력해주세요.</h6>
-  	</span>
-        </div>
-        <div>
-
-        </div>
-        <div>
-            <input type="submit" value="회원가입" class="btn btn-primary">
-        </div>
-    </form>
+    </section>
 </main>
 
 </body>
