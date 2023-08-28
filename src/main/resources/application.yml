@@ -64,4 +64,7 @@ logging:
     cache: false #
 custom:
   genFileDirPath: C:\Users\chlrlqja\Pictures\genFile
+  portfolioPath: C:\Users\chlrlqja\Pictures\genFile
+payment:
+  secretKey: payment_key
 

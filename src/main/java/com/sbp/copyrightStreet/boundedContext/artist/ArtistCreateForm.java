@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 
@@ -23,7 +24,7 @@ public class ArtistCreateForm {
 
     private String email;
 
-//    @Column
-//    private String portfolio; 파일업로드예정
+    @Column
+    private MultipartFile portfolio;
 
 }

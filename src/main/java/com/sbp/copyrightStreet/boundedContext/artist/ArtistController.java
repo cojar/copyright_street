@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 
@@ -22,6 +23,7 @@ import java.security.Principal;
 public class ArtistController {
     private final ArtistService artistService;
     private final MemberService memberService;
+
     private static final Logger LOGGER = LogManager.getLogger(ArtistController.class);
 
     @PreAuthorize("isAuthenticated()")
@@ -36,6 +38,7 @@ public class ArtistController {
     @PostMapping("/register")
     public String register(Model model,
                            @Valid ArtistCreateForm artistCreateForm,
+                           MultipartFile portfolio,
                            BindingResult bindingResult, Principal principal){
         if (bindingResult.hasErrors()) {
             return "artist/form";
@@ -44,7 +47,8 @@ public class ArtistController {
         Artist artist = artistService.create(artistCreateForm.getUsername(),
                 artistCreateForm.getPhoneNumber(),
                 artistCreateForm.getEmail(),
-                artistCreateForm.getIntroDetail());
+                artistCreateForm.getIntroDetail(),
+                portfolio);
 
             model.addAttribute("successArtistRegistration", true);
         LOGGER.info("Artist registration successful: " + model.getAttribute("successArtistRegistration"));

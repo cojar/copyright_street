@@ -21,32 +21,31 @@
   <br>
   <form th:action="@{/product/create}" method="post"  enctype="multipart/form-data" class="form-control w-50 mx-auto">
     <div>
-      <label class="label">
-        <span class="label-text">제목</span>
-      </label>
-      <input type="text" name="name" id="name" class="input input-bordered w-full">
+    <label class="label">
+      <span class="label-text">제목</span>
+    </label>
+    <input type="text" name="name" id="name" class="input input-bordered w-full">
     </div>
-    <br>
     <div>
       <label class="label">
         <span class="label-text">가격</span>
       </label>
       <input type="number" name="price" id="price" class="input input-bordered w-full">
     </div>
-    <br>
     <div>
       <label class="label">
-        <span class="label-text">내용</span>
+        <span class="label-text">설명</span>
       </label>
-      <input type="text" name="description" id="description" class="input input-bordered w-full">
+      <textarea name="description" id="description" class="textarea textarea-bordered w-full max-w-none"></textarea>
     </div>
-    <br>
-      <label>
-        <span >이미지</span>
+    <div>
+      <label class="label">
+        <span class="label-text">상품</span>
       </label>
       <input type="file" name="thumbnail" accept="img/png, image/gif, image/jpeg">
+    </div>
     <br>
-    <button type="submit" class="btn btn-accent">전송</button>
+    <button type="submit" class="btn btn-accent">등록하기</button>
   </form>
   <br>
   <br>
