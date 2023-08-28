@@ -85,24 +85,24 @@
 
     <br>
 
-    <div class="board-list-section" >
-        <div class="search-box border border-gray-400 rounded-md w-full">
-            <select id="boardSearch" name="boardSearch" th:value="${bSearch}"
-                    class="border-none p-2 w-70 text-base">
-                <option value="all" th:selected="${bSearch} == all">공지사항</option>
-                <option value="title" th:selected="${bSearch} == title">게시판</option>
-                <option value="content" th:selected="${bSearch} == content">Pro관</option>
-                <option value="title_content" th:selected="${bSearch} == title_content">Primium</option>
-                <option value="author" th:selected="${bSearch} == author">Basic</option>
-                <option value="comment" th:selected="${bSearch} == comment">고객센터</option>
-            </select>
-            <input type="text" id="boardKeyword" name="boardKeyword" th:value="${bKw}" placeholder="검색어를 입력해주세요."
-                   class="border-l border-gray-400 pl-2 h-7">
-            <a th:onclick="_bSearch()" class="search-btn p-3 text-black text-sm hover:cursor-pointer float-right">
-                <i class="fas fa-search"></i>
-            </a>
-        </div>
-    </div>
+<!--    <div class="board-list-section" >-->
+<!--        <div class="search-box border border-gray-400 rounded-md w-full">-->
+<!--            <select id="boardSearch" name="boardSearch" th:value="${bSearch}"-->
+<!--                    class="border-none p-2 w-70 text-base">-->
+<!--                <option value="all" th:selected="${bSearch} == all">공지사항</option>-->
+<!--                <option value="title" th:selected="${bSearch} == title">게시판</option>-->
+<!--                <option value="content" th:selected="${bSearch} == content">Pro관</option>-->
+<!--                <option value="title_content" th:selected="${bSearch} == title_content">Primium</option>-->
+<!--                <option value="author" th:selected="${bSearch} == author">Basic</option>-->
+<!--                <option value="comment" th:selected="${bSearch} == comment">고객센터</option>-->
+<!--            </select>-->
+<!--            <input type="text" id="boardKeyword" name="boardKeyword" th:value="${bKw}" placeholder="검색어를 입력해주세요."-->
+<!--                   class="border-l border-gray-400 pl-2 h-7">-->
+<!--            <a th:onclick="_bSearch()" class="search-btn p-3 text-black text-sm hover:cursor-pointer float-right">-->
+<!--                <i class="fas fa-search"></i>-->
+<!--            </a>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <div class="flex-grow flex flex-col py-5">
         <main layout:fragment="main" class="flex-grow flex flex-col"></main>
@@ -209,6 +209,7 @@
             </div>
         </div>
     </div>
+    <br>
     <!-- 오른쪽 블럭: 연락처 및 저작권 정보 -->
     <div class="text-center">
         <p>고객센터: 123-456-7890</p>
