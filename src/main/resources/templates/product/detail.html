@@ -74,24 +74,19 @@
           </div>
         </div>
       </div>
-
       <div class="card t-mt-[30px]">
-        <div >
+        <div class="card-header">
           질문등록
         </div>
 
         <div class="card-body">
-          <form
-                  sec:authorize="isAuthenticated()"
-                  th:action="@{|/question/create/${product.id}|}"
-                  method="POST"
-          >
+          <form sec:authorize="isAuthenticated()" th:action="@{|/question/create/${product.id}|}" method="POST">
             <div class="mb-3">
               <div class="mb-3">
                 <label for="content" class="form-label">내용</label>
                 <textarea name="content" id="content" class="form-control" rows="10"></textarea>
               </div>
-              <input type="submit" value="등록하기" class="btn btn-success my-2">
+              <input type="submit" value="등록하기" class="btn btn-primary my-2">
             </div>
           </form>
           <div class="t-text-gray-400" sec:authorize="isAnonymous()" >
@@ -104,13 +99,14 @@
         <div class="card-header">
           질문리스트
         </div>
-        <ul th:if="${#lists.size(product.questionList)} > 0" class="list-group list-group-flush">
+        <ul class="list-group-flush" >
           <li th:each="question : ${product.questionList}" class="list-group-item">
             <span th:text="${question.id}" class="badge bg-secondary"></span>
             <span th:text="${question.content}"></span>
             <a th:href="@{|/question/modify/${question.id}|}"
                sec:authorize="isAuthenticated()"
-               th:if="${question.member != null and #authentication.getPrincipal().getUsername() == question.member.username}"
+               th:if="${question.member != null and #authentication.getPrincipal().getUsername() ==
+               question.member.username}"
                class="btn btn-sm btn-primary"
             >수정</a>
             <a th:href="@{|/question/delete/${question.id}|}" class="btn btn-sm btn-warning"
@@ -119,16 +115,11 @@
                onclick="if ( confirm('정말 삭제하시겠습니까?') == false ) return false;">삭제</a>
           </li>
         </ul>
-        <div th:unless="${#lists.size(product.questionList)} > 0" class="card-body">
-          <div class="t-text-gray-400">
-            질문이 없습니다
-          </div>
         </div>
       </div>
     </div>
-  </section>
+  </section>>
 </main>
-
     <script src="https://js.tosspayments.com/v1"></script>
     <script th:inline="javascript">
     let amount = /*[[ ${product.price}]]*/;

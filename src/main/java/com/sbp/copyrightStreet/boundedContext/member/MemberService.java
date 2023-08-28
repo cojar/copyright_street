@@ -23,10 +23,10 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
 
-    public Optional<Member> findByUsername(String username) {
-        return memberRepository.findByUsername(username);
-    }
-    public Member findByUserName(String username) {
+//    public Optional<Member> findByUsername(String username) {
+//        return memberRepository.findByUsername(username);
+//    }
+    public Member findByUser(String username) {
         Optional<Member> member = memberRepository.findByUsername(username);
 
         if (member.isPresent()) {
@@ -34,6 +34,10 @@ public class MemberService {
         } else {
             throw new RuntimeException("member not found");
         }
+    }
+
+    public Optional<Member> findByUsername(String username) {
+        return memberRepository.findByUsername(username);
     }
     @Transactional // SELECT 이외의 쿼리에 대한 가능성이 아주 조금이라도 있으면 붙인다.
     // 일반 회원가입(소셜 로그인을 통한 회원가입이 아님)

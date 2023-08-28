@@ -21,11 +21,12 @@ public class QuestionController {
     private  final QuestionService questionService;
     private  final ProductService productService;
     private  final MemberService memberService;
+
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/create/{id}")
     public String create(@PathVariable Long id, Principal principal, @RequestParam String content) {
         Product product = this.productService.getProduct(id);
-        Member member = this.memberService.findByUserName(principal.getName());
+        Member member = this.memberService.findByUser(principal.getName());
         this.questionService.create(product, member, content);
         return String.format("redirect:/product/detail/%s", id);
     }
