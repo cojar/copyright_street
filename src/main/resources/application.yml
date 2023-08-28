@@ -63,5 +63,5 @@ logging:
     suffix: .html
     cache: false #
 custom:
-  genFileDirPath: C:\Users\chlrlqja\Pictures
+  genFileDirPath: C:\Users\chlrlqja\Pictures\genFile
 
